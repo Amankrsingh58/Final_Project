@@ -4,10 +4,9 @@ import App from './Card';
 import "./Header.css"
 function Header(){
   return(
-    <>
+    <div className='header'>
     <img className='main-img' src ={Mainimage}alt='logo'></img>
-    <App/>
-    </>
+    </div>
   )
 }
 export default Header;

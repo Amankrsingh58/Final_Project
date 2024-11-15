@@ -27,7 +27,7 @@ function App() {
   ];
 
   return (
-    <div className="app">
+    <div className="card">
       <h2>Verified Tutor</h2>
       <div className="tutor-container">
         {tutors.map((tutor, index) => (

@@ -1,15 +1,16 @@
-.app{
-  /* text-align: center; */
-
-    
-  background-color: aqua;
+.card{
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0);
+  padding-bottom: 20px;
 }
   
   
+    h2{
+      margin: 0;
+      padding: 18px;
+    }
+    
   
-  h2 {
-    margin-bottom:20 px;
-  }
   
   .tutor-container {
     display: flex;
