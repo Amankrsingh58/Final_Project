@@ -1,0 +1,42 @@
+.About{
+    text-align: center;
+    margin-top: 0rem;
+    
+}
+.About1{
+    
+    background-color: rgb(193, 216, 236);
+
+   
+
+}
+.image{
+    height: 10rem;
+    width:35rem;
+    margin-left: 120px;
+}
+.sunny{
+    display: flex;
+   
+    border-spacing: 20px;
+}
+.para{
+    margin-left: 50px;
+    margin-right: 80px;
+    text-shadow: 30px;
+}
+.bold{
+    text-align: center;
+    margin-left: 25rem;
+
+}
+.story{
+    text-align: center;
+}
+.picture{
+    height: 50px;
+}
+.sunny90{
+    height: 25rem;
+    width: 100rem;
+}

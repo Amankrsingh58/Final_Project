@@ -10,11 +10,18 @@ import DashBoard from './pages/DashBoard';
 import Services from './pages/Services';
 import Notfound from './pages/Notfound';
 import Navbar from './components/Navbar';
+import Footer from './components/Footer';
+import Header from './components/Header';
+
 
 function App() {
   return (
     <div className="App">
-      <Navbar/>
+       <Navbar/>
+
+
+
+     
      <Routes>
       <Route path="/" element={<Home/>}/>
       <Route path="/about" element={<About/>}/>
