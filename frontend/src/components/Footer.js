@@ -125,6 +125,7 @@ import './Footer.css';
         </div>
       </div>
     </footer>
+
             )
           };
             
