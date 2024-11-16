@@ -77,12 +77,12 @@ export default function Navbar(props) {
 
             <ul className='auth'>
             { !isLoggedIn &&
-           <Link to="/">
+           <Link to="/login">
                 <button onClick={clickHandler}>Login</button>
           </Link>}
 
           { !isLoggedIn &&
-           <Link to='/'>
+           <Link to='/signup'>
                 <button onClick={clickHandler2}>Sign Up</button>
           </Link>}
 

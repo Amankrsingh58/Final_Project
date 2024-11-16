@@ -2,7 +2,7 @@ import React from "react";
 import Login from '../Images/Login.jpg'
 import SignupForm from "./SignupForm";
 import LoginForm from "./LoginForm";
-const Template=( title,desc1,desc2,image,formtyoe ,setIsLoggedIn)=>{
+const Template=({ title,desc1,desc2,image,formtype ,setIsLoggedIn})=>{
     return(
         <div>
 <>
@@ -13,7 +13,7 @@ const Template=( title,desc1,desc2,image,formtyoe ,setIsLoggedIn)=>{
     </span>
     <span>{desc2}</span>
 </p>
-{formtyoe ==="signup"? 
+{formtype ==="signup"? 
 (<SignupForm/>):
 (<LoginForm/>)}
 <div>
