@@ -1,5 +1,6 @@
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import { NavLink, Route, Routes } from 'react-router-dom';
+import { useState } from 'react';
 import './App.css';
 import Home from './pages/Home';
 import About from './pages/About';
@@ -15,9 +16,11 @@ import Header from './components/Header';
 
 
 function App() {
+  const [isLoggedIn, setisaLoggesIn] = useState(false);
+
   return (
     <div className="App">
-       <Navbar/>
+    <Navbar isLoggedIn={isLoggedIn} setisaLoggesIn={setisaLoggesIn}/>
      <Routes>
       <Route path="/" element={<Home/>}/>
       <Route path="/about" element={<About/>}/>
