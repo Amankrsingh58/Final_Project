@@ -14,6 +14,7 @@ const Template=({ title,desc1,desc2,image,formtype ,setIsLoggedIn})=>{
     <span>{desc2}</span>
 </p>
 {formtype ==="signup"? 
+""
 (<SignupForm/>):
 (<LoginForm/>)}
 <div>
