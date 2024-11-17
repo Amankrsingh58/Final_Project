@@ -1,0 +1,14 @@
+
+.button{
+    background-color: brown;
+border-radius: 30px;
+width: 50px;
+
+}
+.loginform{
+    /* background-color: aquamarine; */
+    height: 50px;
+    width: 60px;
+    margin-left: 20px;
+    margin-top: 50px;
+}

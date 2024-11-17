@@ -2,9 +2,11 @@ import React from "react";
 import Login from '../Images/Login.jpg'
 import SignupForm from "./SignupForm";
 import LoginForm from "./LoginForm";
+import './Tamplate.css'
+
 const Template=({ title,desc1,desc2,image,formtype ,setIsLoggedIn})=>{
     return(
-        <div>
+        <div className='felx' > 
 <>
 <h1>{title}</h1>
 <p>
@@ -14,7 +16,7 @@ const Template=({ title,desc1,desc2,image,formtype ,setIsLoggedIn})=>{
     <span>{desc2}</span>
 </p>
 {formtype ==="signup"? 
-""
+
 (<SignupForm/>):
 (<LoginForm/>)}
 <div>
@@ -25,7 +27,7 @@ const Template=({ title,desc1,desc2,image,formtype ,setIsLoggedIn})=>{
 <button>Sign up with google</button>
 
 </>
-<img src={Login} alt="login img"/>
+<img  className='image'src={Login} alt="login img"/>
         </div>
     )
 }

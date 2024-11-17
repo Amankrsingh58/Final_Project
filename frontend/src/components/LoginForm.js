@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import {AiOutlineEye, AiOutlineEyeInvisible}from "react-icons/ai";
+import {AiOutlineEye, AiOutlineEyeInvisible}from "react-icons/ai"
+import './LoginForm.css'
 
 function LoginForm() {
    const [formData , setFormData]= useState({
@@ -18,7 +19,8 @@ function LoginForm() {
 
    }
   return (
-   <form>
+    <div className='loginform'>
+      <form >
     <label>
       <p>Email Address<sup>*</sup>
       </p>
@@ -48,9 +50,11 @@ function LoginForm() {
       </span>
      
     </label>
-    <button>Signin</button>
+    <button className='button'>Signin</button>
 
    </form>
+    </div>
+   
   )
 }
 

@@ -1,0 +1,10 @@
+.flex{
+    display: flex;
+    background-color: aqua;
+    margin-top: 100px;
+}
+.image{
+    margin-right: 0px;
+    margin-top: 60px;
+
+}
