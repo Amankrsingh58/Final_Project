@@ -4,7 +4,7 @@ import Logo from '../Images/logo4.jpeg';
 import { SiStudyverse } from "react-icons/si";
 import { Link } from 'react-router-dom';
 import Dropdown from './Dropdown';
-// import { toast } from "react-toastify";
+import { toast } from "react-toastify";
 import { FaChevronDown } from 'react-icons/fa';
 
 
@@ -32,7 +32,7 @@ export default function Navbar(props) {
 
   function clickHandler() {
     setisaLoggesIn(true);
-    // toast.success("Signed In");
+    toast.success("Signed In");
   }
 
   function clickHandler2() {
@@ -89,7 +89,7 @@ export default function Navbar(props) {
         {  isLoggedIn &&
            <Link to='/'>
                 <button onClick={ () => { setisaLoggesIn(false)
-                                    // toast.success("Logged Out");
+                                    toast.success("Logged Out");
                                   }
                                     }>Logout</button>
           </Link>}
