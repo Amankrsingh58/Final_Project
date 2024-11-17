@@ -2,7 +2,7 @@ import React from 'react'
 
 function Services() {
   return (
-    <div>Services</div>
+    <h1>services are currently unavalible</h1>
   )
 }
 
