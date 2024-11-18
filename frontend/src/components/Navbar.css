@@ -1,9 +1,9 @@
-
 .section{
   word-spacing: 100px;
   color: aliceblue;
   margin-top: 30px;
   gap: 30px;
+  margin-top: 0px;
 
 }
 .box{

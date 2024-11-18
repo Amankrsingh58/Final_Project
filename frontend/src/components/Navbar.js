@@ -49,7 +49,8 @@ export default function Navbar(props) {
 
         {/* <nav className='nav'> */}
           <ul className='navitem'>
-            <li className='flex gap-3'>
+            <li>
+            {/* <li className='flex gap-3'> */}
               <Link to="/">One-2-One-Class</Link>
             </li>
 

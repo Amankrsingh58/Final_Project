@@ -1,12 +1,15 @@
 import React from 'react'
-import Template from '../components/Tamplate'
-import LoginForm from '../components/LoginForm'
-import login from '../Images/Login.jpg'
+
+
+import LoginForm from '../components/LoginForm';
 
 function Login() {
   return (
+    <>
+ 
+<LoginForm/>
     
-    <Template
+    {/* <Template
     title="Welcome Back"
     desc1="Build skills for today ,tomorrow, and beyond."
     desc2="Education to future-proof your career"
@@ -14,7 +17,10 @@ function Login() {
     formtype = "login"
     // setIsLoggedIn={setIsLoggedIn}
     
-    />
+    /> */}
+
+    </>
+ 
    
 
 
