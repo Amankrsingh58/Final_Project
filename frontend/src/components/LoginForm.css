@@ -28,6 +28,7 @@ width: 50px;
   
   /* Card */
   .login-card {
+    margin-left:40% ;
     width: 350px;
     background-color: #fff;
     padding: 30px 20px;
@@ -107,3 +108,38 @@ width: 50px;
     text-decoration: underline;
   }
   
+
+  /* Style for form group */
+.form-group {
+  margin-bottom: 20px;
+}
+
+/* Container for input and icon */
+.input-with-icon {
+  position: relative;
+  width: 100%;
+}
+
+/* Input styling */
+.input-with-icon input {
+  width: 100%;
+  padding: 10px 40px 10px 10px; /* Leave space for the icon */
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Icon styling */
+/* .password-toggle {
+  position: absolute;
+  top: 56%;
+  right: 34%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 18px;
+  color: #777;
+}
+
+.password-toggle:hover {
+  color: #000; */
+
