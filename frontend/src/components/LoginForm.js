@@ -5,7 +5,8 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { FaRegEye } from "react-icons/fa";
 import { FaRegEyeSlash } from "react-icons/fa";
-
+import bgImg from "../Images/bg1.png"
+ 
 
 function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
@@ -38,9 +39,9 @@ function LoginForm() {
   };
 
   return (
-    <div className=" flex justify-center">
-
-      <div className="login-card">
+    <div className="login-container">
+    <img src={bgImg} className="bgImg" />
+          <div className="login-card">
         <h2>Login</h2>
         {errors.email && <div className="error-message">Email is required</div>}
         {errors.password && <div className="error-message">Password is required</div>}
