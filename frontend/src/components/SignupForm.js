@@ -152,6 +152,7 @@ const SignupForm = () => {
   };
 
   return (
+    <div className="form">
     <div className="signup-form-container">
       <h1>Signup</h1>
       {submitted && <p className="success-message">Signup successful!</p>}
@@ -206,6 +207,7 @@ const SignupForm = () => {
 
         <button type="submit">Sign Up</button>
       </form>
+    </div>
     </div>
   );
 };

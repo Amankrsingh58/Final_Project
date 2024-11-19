@@ -15,7 +15,8 @@ width: 50px;
 /* Container */
 
 .div{
-  background-image: url(https://media.istockphoto.com/id/1033277722/photo/textbooks-on-wooden-school-desk-with-chalkboard.jpg?s=1024x1024&w=is&k=20&c=BXt8ORQ_Y3hgQsbFQ5fP0KHVTu4GTdMuVkXcdLXI-oY);
+  
+  /* background-image: url(https://media.istockphoto.com/id/1033277722/photo/textbooks-on-wooden-school-desk-with-chalkboard.jpg?s=1024x1024&w=is&k=20&c=BXt8ORQ_Y3hgQsbFQ5fP0KHVTu4GTdMuVkXcdLXI-oY); */
 }
 .login-container {
     display: flex;
