@@ -84,6 +84,7 @@ function LoginForm() {
   };
 
   return (
+    <div className="div">
     <div className="login-container">
       <div className="login-card">
         <h2>Login</h2>
@@ -120,6 +121,7 @@ function LoginForm() {
           </p>
         </div>
       </div>
+    </div>
     </div>
   );
 }

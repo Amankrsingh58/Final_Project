@@ -15,12 +15,14 @@ import Footer from './components/Footer';
 import Header from './components/Header';
 
 
+
 function App() {
   const [isLoggedIn, setisaLoggesIn] = useState(false);
 
   return (
     <div className="App">
     <Navbar isLoggedIn={isLoggedIn} setisaLoggesIn={setisaLoggesIn}/>
+
      <Routes>
       <Route path="/" element={<Home/>}/>
       <Route path="/about" element={<About/>}/>
@@ -31,6 +33,7 @@ function App() {
       <Route path="/services" element={<Services/>}/>
       <Route path="*" element={<Notfound/>}/>
      </Routes>
+    
     </div>
   );
 }
