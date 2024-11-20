@@ -18,7 +18,7 @@ function LoginForm() {
   } = useForm();
 
   const onSubmit = async (data) => {
-    const url = "https://example.com/api/login"; // Replace with your actual API endpoint
+    const url = "https://localhost/api/login"; // Replace with your actual API endpoint
     try {
       const response = await axios.post(url, data, {
         headers: {

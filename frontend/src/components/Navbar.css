@@ -73,7 +73,15 @@ margin-right: 2rem;
   display: flex;
   color: white;
   gap: 2rem;
+  height: 10vh;
+  width: 20%;
   font-size: 1.1rem;
   align-items: center;
   /* margin-right: 2rem; */
+}
+.auth li{
+  height: 10vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
