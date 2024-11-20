@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import Dropdown from './Dropdown';
 import { toast } from "react-toastify";
 import { FaChevronDown } from 'react-icons/fa';
+import Tutor from '../pages/Tutor';
 
 
 
@@ -55,7 +56,7 @@ export default function Navbar(props) {
             </li>
 
             <li>
-              <Link to="/">Top Tutors</Link>
+              <Link to="/{<Tutor/>}">Top Tutors</Link>
             </li>
               
             <li>

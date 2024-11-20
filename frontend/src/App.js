@@ -13,6 +13,7 @@ import Notfound from './pages/Notfound';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Header from './components/Header';
+import Tutor from './pages/Tutor';
 
 
 
@@ -32,6 +33,7 @@ function App() {
       <Route path="/dashboard" element={<DashBoard/>}/>
       <Route path="/services" element={<Services/>}/>
       <Route path="*" element={<Notfound/>}/>
+      <Route path="/tutor" element={<Tutor/>}/>
      </Routes>
     
     </div>
