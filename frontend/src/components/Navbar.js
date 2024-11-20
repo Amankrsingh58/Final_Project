@@ -4,6 +4,11 @@ import { Link } from 'react-router-dom';
 import { FaChevronDown } from 'react-icons/fa';
 import Dropdown from './Dropdown';
 import { toast } from "react-toastify";
+<<<<<<< HEAD
+=======
+import { FaChevronDown } from 'react-icons/fa';
+import Tutor from '../pages/Tutor';
+>>>>>>> 853febef4076a1190906584e4389d711155625a5
 
 export default function Navbar({ isLoggedIn, setisaLoggesIn }) {
   const [dropdown, setDropdown] = useState(null);
@@ -57,6 +62,7 @@ export default function Navbar({ isLoggedIn, setisaLoggesIn }) {
         </li>
       </ul>
 
+<<<<<<< HEAD
       <ul className="auth">
         {!isLoggedIn && (
           <>
@@ -85,6 +91,25 @@ export default function Navbar({ isLoggedIn, setisaLoggesIn }) {
                   setisaLoggesIn(false);
                   toast.success("Logged Out");
                 }}
+=======
+            <li>
+              <Link to="/{<Tutor/>}">Top Tutors</Link>
+            </li>
+              
+            <li>
+              <Link to="/{<Student/>}">Students</Link>
+
+            </li>
+
+            <li>
+              <Link to="/">Online Class</Link>
+
+            </li>
+
+            <li 
+            onMouseEnter={ () => setDropdown(true)}
+              onMouseLeave={ ()=> setDropdown(false)}
+>>>>>>> 853febef4076a1190906584e4389d711155625a5
               >
                 Logout
               </button>
