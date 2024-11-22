@@ -9,6 +9,7 @@ export default function Navbar({ isLoggedIn, setisaLoggesIn }) {
   const [dropdown, setDropdown] = useState(null);
 
   const serviceDropdown = [
+    
     { id: 1, title: "About", path: "/about", cName: "s-item" },
     { id: 2, title: "Contact Us", path: "/contact", cName: "s-item" },
   ];
