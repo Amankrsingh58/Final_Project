@@ -1,7 +1,18 @@
 import React from 'react';
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import './Card.css';
 
 function App() {
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 3,
+    slidesToScroll: 3,
+    
+  };
   const tutors = [
     {
       id: '853302',
@@ -29,6 +40,7 @@ function App() {
   return (
     <div className="card">
       <h2>Verified Tutor</h2>
+      <Slider {...settings}>
       <div className="tutor-container">
         {tutors.map((tutor, index) => (
           <div className="tutor-card" key={index}>
@@ -41,6 +53,7 @@ function App() {
           </div>
         ))}
       </div>
+      </Slider>
     </div>
   );
 }
