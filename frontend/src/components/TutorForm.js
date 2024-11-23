@@ -12,7 +12,8 @@ function  TutorForm(){
     <div>
 <ul>
     {records.map((list,index)=>(
-        <li key={index}>{list.id} | {list.name}</li>
+        <li 
+        key={index}>{list.id} | {list.name}</li>
     ))}
 </ul>
 

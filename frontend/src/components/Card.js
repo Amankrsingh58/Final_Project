@@ -46,7 +46,7 @@ function App() {
 
   return (
     <div className="card " >
-      <h1>our Top Tutors </h1>
+      <b>our Top Tutors </b>
   
       <div className='tutor-container' >
       <Slider {...settings}>

@@ -1,0 +1,42 @@
+
+.stats-container {
+    display: flex;
+    justify-content: space-around;
+    background-color: #fff7ff;
+    padding: 20px;
+  
+    margin-bottom: 5px;
+  }
+  
+  .stat-item {
+    text-align: center;
+    color: #333;
+  }
+  
+ 
+  .stat-icon {
+    width: 100px;
+    height: 100px;
+    background-color: #007acc;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 40px; /* Adjust size to match your icons */
+    margin-bottom: 10px;
+  }
+  
+ 
+  .stat-value {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+ 
+  .stat-label {
+    font-size: 16px;
+    color: #666;
+  }
+  

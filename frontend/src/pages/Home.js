@@ -3,6 +3,7 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Card from '../components/Card';
 import Container from '../components/Container';
+import Stats from '../components/States';
 import './Home.css'
 
 function Home() {
@@ -11,7 +12,9 @@ function Home() {
       <Header/>
       <Card/>
 <Container/>
+<Stats/>
       <Footer/>
+     
     </div>
     
   )

@@ -123,7 +123,10 @@ import './Footer.css';
             <li>Email: info@gharpetshiksha.com</li>
           </ul>
         </div>
+      
       </div>
+      <hr></hr>
+      <b>Developed by Aman & Anjani</b>
     </footer>
 
             )

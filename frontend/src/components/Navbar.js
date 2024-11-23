@@ -37,7 +37,7 @@ export default function Navbar({ isLoggedIn, setisaLoggesIn }) {
           <Link to="/">One-2-One-Class</Link>
         </li>
         <li>
-          <Link to="/">Top Tutors</Link>
+          <Link to="/tutor">Top Tutors</Link>
         </li>
         <li>
           <Link to="/">Students</Link>
