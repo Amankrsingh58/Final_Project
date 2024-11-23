@@ -1,7 +1,8 @@
 import React from 'react'
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import Card from '../components/Card'
+import Card from '../components/Card';
+import Container from '../components/Container';
 import './Home.css'
 
 function Home() {
@@ -9,6 +10,7 @@ function Home() {
     <div className='home'>
       <Header/>
       <Card/>
+<Container/>
       <Footer/>
     </div>
     
