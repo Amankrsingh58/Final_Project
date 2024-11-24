@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import './Navbar.css';
 import { Link } from 'react-router-dom';
 import { FaChevronDown } from 'react-icons/fa';
@@ -7,6 +7,8 @@ import { toast } from "react-toastify";
 
 export default function Navbar({ isLoggedIn, setisaLoggesIn }) {
   const [dropdown, setDropdown] = useState(null);
+  const [isScrolled, setIsScrolled] = useState(false);
+
 
   const serviceDropdown = [
     
@@ -19,6 +21,23 @@ export default function Navbar({ isLoggedIn, setisaLoggesIn }) {
     { id: 2, title: "As Tutor", path: "/signup", cName: "s-item" },
   ];
 
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+    
+
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
   const clickHandler = () => {
     setisaLoggesIn(true);
     toast.success("Signed In");
@@ -29,8 +48,8 @@ export default function Navbar({ isLoggedIn, setisaLoggesIn }) {
   };
 
   return (
-    <div className="box">
-      <Link to="/" className="logo">LOGO</Link>
+<div className={`navbar ${isScrolled ? "scrolled" : "box"}`}>
+<Link to="/" className="logo">LOGO</Link>
 
       <ul className="navitem">
         <li>

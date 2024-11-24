@@ -2,7 +2,7 @@ import React from 'react';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-// import './Card.css';
+import './Card.css';
 
 function App() {
   const settings = {
@@ -11,6 +11,8 @@ function App() {
     speed: 500,
     slidesToShow: 4,
     slidesToScroll: 2,
+    autoplay:true
+    
     
 };
 
@@ -46,8 +48,9 @@ function App() {
 
   return (
     <div className="card " >
-      <b>our Top Tutors </b>
-  
+    <div className='headingtag'>
+    <b className='heading'>Our Top Tutors </b>
+      </div>  
       <div className='tutor-container' >
       <Slider {...settings}>
         {tutors.map((tutor, index) => (

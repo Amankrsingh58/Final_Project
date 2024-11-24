@@ -1,5 +1,5 @@
 import React from 'react'
-import Mainimage from '../Images/Mainimage.jpg';
+import Mainimage from '../Images/home1.jpg';
 import App from './Card';
 import "./Header.css"
 function Header(){

@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Footer.css';
+import DeveloperFooter from './DeveloperFooter.jsx';
 
  function Footer() {
   // const navigate = useNavigate(); // hook to navigate
@@ -12,6 +13,8 @@ import './Footer.css';
   };
 
   return (
+    <div>
+
     <footer className="footer">
       <div className="footer-content">
         <div className="footer-section">
@@ -80,6 +83,11 @@ import './Footer.css';
               </button>
             </li>
             <li>
+              <button onClick={() => handleNavigation("/online-tuition")}>
+                One-to-One Online Tuition
+              </button>
+            </li>
+            <li>
               <button onClick={() => handleNavigation("/group-tuition")}>
                 One-to-One Group Tuition
               </button>
@@ -116,18 +124,17 @@ import './Footer.css';
         <div className="footer-section contact">
           <h4>CONTACT US</h4>
           <ul>
-            <li>Shop No. 24, DDA Market Patel Road, New Delhi, Delhi - 110008</li>
-            <li>Sales: +91 7838139942, +91 9711727162</li>
+            <li>Beta I, Knowledge park, Greater_Noida, UP - 201326</li>
             <li>Service: +91 9811328336</li>
             <li>WhatsApp: +91 7065-80-4545</li>
             <li>Email: info@gharpetshiksha.com</li>
           </ul>
         </div>
-      
-      </div>
       <hr></hr>
-      <b>Developed by Aman & Anjani</b>
-    </footer>
+      </div>
+      </footer>
+      <DeveloperFooter/>
+    </div>
 
             )
           };

@@ -1,45 +1,43 @@
-.section{
+.section {
   word-spacing: 100px;
   color: aliceblue;
   margin-top: 30px;
   gap: 30px;
- 
-
 }
-.box{
-  background-color: #326cb5;
-  /* color: aliceblue; */
+
+.box {
+  background-color: transparent;
   display: flex;
   justify-content: center;
   align-items: center;
-  /* position:fixed; */
-  
-  width: 100%;
+  position: fixed; /* Ensure navbar stays fixed on scroll */
+  z-index: 1111; /* Keep navbar above other elements */
+  width: 100%; /* Ensure navbar spans the full width */
   height: 10vh;
-  align-items: center;
   font-weight: 500;
-  margin-top: 0px;
-  
- 
-
+  top: 0; /* Fix at the top of the page */
+  /* transition: background-color 0.3s ease, box-shadow 0.3s ease; */
 }
 
-.logo{
-color: white;
-text-decoration: none;
-font-size: 2rem;
-display: flex;
-justify-content: space-between;
-width: 9em;
-    margin-left: 2rem;
-    align-items: center;
+.box.scrolled {
+  background-color: rgba(50, 108, 181, 0.95);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
-/* .nav{
+/* Logo Styling */
+.logo {
+  color: white;
+  text-decoration: none;
+  font-size: 2rem;
+  display: flex;
+  justify-content: space-between;
+  width: 9em;
+  margin-left: 2rem;
+  align-items: center;
+}
 
-} */
-
-.navitem{
+/* Navigation Items */
+.navitem {
   display: flex;
   list-style: none;
   text-align: center;
@@ -47,29 +45,30 @@ width: 9em;
   margin-right: 2rem;
   width: 70vw;
   height: 10vh;
-  
-  /* gap: 3rem; */
 }
-.navitem li{
+
+.navitem li {
   display: flex;
   align-items: center;
-
 }
-.navitem li a{
-text-decoration: none;
-color: white;
-font-size: 1.1rem;
-margin-right: 2rem;
 
+.navitem li a {
+  text-decoration: none;
+  color: white; /* Ensure the text is visible on both transparent and colored navbar */
+  font-size: 1.1rem;
+  margin-right: 2rem;
 }
-.cursor{
+
+/* Dropdown Cursor */
+.cursor {
   display: flex;
   gap: 5px;
   justify-content: center;
   align-items: center;
 }
 
-.auth{
+/* Authentication Links */
+.auth {
   display: flex;
   color: white;
   gap: 2rem;
@@ -77,9 +76,9 @@ margin-right: 2rem;
   width: 20%;
   font-size: 1.1rem;
   align-items: center;
-  /* margin-right: 2rem; */
 }
-.auth li{
+
+.auth li {
   height: 10vh;
   display: flex;
   justify-content: center;
