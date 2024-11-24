@@ -5,6 +5,25 @@
   gap: 30px;
 }
 
+.menu{
+  display: flex;
+  position: absolute;
+  top:0.75rem;
+  right: 0.5rem;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 2.25rem;
+  height: 2rem;
+
+}
+.span{
+height: 0.4rem;
+width:100%;
+background-color: #fff;
+border-radius: 0.2rem;
+
+
+}
 .box {
   background-color: transparent;
   display: flex;
@@ -83,4 +102,33 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+@media ("(max-width :480px)") {
+  .open{
+    display: flex;
+  }
+  .menu{
+    display: flex;
+  }
+.nav{
+    flex-direction: column;
+    align-items: start;
+  }
+.navitem{
+    /* display: none; */
+    flex-direction: column;
+    /* align-items: start; */
+    width: 100px;
+    margin-bottom: 0.25rem;
+  }
+.navitem li{
+    width:100% ;
+    text-align: center;
+  }
+.navitem li a {
+    margin: 0.25rem 0.5rem ;
+ }
+
+
 }
