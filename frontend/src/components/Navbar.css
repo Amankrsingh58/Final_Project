@@ -19,7 +19,7 @@
   /* transition: background-color 0.3s ease, box-shadow 0.3s ease; */
 }
 
-.box.scrolled {
+.scrolled{
   background-color: rgba(50, 108, 181, 0.95);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
