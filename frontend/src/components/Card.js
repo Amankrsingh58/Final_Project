@@ -2,6 +2,8 @@ import React from 'react';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import tutor from '../Images/Tutor1.jpg';
+import tutor2 from "../Images/sunny.jpg"
 import './Card.css';
 
 function App() {
@@ -11,7 +13,7 @@ function App() {
     speed: 500,
     slidesToShow: 4,
     slidesToScroll: 2,
-    autoplay:true
+    autoplay:true,
     
     
 };
@@ -21,7 +23,7 @@ function App() {
     {
       id: '853302',
       experience: '25 year',
-      imageUrl: " https://imgs.search.brave.com/qpWKmEBSVFV6azClAAZSqb9C2fNMWLbZaXhYJ_tlwFw/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9zdGF0/aWMxLnd5emFudGNk/bi5jb20vaW1hZ2Vz/L3Nlby1zdG9jay10/dXRvcnMvc3RlcGhl/bi53ZWJw",
+      imageUrl:  tutor2,
     },
     {
       id: '20019',
@@ -35,9 +37,9 @@ function App() {
       imageUrl: 'https://imgs.search.brave.com/TmPjdkKcHXFNMf14Owwuwh7IZ3FMD8MKJjZXtylKIQM/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9zdGF0/aWMxLnd5emFudGNk/bi5jb20vaW1hZ2Vz/L3Nlby1zdG9jay10/dXRvcnMvam9zaHVh/LndlYnA',
     },
     {
-      id: '20019',
-      experience: '10 year',
-      imageUrl: 'https://imgs.search.brave.com/nkNR7hH6AJM__x9b1B7N5kxdDYBSQjsBuWbweQuKwso/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9zdGF0/aWMxLnd5emFudGNk/bi5jb20vaW1hZ2Vz/L3Nlby1zdG9jay10/dXRvcnMvYmlndHV0/b3IyLndlYnA',
+      id: '2022',
+      experience: '2 year',
+      imageUrl: tutor,
     },
     {
       id: '20019',
