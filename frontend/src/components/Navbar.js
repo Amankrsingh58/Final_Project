@@ -48,7 +48,7 @@ export default function Navbar({ isLoggedIn, setisaLoggesIn }) {
   };
 
   return (
-<div className={`navbar ${isScrolled ? "scrolled" : "box"}`}>
+<div className={`navbar ${isScrolled ? "box scrolled" : "box"}`}>
 <Link to="/" className="logo">LOGO</Link>
 
       <ul className="navitem">
