@@ -1,164 +1,129 @@
-/* 
-.button{
-    background-color: brown;
-border-radius: 30px;
-width: 50px;
-
-}
-.loginform{
-    /* background-color: aquamarine; */
-    /* height: 50px;
-    width: 60px;
-    margin-left: 20px;
-    margin-top: 50px; */
- */
-/* Container */
-
-.bgImg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  /* z-index: -1; */
-}
-
-.login-container img {
-  max-width: 100%;
-  height: 100vh;
-  position: absolute;
+/* Login Page Main Layout */
+.login-page {
   display: flex;
-  z-index: -1;
+  min-height: 100vh;
+  font-family: "Arial", sans-serif;
+}
+
+/* Left Section */
+.login-page-left {
+  flex: 1;
+  /* background-image: url(https://media.istockphoto.com/id/1463013729/photo/online-registration-form-for-modish-form-filling.webp?a=1&b=1&s=612x612&w=0&k=20&c=XuFG-ld8CGs24t7g569vPupOI2bTcvqwq2NuPTuOfIo=);Purple gradient */
+  object-fit: cover;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 50px;
+
+}
+
+.welcome-message h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+.welcome-message .brand-name {
+  color: #fff700;
+}
+
+.welcome-message p {
+  margin-top: 20px;
+  font-size: 1.2rem;
+  line-height: 1.6;
+}
+
+.footer {
+  margin-top: auto;
+  font-size: 0.9rem;
+  opacity: 0.7;
+}
+
+/* Right Section */
+.login-page-right {
+  flex: 1;
+  background: #f8f9fa;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: center;
+  /* width: 100%; */
+  width: 50vw;
 }
 
 .login-container {
-  /* background-image: url(""); */
-    /* display: flex; */
-    justify-content: center;
-    align-items: center;
-    z-index: -1;
-    height: 100vh;
-    position: relative;
-    background-color: #f4f4f4;
-    
-  }
-  
-  /* Card */
-  .login-card {
-    margin-left:40% ;
-    width: 350px;
-    background-color: #fff;
-    padding: 30px 20px;
-    height: 90vh;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    text-align: center;
-  }
-  
-  .login-card h2 {
-    margin-bottom: 20px;
-    color: #333;
-  }
-  
-  /* Error Message */
-  .error-message {
-    color: red;
-    font-size: 14px;
-    margin-bottom: 10px;
-  }
-  
-  /* Form Group */
-  .form-group {
-    margin-bottom: 20px;
-    text-align: left;
-  }
-  
-  .form-group label {
-    display: block;
-    font-size: 14px;
-    margin-bottom: 5px;
-    color: #555;
-  }
-  
-  .form-group input {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 14px;
-    outline: none;
-    transition: border-color 0.3s ease;
-  }
-  
-  .form-group input:focus {
-    border-color: #007bff;
-  }
-  
-  /* Button */
-  .login-button {
-    width: 100%;
-    padding: 10px 0;
-    background-color: #007bff;
-    border: none;
-    border-radius: 5px;
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .login-button:hover {
-    background-color: #0056b3;
-  }
-  
-  /* Footer */
-  .login-footer {
-    margin-top: 20px;
-    font-size: 14px;
-  }
-  
-  .login-footer a {
-    color: #007bff;
-    text-decoration: none;
-  }
-  
-  .login-footer a:hover {
-    text-decoration: underline;
-  }
-  
+  width: 100%;
+   max-width: 400px;
+  background: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  /* text-align: center; */
+  object-fit: contain;
 
-  /* Style for form group */
-.form-group {
+}
+
+.login-container h2 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.login-container p {
+  font-size: 0.9rem;
   margin-bottom: 20px;
+  color: #555;
 }
 
-/* Container for input and icon */
-.input-with-icon {
-  position: relative;
-  width: 100%;
+.input-group {
+  text-align: left;
+  margin-bottom: 15px;
+  
+
 }
 
-/* Input styling */
-.input-with-icon input {
+.input-group label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.input-group input {
   width: 100%;
-  padding: 10px 40px 10px 10px; /* Leave space for the icon */
-  font-size: 16px;
-  border: 1px solid #ccc;
+  padding: 10px;
+  border: 1px solid #ddd;
   border-radius: 5px;
 }
 
-/* Icon styling */
-/* .password-toggle {
-  position: absolute;
-  top: 56%;
-  right: 34%;
-  transform: translateY(-50%);
+.login-button {
+  width: 100%;
+  background: #3a00d4;
+  color: white;
+  border: none;
+  padding: 10px;
+  font-size: 1rem;
+  border-radius: 5px;
   cursor: pointer;
-  font-size: 18px;
-  color: #777;
+  margin-bottom: 15px;
 }
 
-.password-toggle:hover {
-  color: #000; */
+.google-login {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #ddd;
+  padding: 10px;
+  font-size: 0.9rem;
+  background: white;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.forgot-password {
+  color: #3a00d4;
+  font-size: 0.9rem;
+  text-decoration: none;
+}
+
 

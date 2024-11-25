@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 export default function Navbar({ isLoggedIn, setisaLoggesIn }) {
   const [dropdown, setDropdown] = useState(null);
   const [isScrolled, setIsScrolled] = useState(false);
-   const[menuOpen , setMenuOpen] = useState(false)
+   const[menuOpen , setMenuOpen] = useState(false);
 
 
   const serviceDropdown = [
@@ -58,8 +58,8 @@ onClick={()=>{
   <span className='span'></span>
   <span className='span'></span>
   <span className='span'></span>
-   </div>
-   <ul className={menuOpen ? "open" : ""}/>
+   </div> */
+   /* <ul className={menuOpen ? "open" : ""}/>
       <ul className="navitem">
         <li>
           <Link to="/">One-2-One-Class</Link>

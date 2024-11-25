@@ -1,98 +1,63 @@
-import React, { useState } from "react";
-import { useForm } from "react-hook-form";
+import React from "react";
 import "./LoginForm.css";
-import axios from "axios";
-import { toast } from "react-toastify";
-import { FaRegEye } from "react-icons/fa";
-import { FaRegEyeSlash } from "react-icons/fa";
-import bgImg from "../Images/bg1.png"
- 
+import LOGIN from "../Images/login12.jpg"
 
-function LoginForm() {
-  const [showPassword, setShowPassword] = useState(false);
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
-
-  const onSubmit = async (data) => {
-    const url = "https://localhost/api/login"; // Replace with your actual API endpoint
-    try {
-      const response = await axios.post(url, data, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      if (response.status===200) {
-        console.log("Login successful:", response);
-        toast.success("Login Successful!");
-        
-      } else {
-        toast.error("Login Faild");
-      }
-    } catch (error) {
-      console.error("Login failed:", error);
-      toast.error(error.message || "Login failed. Please try again.");
-    }
-  };
-
+const LoginForm = () => {
   return (
-    <div className="login-container">
-    <img src={bgImg} className="bgImg" />
-          <div className="login-card">
-        <h2>Login</h2>
-        {errors.email && <div className="error-message">Email is required</div>}
-        {errors.password && <div className="error-message">Password is required</div>}
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="form-group">
-            <label htmlFor="email">Email/Username</label>
-            <input
-              type="text"
-              id="email"
-              placeholder="Enter your email"
-              {...register("email", { required: true,
-                pattern: {
-                  value:
-                    /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
-                  message: "Invalid email address",
-                }, })}
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="password">Password</label>
-            <input
-              className="input-with-icon"
-              type={showPassword ? "text" : "password"}
-              id="password"
-              placeholder="Enter your password"
-              {...register("password", { required: true },
-              )}
-            />
-            <span
-              className="password-toggle"
-              onClick={() => setShowPassword((prev) => !prev)}
-            >
-              {showPassword ? <FaRegEyeSlash /> : <FaRegEye />}
-            </span>
-          </div>
-          <button type="submit" className="login-button">
-            Login
-          </button>
-        </form>
-        <div className="login-footer">
+    <div className="login-page">
+      {/* Left section */}
+      <div className="login-page-left">
+       
+        <div className="welcome-message">
+        <img src={LOGIN}/>
+         
+        
+        </div>
+        
+      </div>
+
+      {/* Right section */}
+      <div className="login-page-right">
+        <div className="login-container">
+          <h2>Welcome Back!</h2>
           <p>
-            Don't have an account? <a href="#">Sign Up</a>
+            Don't have an account? <a href="/signup">Create a new account now</a>, it's FREE!
           </p>
-          <p>
-            Forgot password? <a href="#">Reset</a>
-          </p>
+          <form>
+            <div className="input-group">
+              <label>Email</label>
+              <input
+                type="email"
+                name="email"
+                placeholder="Enter your email"
+                required
+              />
+            </div>
+            <div className="input-group">
+              <label>Password</label>
+              <input
+                type="password"
+                name="password"
+                placeholder="Enter your password"
+                required
+              />
+            </div>
+            <button type="submit" className="login-button">
+              Login Now
+            </button>
+          </form>
+          
+          <a href="/forgot-password" className="forgot-password">
+            Forgot password? Click here
+          </a>
         </div>
       </div>
     </div>
   );
-}
+};
+
+
+
 
 export default LoginForm;
 

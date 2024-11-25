@@ -21,9 +21,7 @@ height: 0.4rem;
 width:100%;
 background-color: #fff;
 border-radius: 0.2rem;
-
-
-}
+} 
 .box {
   background-color: transparent;
   display: flex;
@@ -70,6 +68,9 @@ border-radius: 0.2rem;
   display: flex;
   align-items: center;
 }
+.navitem li :hover{
+  color:rgb(58, 55, 55);
+}
 
 .navitem li a {
   text-decoration: none;
@@ -104,31 +105,49 @@ border-radius: 0.2rem;
   align-items: center;
 }
 
-@media ("(max-width :480px)") {
-  .open{
-    display: flex;
-  }
-  .menu{
-    display: flex;
-  }
-.nav{
-    flex-direction: column;
-    align-items: start;
-  }
-.navitem{
-    /* display: none; */
-    flex-direction: column;
-    /* align-items: start; */
-    width: 100px;
-    margin-bottom: 0.25rem;
-  }
-.navitem li{
-    width:100% ;
-    text-align: center;
-  }
-.navitem li a {
-    margin: 0.25rem 0.5rem ;
- }
+/* .menu{
+  position: absolute;
+  top: 0.75rem;
+  right: 0.5rem;
+  flex-direction: column;
+  justify-content:center;
+  width: 2.25rem;
+  height:2rem
+} */
 
 
-}
+
+  @media screen and(max-width:480px) {
+    
+    .menu{
+      display: flex;
+    }
+  .nav{
+      flex-direction: column;
+      align-items: start;
+    }
+  .navitem{
+      display: none;
+      flex-direction: column;
+      align-items: start;
+       width: 100%;
+      margin-bottom: 0.25rem;
+    }
+    .open{
+      display: flex;
+       }
+  .navitem li{
+      width:100% ;
+      text-align: center;
+    }
+  .navitem li a {
+      margin: 0.25rem 0.5rem ;
+   }
+
+  } 
+
+
+
+ 
+  
+
