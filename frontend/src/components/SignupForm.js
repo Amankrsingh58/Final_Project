@@ -1,5 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import bgimg from '../Images/5156366.jpg'
 import "./SignupForm.css";
 
 const SignupForm = () => {
@@ -30,11 +31,22 @@ const SignupForm = () => {
   };
 
   return (
-    <div className="form">
-      <div className="signup-form-container">
+
+
+    <div className="signup-page">
+    {/* Left section */}
+    <div className="signup-page-left">
+      <div className="welcome-message">
+        <img src={bgimg} alt="Login visual" />
+      </div>
+    </div>
+
+    {/* Right section */}
+    <div className="signup-page-right">
+      <div className="signup-container">
         <h1>Signup</h1>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="form-group">
+          <div className="input-group">
             <label>Username</label>
             <input
               type="text"
@@ -44,7 +56,7 @@ const SignupForm = () => {
             {errors.username && <span className="error">{errors.username.message}</span>}
           </div>
 
-          <div className="form-group">
+          <div className="input-group">
             <label>Email</label>
             <input
               type="email"
@@ -60,7 +72,7 @@ const SignupForm = () => {
             {errors.email && <span className="error">{errors.email.message}</span>}
           </div>
 
-          <div className="form-group">
+          <div className="input-group">
             <label>Password</label>
             <input
               type="password"
@@ -70,7 +82,7 @@ const SignupForm = () => {
             {errors.password && <span className="error">{errors.password.message}</span>}
           </div>
 
-          <div className="form-group">
+          <div className="input-group">
             <label>Confirm Password</label>
             <input
               type="password"
@@ -87,8 +99,10 @@ const SignupForm = () => {
 
           <button type="submit">Sign Up</button>
         </form>
+        </div>
       </div>
-    </div>
+  </div>
+
   );
 };
 
