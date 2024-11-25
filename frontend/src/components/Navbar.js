@@ -1,6 +1,6 @@
 import React, { useState,useEffect } from 'react';
 import './Navbar.css';
-import { Link } from 'react-router-dom';
+import { Link ,useLocation } from 'react-router-dom';
 import { FaChevronDown } from 'react-icons/fa';
 import Dropdown from './Dropdown';
 import { toast } from "react-toastify";
@@ -9,6 +9,8 @@ export default function Navbar({ isLoggedIn, setisaLoggesIn }) {
   const [dropdown, setDropdown] = useState(null);
   const [isScrolled, setIsScrolled] = useState(false);
    const[menuOpen , setMenuOpen] = useState(false);
+   const location = useLocation();
+  const isHomePage = location.pathname !== '/';
 
 
   const serviceDropdown = [
@@ -49,7 +51,7 @@ export default function Navbar({ isLoggedIn, setisaLoggesIn }) {
   };
 
   return (
-<div className={`navbar ${isScrolled ? "box scrolled" : "box"}`}>
+<div className={`navbar ${isHomePage?"box login_page": ( isScrolled ? "box scrolled" : "box")}`}>
 <Link to="/" className="logo">LOGO</Link>
 <div className='menu' 
 onClick={()=>{
@@ -58,7 +60,7 @@ onClick={()=>{
   <span className='span'></span>
   <span className='span'></span>
   <span className='span'></span>
-   </div> */
+   </div> 
    /* <ul className={menuOpen ? "open" : ""}/>
       <ul className="navitem">
         <li>

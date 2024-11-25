@@ -1,7 +1,7 @@
 /* Login Page Main Layout */
 .login-page {
   display: flex;
-  min-height: 100vh;
+ height: 100vh;
   font-family: "Arial", sans-serif;
 }
 
