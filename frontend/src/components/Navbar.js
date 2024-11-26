@@ -25,21 +25,7 @@ export default function Navbar({ isLoggedIn, setisaLoggesIn }) {
   ];
 
   useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
-    };
     
-
-
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
   }, []);
   const clickHandler = () => {
     setisaLoggesIn(true);
@@ -51,7 +37,7 @@ export default function Navbar({ isLoggedIn, setisaLoggesIn }) {
   };
 
   return (
-<div className={`navbar ${isHomePage?"box login_page": ( isScrolled ? "box scrolled" : "box")}`}>
+<div className= {`nav navbar ${isHomePage?"box login_page": "box"}`}>
 <Link to="/" className="logo">LOGO</Link>
 <div className='menu' 
 onClick={()=>{

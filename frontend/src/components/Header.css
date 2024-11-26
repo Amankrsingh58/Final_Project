@@ -3,6 +3,11 @@
     width:100%;
     /* background-size: cover; */
     /* background-position: center; */
-    object-fit: cover;
+    object-fit: contain;
     /* margin-top: 30px; */
+}
+.header {
+    margin-top: 72px;
+    z-index: -1;
+    background-color: #1D4FA6;
 }

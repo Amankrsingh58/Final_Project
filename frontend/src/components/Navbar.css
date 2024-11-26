@@ -1,3 +1,8 @@
+.nav{
+  position: fixed;
+  margin-bottom: 45px;
+  background-color: rgba(50, 108, 181, 0.95);
+}
 .section {
   word-spacing: 100px;
   color: aliceblue;
@@ -32,6 +37,7 @@ border-radius: 0.2rem;
   width: 100%; /* Ensure navbar spans the full width */
   height: 10vh;
   font-weight: 500;
+  background-color: #1D4FA6;
   top: 0; /* Fix at the top of the page */
   /* transition: background-color 0.3s ease, box-shadow 0.3s ease; */
 }
@@ -121,6 +127,7 @@ border-radius: 0.2rem;
     
     .menu{
       display: flex;
+
     }
   .nav{
       flex-direction: column;
