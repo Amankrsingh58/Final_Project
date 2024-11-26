@@ -75,7 +75,8 @@ border-radius: 0.2rem;
   align-items: center;
 }
 .navitem li :hover{
-  color:rgb(58, 55, 55);
+  color:#2569d1;
+  transition: all ease-in-out;
 }
 
 .navitem li a {

@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import "./LoginForm.css";
 import LOGIN from "../Images/login12.jpg";
+import { toast } from "react-toastify";
 
 const LoginForm = () => {
   const {
@@ -13,9 +14,10 @@ const LoginForm = () => {
 
   const onSubmit = async (data) => {
     try {
-      const response = await axios.post("url", data); // Replace "url" with your API endpoint
+      const response = await axios.post("http://localhost:3000/api/users/login", data); // Replace "url" with your API endpoint
       console.log(response.data); // Handle the response
       alert("Login successful!");
+      toast.success("Login successful!")
     } catch (error) {
       console.error(error);
       alert("Login failed. Please try again.");

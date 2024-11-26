@@ -8,7 +8,7 @@
 }
 
 .servicessubmenu li{
-    background-color: #8445ff;
+    background-color: #007bff;
 }
 
 .s-item{
@@ -23,7 +23,7 @@
     display: none;
 }
 .servicessubmenu li:hover{
-    background-color: #9959ff;
+    background-color: #256eec;
 } 
 
 
