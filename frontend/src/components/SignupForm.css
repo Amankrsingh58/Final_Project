@@ -43,13 +43,14 @@
 /* Right Section */
 .signup-page-right {
   flex: 1;
-  background: #f8f9fa;
+  background: #fcfcff;
   display: flex;
   align-items: center;
   width: 100%;
   justify-content: center;
   /* width: 100%; */
   width: 50vw;
+
 }
 
 .signup-container {

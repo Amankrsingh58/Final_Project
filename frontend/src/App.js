@@ -15,6 +15,7 @@ import Footer from './components/Footer';
 import Header from './components/Header';
 import Tutor from './pages/Tutor';
 import Student from './pages/Student';
+import TutorDetails from './components/TutorDetails';
 // import Footer from './components/Footer';
 
 
@@ -36,6 +37,7 @@ function App() {
       <Route path="*" element={<Notfound/>}/>
       <Route path="/tutor" element={<Tutor/>}/>
       <Route path="/student" element={<Student/>}/>
+      <Route path="/TutorDetails" element={<TutorDetails/>}/>
      </Routes>
   
     

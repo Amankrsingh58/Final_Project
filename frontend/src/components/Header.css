@@ -6,6 +6,7 @@
     object-fit: contain;
     /* margin-top: 30px; */
     transform: translateX(150px);
+    text-align: left;
 }
 .header {
     margin-top: 3vh;

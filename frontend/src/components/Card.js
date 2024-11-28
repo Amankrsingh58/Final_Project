@@ -5,6 +5,8 @@ import "slick-carousel/slick/slick-theme.css";
 import tutor from '../Images/Tutor1.jpg';
 import tutor2 from "../Images/sunny.jpg"
 import './Card.css';
+import { useNavigate ,Link } from 'react-router-dom';
+import TutorDetails from './TutorDetails';
 
 function App() {
   const settings = {
@@ -19,11 +21,13 @@ function App() {
 };
 
 
+
   const tutors = [
     {
       id: '853302',
       experience: '25 year',
       imageUrl:  tutor2,
+      phone:'9509000o3'
     },
     {
       id: '20019',
@@ -47,6 +51,19 @@ function App() {
       imageUrl: 'https://imgs.search.brave.com/nkNR7hH6AJM__x9b1B7N5kxdDYBSQjsBuWbweQuKwso/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9zdGF0/aWMxLnd5emFudGNk/bi5jb20vaW1hZ2Vz/L3Nlby1zdG9jay10/dXRvcnMvYmlndHV0/b3IyLndlYnA',
     },
   ];
+//   function TutorDetails(){
+//     <div>
+//  <p>jojoj;l;l</p>
+//     </div>
+
+// const MyComponent = () => {
+//   const navigate = useNavigate();
+// }
+// const handleClick = () => {
+// navigate('/TutorDetails');
+// };
+  
+
 
   return (
     <div className="card " >
@@ -62,7 +79,9 @@ function App() {
               <p>Tutor ID: {tutor.id}</p>
               <p>Experience: {tutor.experience}</p>
             </div>
-            <button className="contact-btn">Contact This Tutor</button>
+            <Link to="/TutorDetails">
+            <button className="contact-btn" > Contact This Tutor</button>
+            </Link>
           </div>
         ))}
          </Slider>    

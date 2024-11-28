@@ -28,6 +28,10 @@
     justify-content: center; */
     gap: 40px;
   }
+  .tutor-card:hover {
+    transform: scale(1.1);
+    z-index: 1; 
+  }
   
   .tutor-card {
     width: 200px;
