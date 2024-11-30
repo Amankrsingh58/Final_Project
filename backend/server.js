@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const cookieParser = require('cookie-parser');
 require('dotenv').config();
-
+const cors = require('cors');
 
 const connectDB = require('./config/database');
 const userRoutes = require('./routes/userRoutes');
@@ -13,6 +13,7 @@ const userRoutes = require('./routes/userRoutes');
 
 app.use(express.json());
 app.use(cookieParser());
+app.use(cors());
 
 // // Define routes
 app.use('/api/users', userRoutes);
@@ -26,6 +27,6 @@ connectDB();
 
 const PORT = process.env.PORT || 5000;
 
-app.listen(3000, () => {
-    console.log("started");
+app.listen(PORT, () => {
+    console.log(`started on port ${PORT}`);
 });

@@ -13,7 +13,7 @@ const tutorSchema = new mongoose.Schema({
         type:[String],
         require:true
     },
-    experiences:{
+    experience:{
         type:Number,
         default:0,
     },

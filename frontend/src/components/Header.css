@@ -1,15 +1,36 @@
-.main-img{
-    height:85vh;
-    width:100%;
-    /* background-size: cover; */
-    /* background-position: center; */
-    object-fit: contain;
-    /* margin-top: 30px; */
-    transform: translateX(150px);
-    text-align: left;
-}
 .header {
     margin-top: 3vh;
     z-index: -1;
     background-color: #1D4FA6;
-}
+    text-align: center; /* Center-align content */
+  }
+  
+  .main-img {
+    height: 85vh;
+    width: 100%;
+    object-fit: contain;
+    transform: translateX(150px);
+    transition: transform 0.3s ease-in-out; /* Smooth transition for responsiveness */
+  }
+  
+  @media screen and (max-width: 1024px) {
+    .main-img {
+      transform: translateX(50px); /* Adjust positioning for tablets */
+    }
+  }
+  
+  @media screen and (max-width: 768px) {
+    .main-img {
+      transform: translateX(0); /* Center the image for small screens */
+      height: 70vh; /* Reduce height for smaller screens */
+      object-fit: cover; /* Fill the container without overflow */
+    }
+  }
+  
+  @media screen and (max-width: 480px) {
+    .main-img {
+      height: 60vh; /* Further reduce height for very small screens */
+      transform: translateX(0); /* Remove any horizontal offset */
+    }
+  }
+  

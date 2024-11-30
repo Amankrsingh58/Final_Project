@@ -16,9 +16,10 @@ const LoginForm = () => {
 
   const onSubmit = async (data) => {
     try {
-      const response = await axios.post("http://localhost:3000/api/users/login", data); // Replace "url" with your API endpoint
+      const response = await axios.post("http://localhost:5000/api/users/login", data); // Replace "url" with your API endpoint
       console.log(response.data); // Handle the response
       toast.success("Login successful!");
+      setIsLoggedIn(true);
       
       // Optionally store a token in local storage (if you use tokens)
       // localStorage.setItem("token", response.data.token);
@@ -26,7 +27,6 @@ const LoginForm = () => {
     } catch (error) {
       // console.error(error);
       toast.error("Login failed. Please try again.");
-      setIsLoggedIn(true);
     }
   };
 

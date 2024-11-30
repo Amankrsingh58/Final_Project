@@ -75,17 +75,16 @@ const registerUser = async(req,res) => {
 
     // Check if email is provided
     if (!email) return res.status(400).json({ success: false, message: 'Email is required' });
-
+    
     // Find user by email
     const user = await User.findOne({ email });
     if (!user) {
-        console.log("User not found");
         return res.status(404).json({
             status: false,
             message: 'User not found',
         });
     }
-
+    
     // Password check
     const isPasswordValid = await user.isPasswordCorrect(password);
     if (!isPasswordValid) {
@@ -95,14 +94,15 @@ const registerUser = async(req,res) => {
             message: 'Password does not match',
         });
     }
-
+    
     // Generate access and refresh tokens
     const accessToken = await user.generateAccessToken();
     const refreshToken =await user.generateRefreshToken();
+    console.log("User not found",user);
     user.refreshToken = refreshToken
     await user.save();
     console.log(refreshToken);
-
+    
     // Set cookies with the tokens
     const options = {
         httpOnly: true,
