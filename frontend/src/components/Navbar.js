@@ -1,16 +1,18 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState,useEffect, useContext } from 'react';
 import './Navbar.css';
 import { Link ,useLocation } from 'react-router-dom';
 import { FaChevronDown } from 'react-icons/fa';
 import Dropdown from './Dropdown';
 import { toast } from "react-toastify";
+import { AuthContext } from '../hooks/AuthContext';
 
-export default function Navbar({ isLoggedIn, setisaLoggesIn }) {
+export default function Navbar() {
   const [dropdown, setDropdown] = useState(null);
   const [isScrolled, setIsScrolled] = useState(false);
    const[menuOpen , setMenuOpen] = useState(false);
    const location = useLocation();
   const isHomePage = location.pathname !== '/';
+const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
 
 
   const serviceDropdown = [
@@ -27,14 +29,7 @@ export default function Navbar({ isLoggedIn, setisaLoggesIn }) {
   useEffect(() => {
     
   }, []);
-  const clickHandler = () => {
-    setisaLoggesIn(true);
-    toast.success("Signed In");
-  };
-
-  const clickHandler2 = () => {
-    setisaLoggesIn(true);
-  };
+ 
 
   return (
 <div className= {`nav navbar ${isHomePage?"box login_page": "box"}`}>
@@ -47,7 +42,7 @@ onClick={()=>{
   <span className='span'></span>
   <span className='span'></span>
    </div> 
-   /* <ul className={menuOpen ? "open" : ""}/>
+   <ul className={menuOpen ? "open" : "close"}/>
       <ul className="navitem">
         <li>
           <Link to="/">One-2-One-Class</Link>
@@ -76,44 +71,36 @@ onClick={()=>{
 
 
       <ul className="auth">
-        {!isLoggedIn && (
+        {!isLoggedIn ? (
           <>
-            <Link to="/login">
-             Login
-            </Link>
+            <Link to="/login"><li>Login</li></Link>
             <Link to="/signup">
-            <li
-          onMouseEnter={() => setDropdown("serviceDropdown2")}
-          onMouseLeave={() => setDropdown(null)}
-        >
-          {dropdown === "serviceDropdown2" && (
-            <Dropdown serviceDropdown={serviceDropdown2} />
-          )}
-          <Link className="cursor" to="">
-            Sign Up <FaChevronDown />
-          </Link>
-        </li>            </Link>
+              <li
+                onMouseEnter={() => setDropdown("serviceDropdown2")}
+                onMouseLeave={() => setDropdown(null)}
+              >
+                {dropdown === "serviceDropdown2" && <Dropdown serviceDropdown={serviceDropdown2} />}
+                Sign Up <FaChevronDown />
+              </li>
+            </Link>
           </>
-        )}
-        {isLoggedIn && (
+        ) : (
           <>
             <Link to="/">
               <button
                 onClick={() => {
-                  setisaLoggesIn(false);
+                  setIsLoggedIn(false);
                   toast.success("Logged Out");
                 }}
-
-     >
+              >
                 Logout
               </button>
             </Link>
-            <Link to="/">
+            <Link to="/dashboard">
               <button>Dashboard</button>
             </Link>
           </>
         )}
-        
       </ul>
     </div>
   );

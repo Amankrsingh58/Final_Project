@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import "./LoginForm.css";
+import { AuthContext } from "../hooks/AuthContext";
 import LOGIN from "../Images/login12.jpg";
 import { toast } from "react-toastify";
 
 const LoginForm = () => {
+  const { setIsLoggedIn } = useContext(AuthContext);
   const {
     register,
     handleSubmit,
@@ -16,11 +18,15 @@ const LoginForm = () => {
     try {
       const response = await axios.post("http://localhost:3000/api/users/login", data); // Replace "url" with your API endpoint
       console.log(response.data); // Handle the response
-      alert("Login successful!");
-      toast.success("Login successful!")
+      toast.success("Login successful!");
+      
+      // Optionally store a token in local storage (if you use tokens)
+      // localStorage.setItem("token", response.data.token);
+      
     } catch (error) {
-      console.error(error);
-      alert("Login failed. Please try again.");
+      // console.error(error);
+      toast.error("Login failed. Please try again.");
+      setIsLoggedIn(true);
     }
   };
 

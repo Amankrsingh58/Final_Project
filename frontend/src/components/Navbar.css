@@ -10,7 +10,7 @@
   gap: 30px;
 }
 
-.menu{
+/* .menu{
   display: flex;
   position: absolute;
   top:0.75rem;
@@ -20,13 +20,13 @@
   width: 2.25rem;
   height: 2rem;
 
-}
-.span{
-height: 0.4rem;
+} */
+/* .span{ */
+/* height: 0.4rem;
 width:100%;
 background-color: #fff;
 border-radius: 0.2rem;
-} 
+}  */
 .box {
   background-color: transparent;
   display: flex;
@@ -39,7 +39,7 @@ border-radius: 0.2rem;
   font-weight: 500;
   background-color: #1D4FA6;
   top: 0; /* Fix at the top of the page */
-  /* transition: background-color 0.3s ease, box-shadow 0.3s ease; */
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .scrolled{
@@ -81,7 +81,7 @@ border-radius: 0.2rem;
 
 .navitem li a {
   text-decoration: none;
-  color: white; /* Ensure the text is visible on both transparent and colored navbar */
+  color: white; 
   font-size: 1.1rem;
   margin-right: 2rem;
 }
@@ -108,11 +108,12 @@ border-radius: 0.2rem;
 .auth li {
   height: 10vh;
   display: flex;
+  /* gap: 5px; */
   justify-content: center;
   align-items: center;
 }
-
-/* .menu{
+/* 
+.menu{
   position: absolute;
   top: 0.75rem;
   right: 0.5rem;
@@ -124,8 +125,8 @@ border-radius: 0.2rem;
 
 
 
-  @media screen and(max-width:480px) {
-    
+/* @media screen and (max-width: 480px) { 
+
     .menu{
       display: flex;
 
@@ -152,7 +153,7 @@ border-radius: 0.2rem;
       margin: 0.25rem 0.5rem ;
    }
 
-  } 
+  }  */
 
 .login_page{
   background-color: rgba(50, 108, 181, 0.95);

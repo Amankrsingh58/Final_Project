@@ -34,3 +34,13 @@ justify-content: center;
 gap: 37px;
 height: 78vh;
 }
+
+
+@media screen and (max-width: 480px) { 
+    .button{
+        padding: 11px 18px;
+    }
+    .container{
+        height: 82vh;
+    }
+}
