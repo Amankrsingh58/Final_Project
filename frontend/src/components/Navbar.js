@@ -33,7 +33,7 @@ const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
 
   return (
 <div className= {`nav navbar ${isHomePage?"box login_page": "box"}`}>
-<Link to="/" className="logo">LOGO</Link>
+<Link to="/" className="navlogo">LOGO</Link>
 <div className='menu' 
 onClick={()=>{
   setMenuOpen(!menuOpen);
