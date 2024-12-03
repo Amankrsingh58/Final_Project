@@ -22,8 +22,6 @@ function Tutor(){
     <div className=' bg-indigo-600 round-xl px-20 py-10 flex flex-col gap-5 items-center mx-4'>
         <h1 >Tutors Details</h1>
         <p className='text-3xl text-red-500 font-bold max-w-md text-center'>the tutors Details will shown below</p>
-        tutor 1 <br></br>
-        turor 2
     </div>
 
 
