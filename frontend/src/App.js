@@ -1,46 +1,36 @@
-// import logo from './logo.svg';
-import { NavLink, Route, Routes } from 'react-router-dom';
-import { useState } from 'react';
-import './App.css';
-import Home from './pages/Home';
-import About from './pages/About';
-import Login from './pages/Login';
-import Signup from './pages/Signup';
-import Contact from './pages/Contact';
-import DashBoard from './pages/DashBoard';
-import Services from './pages/Services';
-import Notfound from './pages/Notfound';
-import Navbar from './components/Navbar';
-import Footer from './components/Footer';
-import Header from './components/Header';
-import Tutor from './pages/Tutor';
-import Student from './pages/Student';
-import TutorDetails from './components/TutorDetails';
-import TutorDashboard from './components/TutorDashboard';
-// import Footer from './components/Footer';
-
-
+import { Routes, Route, useNavigate } from "react-router-dom";
+import Home from "./pages/Home";
+import About from "./pages/About";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+import Contact from "./pages/Contact";
+import Tutor from "./pages/Tutor";
+import Student from "./pages/Student";
+import Notfound from "./pages/Notfound";
+import Navbar from "./components/Navbar";
+import Dashboard from "./pages/DashBoard";
 
 function App() {
-  const [isLoggedIn, setisaLoggesIn] = useState(false);
+  const Navigate = useNavigate();
 
   return (
     <div className="App">
-    <Navbar isLoggedIn={isLoggedIn} setisaLoggesIn={setisaLoggesIn}/>
-     <Routes>
-      <Route path="/" element={<Home/>}/>
-      <Route path="/about" element={<About/>}/>
-      <Route path="/login" element={<Login/>}/>
-      <Route path="/signup" element={<Signup/>}/>
-      <Route path="/contact" element={<Contact/>}/>
-      <Route path="/dashboard" element={<DashBoard/>}/>
-      <Route path="/services" element={<Services/>}/>
-      <Route path="*" element={<Notfound/>}/>
-      <Route path="/tutor" element={<Tutor/>}/>
-      <Route path="/student" element={<Student/>}/>
-      <Route path="/TutorDetails" element={<TutorDetails/>}/>
-     </Routes>
-      </div>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/contact" element={<Contact />} />
+        {/* <Route path="/dashboard" element={<Navigate to="/dashboard/dashboardhome"  />} /> */}
+        <Route path="/dashboard/*" element={<Dashboard />} />
+        <Route path="/tutor" element={<Tutor />} />
+        <Route path="/student" element={<Student />} />
+        <Route path="/tutor" element={<Tutor />} />
+        <Route path="/student" element={<Student />} />
+        <Route path="*" element={<Notfound />} />
+      </Routes>
+    </div>
   );
 }
 

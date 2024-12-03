@@ -104,9 +104,16 @@
     .stat-label {
       font-size: 0.9rem; 
     }
+    .stat-item:hover {
+      transform: translateY(-5px); /* Slight hover effect */
+    }
   }
   
   @media (max-width: 480px) {
+
+    .stat-item:hover {
+      transform: translateY(-5px); /* Slight hover effect */
+    }
 
     .stats-container {
       display: flex;
