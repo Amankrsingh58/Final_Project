@@ -2,7 +2,7 @@ import React, { useState,useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { RiHomeFill } from "react-icons/ri";
-import { FaUser, FaBell, FaCog, FaChalkboardTeacher, FaUserGraduate } from "react-icons/fa";
+import { FaUser, FaBell, FaCog, FaChalkboardTeacher, FaUserGraduate, FaSignOutAlt } from "react-icons/fa";
 import "./Slidebar.css";
 
 const Sidebar = () => {
@@ -89,6 +89,15 @@ useEffect(() => {
           >
             <FaCog className="icon" />
             {isExpand && <span>Settings</span>}
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            to="/logout"
+            className={({ isActive }) => (isActive ? "active-link" : "")}
+          >
+            <FaSignOutAlt className="icon" />
+            {isExpand && <span>Signout</span>}
           </NavLink>
         </li>
       </ul>
