@@ -96,7 +96,7 @@ onClick={()=>{
                 Logout
               </button>
             </Link>
-            <Link to="/dashboard">
+            <Link to="/Studentdashboard">
               <button>Dashboard</button>
             </Link>
           </>

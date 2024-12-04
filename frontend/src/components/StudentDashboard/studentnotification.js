@@ -2,7 +2,11 @@ import React from 'react'
 
 function studentnotification() {
   return (
-    <div>studentnotification</div>
+    <div>
+      <h1>
+      studentnotification
+        </h1>
+        </div>
   )
 }
 
