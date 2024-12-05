@@ -7,7 +7,7 @@ const Sliderbar = ({children})=>{
   const toggle =()=> setIsOpen(!isOpen)
   const menuItems=[
     {
-      path:"/studentdashboard",
+      path:"/studentdashboard/studentdashboardhome",
       name:"Dashboard",
       icon:<FaTh/>
     },
@@ -28,9 +28,9 @@ const Sliderbar = ({children})=>{
     },
   ]
 return(
-  <div className="container">
-    <div  style={{width:isOpen ? "300px":"50px"}} className="sliderbar">
-      <div  className="top-section flex justify-center items-center m-2">{
+  
+    <div  style={{width:isOpen ? "300px":"50px"}} className="sliderbar  h-[100vh]">
+      <div  className="top-section flex justify-center items-center m-[1.5rem] text-white">{
         isOpen &&
 <h1  className="logo1 font-bold text-[1.5rem]  mr-[12rem]"> Logo</h1>
 }
@@ -42,7 +42,7 @@ return(
  
  {
 menuItems.map((item,index)=>(
-  <NavLink to ={item.path} key={index} className="link"activeclassName="active">
+  <NavLink to ={item.path} key={index} className="link mb-[1rem]"activeclassName="active">
     <div className="icon">{item.icon}</div>
     <div className="link_text">{isOpen && item.name}</div>
    
@@ -50,8 +50,7 @@ menuItems.map((item,index)=>(
 ))
  }
       </div> 
-      <main className="flex-1 p-[2rem] text-white bg-green-500 m-[2rem]">{children}</main>
-</div>
+
   
 );
 };

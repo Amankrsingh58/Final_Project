@@ -9,20 +9,24 @@ import { Route,Router,Routes ,useNavigate, } from "react-router-dom";
 function StudentDashboard(){
     const Navigate = useNavigate();
 useEffect( ()=> {
-  Navigate("/Studentdashboard/Studentdashboardhome");
+  Navigate("/studentdashboard/studentdashboardhome");
 },[]);
     return(
-        <div>
+        <div className="flex h-[100vh] mt-[10vh] ">
             <Sliderbar/>
-          
-           <Routes>
-           <Route path="./Studentdashboardhome" element={<Studentdashboardhome/>} />
-           <Route path="./About" element={<StudentAbout/>} />
-          <Route path="./studentprofile" element={<StudentProfile />} />
+
+            <div className="flex-1  text-white bg-green-500 m-[2rem] w-[100%] h-[100%] rounded-md">
+            <Routes>
+           <Route path="studentdashboardhome" element={<Studentdashboardhome/>} />
+           <Route path="About" element={<StudentAbout/>} />
+          <Route path="studentprofile" element={<StudentProfile />} />
           <Route path="notifications" element={<StudentNotification />} />
           {/* <Route path="tutors" element={<Tutor />} /> */}
           <Route path="*" element={<div>Page not found in Dashboard!</div>} />
            </Routes>
+
+            </div>
+
            
           
            
