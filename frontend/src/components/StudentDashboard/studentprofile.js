@@ -1,9 +1,9 @@
 import React from 'react'
 
-function studentprofile() {
+function Studentprofile() {
   return (
-    <div>studentprofile</div>
+    <div className="h-[300px] bg-white w-[100%] z-8">studentprofile</div>
   )
 }
 
-export default studentprofile
+export default Studentprofile
