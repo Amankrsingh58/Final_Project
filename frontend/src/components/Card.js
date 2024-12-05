@@ -8,7 +8,7 @@ import "./Card.css";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
-function App() {
+function Card() {
   const settings = {
     dots: true,
     infinite: true,
@@ -105,4 +105,4 @@ function App() {
   );
 }
 
-export default App;
+export default Card;

@@ -23,7 +23,7 @@ const Sliderbar = ({children})=>{
     },
     {
       path:"studentdashboard/tutor",
-      name:"tutor",
+      name:"Tutor",
       icon:<FaRegChartBar/>
     },
   ]

@@ -1,8 +1,11 @@
 import React from 'react'
+import Studentprofile from './studentprofile'
 
 function Studentdashboardhome() {
   return (
-    <div>This is Studentdashboardhome</div>
+    <div>
+      <Studentprofile/>
+    </div>
   )
 }
 
