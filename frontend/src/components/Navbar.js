@@ -5,11 +5,14 @@ import { FaChevronDown } from 'react-icons/fa';
 import Dropdown from './Dropdown';
 import { toast } from "react-toastify";
 import { AuthContext } from '../hooks/AuthContext';
+import { GiHamburgerMenu } from "react-icons/gi";
+
 
 export default function Navbar() {
   const [dropdown, setDropdown] = useState(null);
   const [isScrolled, setIsScrolled] = useState(false);
    const[menuOpen , setMenuOpen] = useState(false);
+   const[isNavExpand , setIsNavExpand] = useState(true);
    const location = useLocation();
   const isHomePage = location.pathname !== '/';
 const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
@@ -32,8 +35,11 @@ const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
  
 
   return (
-<div className= {`nav navbar ${isHomePage?"box login_page": "box"}`}>
+<div className= {`nav navbar ${menuOpen?"box menuopen": "box"}`}>
+  <div className={isNavExpand?"flex justify-between items-center w-[100vw]":""}>
 <Link to="/" className="navlogo">LOGO</Link>
+{isNavExpand && <GiHamburgerMenu className='navlogo' onClick={()=>setMenuOpen(!menuOpen)}/>}
+</div>
 <div className='menu' 
 onClick={()=>{
   setMenuOpen(!menuOpen);
@@ -43,7 +49,7 @@ onClick={()=>{
   <span className='span'></span>
    </div> 
    <ul className={menuOpen ? "open" : "close"}/>
-      <ul className="navitem">
+      {!isNavExpand && <ul className="navitem">
         <li>
           <Link to="/">One-2-One-Class</Link>
         </li>
@@ -67,11 +73,11 @@ onClick={()=>{
             More <FaChevronDown />
           </Link>
         </li>
-      </ul>
+      </ul>}
 
 
-      <ul className="auth">
-        {!isLoggedIn ? (
+      <ul className={isNavExpand?"":"auth"}>
+      {!isNavExpand &&  (!isLoggedIn ? (
           <>
             <Link to="/login"><li>Login</li></Link>
             <Link to="/signup">
@@ -100,7 +106,7 @@ onClick={()=>{
               <button>Dashboard</button>
             </Link>
           </>
-        )}
+        ))}
       </ul>
     </div>
   );

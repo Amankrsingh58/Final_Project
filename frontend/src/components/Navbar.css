@@ -1,5 +1,6 @@
 .nav{
   position: fixed;
+  width: 100vw;
   margin-bottom: 45px;
   background-color: rgba(50, 108, 181, 0.95);
 }
@@ -34,7 +35,7 @@ border-radius: 0.2rem;
   align-items: center;
   position: fixed; /* Ensure navbar stays fixed on scroll */
   z-index: 1111; /* Keep navbar above other elements */
-  width: 100%; /* Ensure navbar spans the full width */
+  /* width: 100vw; Ensure navbar spans the full width */
   height: 10vh;
   font-weight: 500;
   background-color: #1D4FA6;
@@ -159,6 +160,12 @@ border-radius: 0.2rem;
   background-color: rgba(50, 108, 181, 0.95);
 }
 
+.menuopen{
+  height: 50vh;
+  display: flex;
+  align-items: flex-start;
+  padding-top: 6px;
+}
  
   
 

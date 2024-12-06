@@ -13,10 +13,10 @@ useEffect( ()=> {
   Navigate("/studentdashboard/studentdashboardhome");
 },[]);
     return(
-        <div className="flex h-[100vh] mt-[10vh] ">
+        <div className="flex h-[100vh] mt-[10vh]  ">
             <Sliderbar/>
 
-            <div className="flex-1  text-white bg-green-500 m-[2rem] w-[100%] h-[100%] rounded-md">
+            <div className="flex-1  text-white bg-white p-[2rem] w-[100%] h-[100%] ">
             <Routes>
            <Route path="studentdashboardhome" element={<Studentdashboardhome/>} />
           <Route path="studentprofile" element={<StudentProfile />} />

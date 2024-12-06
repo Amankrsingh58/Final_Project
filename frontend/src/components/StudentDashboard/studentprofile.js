@@ -4,13 +4,19 @@ import React from "react";
 
 const Studentprofile = () => {
   return (
+
+
+        // BHAI PURA CHAT GPT DIKH RAHA HAI TO WAH 
+
+
+
     <div>
-    <div className="min-h-screen bg-blue-800 text-white flex flex-col items-center py-10 ">
+    <div className="min-h-screen bg-white text-white flex flex-col items-center py-10 ">
       {/* Profile Header */}
-      <div className="w-full bg-blue-500 rounded-lg p-6 mb-6 flex justify-between items-center">
+      <div className="w-full bg-custom-blue rounded-lg p-6 mb-6 flex justify-between items-center">
         <div className="flex items-center">
           {/* Profile Icon */}
-          <div className="w-12 h-12 bg-teal-500 rounded-full flex items-center justify-center text-xl font-bold">
+          <div className="w-12 h-12 bg-custom-blue rounded-full flex items-center justify-center text-xl font-bold">
            S
           </div>
           {/* Profile Info */}
@@ -26,7 +32,7 @@ const Studentprofile = () => {
       </div>
 
       {/* About Section */}
-      <div className="w-full  bg-blue-500 rounded-lg p-6 flex justify-between items-center">
+      <div className="w-full  bg-custom-blue rounded-lg p-6 flex justify-between items-center">
         <div>
           <h3 className="text-lg font-semibold">About</h3>
           <p className="text-sm text-gray-400">Write Something about Yourself</p>
@@ -38,7 +44,7 @@ const Studentprofile = () => {
       </div>
    
   
-          <div className="w-full max-w-6xl bg-blue-500 rounded-lg p-6 mt-7">
+          <div className="w-full max-w-6xl bg-custom-blue rounded-lg p-6 mt-7">
           {/* Header */}
           <div className="flex justify-between items-center mb-6">
             <h2 className="text-xl font-semibold">Personal Details</h2>

@@ -29,7 +29,7 @@ const Sliderbar = ({children})=>{
   ]
 return(
   
-    <div  style={{width:isOpen ? "300px":"50px"}} className="sliderbar  h-[100vh]">
+    <div  style={{width:isOpen ? "300px":"50px"}} className="sliderbar  h-[100%]">
       <div  className="top-section flex justify-center items-center m-[1.5rem] text-white">{
         isOpen &&
 <h1  className="logo1 font-bold text-[1.5rem]  mr-[12rem]"> Logo</h1>
