@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState,useEffect } from "react";
 import { useForm } from "react-hook-form";
 import bgimg from '../Images/5156366.jpg'
 import "./SignupForm.css";
 
 const SignupForm = () => {
+  const [isExpand,setIsExpand] =useState(true);
   const {
     register,
     handleSubmit,
@@ -30,16 +31,35 @@ const SignupForm = () => {
     }
   };
 
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 700) { 
+        setIsExpand(false); 
+      }
+      if (window.innerWidth > 700) { 
+        setIsExpand(true); 
+      }
+    };
+  
+    window.addEventListener('resize', handleResize);
+  
+    handleResize();
+  
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
   return (
 
 
     <div className="signup-page">
     {/* Left section */}
+    {isExpand &&
     <div className="signup-page-left">
       <div className="welcome-message">
         <img src={bgimg} alt="Login visual" />
       </div>
-    </div>
+    </div>}
 
     {/* Right section */}
     <div className="signup-page-right">

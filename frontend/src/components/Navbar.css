@@ -161,10 +161,10 @@ border-radius: 0.2rem;
 }
 
 .menuopen{
-  height: 50vh;
+  height: 56vh;
   display: flex;
   align-items: flex-start;
-  padding-top: 16.5px;
+  padding-top: 8.5px;
   flex-direction: column;
   background-color: transparent;
   display: flex;

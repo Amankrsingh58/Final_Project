@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState,useEffect } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import "./LoginForm.css";
@@ -30,17 +30,38 @@ const LoginForm = () => {
     }
   };
 
+  const [isExpand,setIsExpand] = useState(true);
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 800) { 
+        setIsExpand(false); 
+      }
+      if (window.innerWidth > 800) { 
+        setIsExpand(true); 
+      }
+    };
+  
+    window.addEventListener('resize', handleResize);
+  
+    handleResize();
+  
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+
   return (
-    <div className="login-page">
+    <div className="login-page  lg:flex-row xs:h-[100vh] md:h-[100vh] md:justify-center">
       {/* Left section */}
-      <div className="login-page-left">
+     {isExpand && <div className="login-page-left xs:w-[100vw] md:w-[50vw] md-w-[50%]">
         <div className="welcome-message">
           <img src={LOGIN} alt="Login visual" />
         </div>
-      </div>
+      </div>}
 
       {/* Right section */}
-      <div className="login-page-right">
+      <div className="login-page-right xs:w-[100vw] md:w-[50%]">
         <div className="login-container">
           <h2>Welcome Back!</h2>
           <p>

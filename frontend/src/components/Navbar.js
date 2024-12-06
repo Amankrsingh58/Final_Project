@@ -34,8 +34,11 @@ const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
  
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth < 600) { 
+      if (window.innerWidth < 800) { 
         setIsNavExpand(false); 
+      }
+      if (window.innerWidth > 800) { 
+        setIsNavExpand(true); 
       }
     };
   
@@ -59,31 +62,31 @@ const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
     {menuOpen && <ul>
       <hr></hr>
 
-    <li className='pb-2 pt-2'>
+    <li className='pb-2 pt-2' onClick={()=>setMenuOpen(!menuOpen)}>
           <Link to="/">One-2-One-Class</Link>
         </li>
         <hr></hr>
-        <li className='pb-2 pt-2'>
+        <li className='pb-2 pt-2' onClick={()=>setMenuOpen(!menuOpen)}>
           <Link to="/tutor">Top Tutors</Link>
         </li>
         <hr></hr>
-        <li className='pb-2 pt-2'>
+        <li className='pb-2 pt-2' onClick={()=>setMenuOpen(!menuOpen)}>
           <Link to="/">Students</Link>
         </li>
         <hr></hr>
-        <li className='pb-2 pt-2'>
+        <li className='pb-2 pt-2' onClick={()=>setMenuOpen(!menuOpen)}>
           <Link to="/">Online Class</Link>
         </li>
         <hr></hr>
         {(!isLoggedIn ? (
           <>
-            <Link to="/login"><li className='pb-2 pt-2'>Login</li></Link>
+            <Link to="/login"><li className='pb-2 pt-2' onClick={()=>setMenuOpen(!menuOpen)}>Login</li></Link>
             <hr></hr>
 
-            <Link to="/signup"><li className='pb-2 pt-2'>I Need A Tutor</li></Link>
+            <Link to="/signup"><li className='pb-2 pt-2' onClick={()=>setMenuOpen(!menuOpen)}>I Need A Tutor</li></Link>
             <hr></hr>
 
-            <Link to="/signup"><li className='pb-2 pt-2'>Join As Tutor</li></Link>
+            <Link to="/signup"><li className='pb-2 pt-2' onClick={()=>setMenuOpen(!menuOpen)}>Join As Tutor</li></Link>
             <hr></hr>
 
           </>
@@ -94,6 +97,7 @@ const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
                 className='pb-2 pt-2'
                 onClick={() => {
                   setIsLoggedIn(false);
+                  setMenuOpen(!menuOpen)
                   toast.success("Logged Out");
                 }}
               >
@@ -103,7 +107,7 @@ const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
               <hr></hr>
             </Link>
             <Link to="/Studentdashboard">
-              <button className='pb-2 pt-2'>Dashboard</button>
+              <button onClick={()=>setMenuOpen(!menuOpen)} className='pb-2 pt-2'>Dashboard</button>
             </Link>
             <hr></hr>
           </>
@@ -112,8 +116,8 @@ const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
    </div> }
    <ul className={menuOpen ? "" : ""}/>
       {isNavExpand && <ul className="navitem">
-        <li>
-          <Link to="/">One-2-One-Class</Link>
+        <li >
+          <Link to="/" >One-2-One-Class</Link>
         </li>
         <li>
           <Link to="/tutor">Top Tutors</Link>
