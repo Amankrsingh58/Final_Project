@@ -164,7 +164,17 @@ border-radius: 0.2rem;
   height: 50vh;
   display: flex;
   align-items: flex-start;
-  padding-top: 6px;
+  padding-top: 16.5px;
+  flex-direction: column;
+  background-color: transparent;
+  display: flex;
+  position: fixed; /* Ensure navbar stays fixed on scroll */
+  z-index: 1111; /* Keep navbar above other elements */
+  /* width: 100vw; Ensure navbar spans the full width */
+  font-weight: 500;
+  background-color: #1D4FA6;
+  top: 0; /* Fix at the top of the page */
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
  
   

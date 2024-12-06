@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .slick-slide >div{
-    margin: 0 75px ;
+    /* margin: 0 75px ; */
     margin-top: 50px;
     margin-bottom: 30px;
  

@@ -17,7 +17,6 @@ export default function Navbar() {
   const isHomePage = location.pathname !== '/';
 const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
 
-
   const serviceDropdown = [
     
     { id: 1, title: "About", path: "/about", cName: "s-item" },
@@ -33,23 +32,86 @@ const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
     
   }, []);
  
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 600) { 
+        setIsNavExpand(false); 
+      }
+    };
+  
+    window.addEventListener('resize', handleResize);
+  
+    handleResize();
+  
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   return (
-<div className= {`nav navbar ${menuOpen?"box menuopen": "box"}`}>
-  <div className={isNavExpand?"flex justify-between items-center w-[100vw]":""}>
+<div className= {`nav navbar ${menuOpen?" menuopen": "box"}`}>
+  <div className={isNavExpand?"flex justify-between items-center":"flex justify-between items-center  w-[100vw]"}>
 <Link to="/" className="navlogo">LOGO</Link>
-{isNavExpand && <GiHamburgerMenu className='navlogo' onClick={()=>setMenuOpen(!menuOpen)}/>}
+{!isNavExpand && <GiHamburgerMenu className='navlogo' onClick={()=>setMenuOpen(!menuOpen)}/>}
+<br></br>
 </div>
-<div className='menu' 
-onClick={()=>{
-  setMenuOpen(!menuOpen);
-}}> 
-  <span className='span'></span>
-  <span className='span'></span>
-  <span className='span'></span>
-   </div> 
-   <ul className={menuOpen ? "open" : "close"}/>
-      {!isNavExpand && <ul className="navitem">
+   {!isNavExpand && <div className='w-[80%] pt-4 ml-auto mr-auto text-white font-[1.5rem]'>
+    {menuOpen && <ul>
+      <hr></hr>
+
+    <li className='pb-2 pt-2'>
+          <Link to="/">One-2-One-Class</Link>
+        </li>
+        <hr></hr>
+        <li className='pb-2 pt-2'>
+          <Link to="/tutor">Top Tutors</Link>
+        </li>
+        <hr></hr>
+        <li className='pb-2 pt-2'>
+          <Link to="/">Students</Link>
+        </li>
+        <hr></hr>
+        <li className='pb-2 pt-2'>
+          <Link to="/">Online Class</Link>
+        </li>
+        <hr></hr>
+        {(!isLoggedIn ? (
+          <>
+            <Link to="/login"><li className='pb-2 pt-2'>Login</li></Link>
+            <hr></hr>
+
+            <Link to="/signup"><li className='pb-2 pt-2'>I Need A Tutor</li></Link>
+            <hr></hr>
+
+            <Link to="/signup"><li className='pb-2 pt-2'>Join As Tutor</li></Link>
+            <hr></hr>
+
+          </>
+        ) : (
+          <>
+            <Link to="/" >
+              <button
+                className='pb-2 pt-2'
+                onClick={() => {
+                  setIsLoggedIn(false);
+                  toast.success("Logged Out");
+                }}
+              >
+                Logout
+              </button>
+              <br/>
+              <hr></hr>
+            </Link>
+            <Link to="/Studentdashboard">
+              <button className='pb-2 pt-2'>Dashboard</button>
+            </Link>
+            <hr></hr>
+          </>
+        ))}
+    </ul>}
+   </div> }
+   <ul className={menuOpen ? "" : ""}/>
+      {isNavExpand && <ul className="navitem">
         <li>
           <Link to="/">One-2-One-Class</Link>
         </li>
@@ -76,8 +138,8 @@ onClick={()=>{
       </ul>}
 
 
-      <ul className={isNavExpand?"":"auth"}>
-      {!isNavExpand &&  (!isLoggedIn ? (
+      <ul className={!isNavExpand?"":"auth"}>
+      {isNavExpand &&  (!isLoggedIn ? (
           <>
             <Link to="/login"><li>Login</li></Link>
             <Link to="/signup">

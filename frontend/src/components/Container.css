@@ -2,6 +2,9 @@
     margin-top: 30px;
     background-color: #fff7ff;
     height: 150vh;
+    display: flex;
+    width: 100vw;
+    flex-direction: column;
     
     }
     .button{

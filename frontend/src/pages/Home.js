@@ -10,7 +10,7 @@ function Home() {
   return (
     <div className='home'>
       <Header/>
-      <Card/>
+      {/* <Card/> */}
 <Container/>
 <Stats/>
       <Footer/>

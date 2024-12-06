@@ -3,7 +3,7 @@ import pic from '../Images/pic.png';
 import './Container.css'
 function Container(){
     return(
-<div className="container">
+<div className="container w-full">
  <img src={pic}alt="picture"/>
  
  <div className="demo">
