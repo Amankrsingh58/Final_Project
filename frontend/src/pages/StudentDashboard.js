@@ -5,6 +5,7 @@ import StudentNotification from "../components/StudentDashboard/studentnotificat
 import StudentProfile from "../components/StudentDashboard/studentprofile";
  import Studentdashboardhome from "../components/StudentDashboard/Studentdashboardhome";
  import Studenttutor from "../components/StudentDashboard/Studenttutor";
+ import Studentsetting from "../components/StudentDashboard/Studentsetting";
 import { Route,Router,Routes ,useNavigate, } from "react-router-dom";
 
 function StudentDashboard(){
@@ -21,7 +22,8 @@ useEffect( ()=> {
            <Route path="studentdashboardhome" element={<Studentdashboardhome/>} />
           <Route path="studentprofile" element={<StudentProfile />} />
           <Route path="notifications" element={<StudentNotification />} />
-          <Route path="tutor" element={<Studenttutor/>} />
+          <Route path="Studenttutor" element={<Studenttutor/>} />
+          <Route path="Studentsetting" element={<Studentsetting/>} />
           {/* <Route path="*" element={<div>Page not found in Dashboard!</div>} /> */}
            </Routes>
 

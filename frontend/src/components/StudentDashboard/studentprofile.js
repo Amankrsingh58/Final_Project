@@ -1,16 +1,12 @@
 
 
 import React from "react";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const Studentprofile = () => {
+  const Navigate = useNavigate();
   return (
-
-
-        // BHAI PURA CHAT GPT DIKH RAHA HAI TO WAH 
-
-
-
-    <div>
+ <div>
     <div className="min-h-screen bg-white text-white flex flex-col items-center py-10 ">
       {/* Profile Header */}
       <div className="w-full bg-custom-blue rounded-lg p-6 mb-6 flex justify-between items-center">
@@ -26,7 +22,7 @@ const Studentprofile = () => {
           </div>
         </div>
         {/* Edit Button */}
-        <button className="bg-yellow-400 text-black rounded-md px-4 py-2 text-sm font-bold hover:bg-yellow-500">
+        <button onClick={ ()=> Navigate("/Studentdashboard/Studentsetting")} className="bg-yellow-400 text-black rounded-md px-4 py-2 text-sm font-bold hover:bg-yellow-500">
           Edit
         </button>
       </div>
@@ -38,7 +34,7 @@ const Studentprofile = () => {
           <p className="text-sm text-gray-400">Write Something about Yourself</p>
         </div>
         {/* Edit Button */}
-        <button className="bg-yellow-400 text-black rounded-md px-4 py-2 text-sm font-bold hover:bg-yellow-500">
+        <button onClick={ ()=> Navigate("/Studentdashboard/Studentsetting")} className="bg-yellow-400 text-black rounded-md px-4 py-2 text-sm font-bold hover:bg-yellow-500">
           Edit
         </button>
       </div>
@@ -48,7 +44,7 @@ const Studentprofile = () => {
           {/* Header */}
           <div className="flex justify-between items-center mb-6">
             <h2 className="text-xl font-semibold">Personal Details</h2>
-            <button className="bg-yellow-400 text-black rounded-md px-4 py-2 text-sm font-bold hover:bg-yellow-500">
+            <button onClick={ ()=> Navigate("/Studentdashboard/Studentsetting")} className="bg-yellow-400 text-black rounded-md px-4 py-2 text-sm font-bold hover:bg-yellow-500">
               Edit
             </button>
           </div>

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import{FaTh,FaUserAlt,FaRegChartBar,FaComment ,FaBars}from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 import "./Sliderbar.css"
+import { IoSettingsSharp } from "react-icons/io5";
 const Sliderbar = ({children})=>{
   const [isOpen ,setIsOpen]=useState(true)
   const toggle =()=> setIsOpen(!isOpen)
@@ -22,9 +23,14 @@ const Sliderbar = ({children})=>{
       icon:<FaComment/>
     },
     {
-      path:"studentdashboard/tutor",
+      path:"/Studentdashboard/Studenttutor",
       name:"Tutor",
       icon:<FaRegChartBar/>
+    },
+    {
+      path:"/Studentdashboard/Studentsetting",
+      name:"Settings",
+      icon:<IoSettingsSharp/>
     },
   ]
 return(
