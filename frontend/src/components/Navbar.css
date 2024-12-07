@@ -3,12 +3,17 @@
   width: 100vw;
   margin-bottom: 45px;
   background-color: rgba(50, 108, 181, 0.95);
+  transition: background-color 0.3s ease, color 0.3s ease;
+
 }
 .section {
   word-spacing: 100px;
   color: aliceblue;
   margin-top: 30px;
   gap: 30px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+
+
 }
 
 /* .menu{
@@ -46,6 +51,8 @@ border-radius: 0.2rem;
 .scrolled{
   background-color: rgba(50, 108, 181, 0.95);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease, color 0.3s ease;
+
 }
 
 /* Logo Styling */
@@ -69,11 +76,15 @@ border-radius: 0.2rem;
   margin-right: 2rem;
   width: 70vw;
   height: 10vh;
+  transition: background-color 0.3s ease, color 0.3s ease;
+
 }
 
 .navitem li {
   display: flex;
   align-items: center;
+  transition: background-color 0.3s ease, color 0.3s ease;
+
 }
 .navitem li :hover{
   color:#2569d1;
@@ -85,6 +96,8 @@ border-radius: 0.2rem;
   color: white; 
   font-size: 1.1rem;
   margin-right: 2rem;
+  transition: background-color 0.3s ease, color 0.3s ease;
+
 }
 
 /* Dropdown Cursor */
@@ -158,13 +171,15 @@ border-radius: 0.2rem;
 
 .login_page{
   background-color: rgba(50, 108, 181, 0.95);
+  transition: background-color 0.3s ease, color 0.3s ease;
+
 }
 
 .menuopen{
   height: 56vh;
   display: flex;
   align-items: flex-start;
-  padding-top: 8.5px;
+  padding-top: 16px;
   flex-direction: column;
   background-color: transparent;
   display: flex;
@@ -174,7 +189,9 @@ border-radius: 0.2rem;
   font-weight: 500;
   background-color: #1D4FA6;
   top: 0; /* Fix at the top of the page */
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  /* transition: background-color 0.3s ease, box-shadow 0.3s ease; */
+  transition: background-color 0.3s ease, color 0.3s ease;
+
 }
  
   

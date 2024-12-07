@@ -60,8 +60,7 @@ const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
 </div>
    {!isNavExpand && <div className='w-[80%] pt-4 ml-auto mr-auto text-white font-[1.5rem]'>
     {menuOpen && <ul>
-      <hr></hr>
-
+      <hr className='bg-black text-black'></hr>
     <li className='pb-2 pt-2' onClick={()=>setMenuOpen(!menuOpen)}>
           <Link to="/">One-2-One-Class</Link>
         </li>
