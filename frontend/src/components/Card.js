@@ -8,7 +8,7 @@ import "./Card.css";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
-function Card() {
+function App() {
   const settings = {
     dots: true,
     infinite: true,
@@ -76,12 +76,12 @@ function Card() {
         <Slider {...settings}>
           {tutors.map((tutor, index) => (
             <motion.div
-              className="tutor-card"
+              className="tutor-cards"
               key={index}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
+              // whileHover={{ scale: 1.05 }}
+              // whileTap={{ scale: 0.95 }}
+              // initial={{ opacity: 0, y: 50 }}
+              // animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
             >
               <img src={tutor.imageUrl} alt="Tutor" className="tutor-image" />
@@ -105,4 +105,4 @@ function Card() {
   );
 }
 
-export default Card;
+export default App;

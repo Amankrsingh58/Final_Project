@@ -23,18 +23,19 @@
   }
   
   .tutor-container {
+    /* padding: 20px; */
     /* display: flex;
   
     justify-content: center; */
     gap: 40px;
   }
   .tutor-card:hover {
-    transform: scale(1.1);
+    /* transform: scale(1.1); */
     z-index: 1; 
   }
   
-  .tutor-card {
-    width: 200px;
+  .tutor-cards {
+    max-width: 300px;
     border: 1px solid #ddd;
     border-radius: 10px;
     overflow: hidden;
