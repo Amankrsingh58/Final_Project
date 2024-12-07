@@ -8,6 +8,7 @@ import './Home.css'
 import RegisterCard from '../components/RegisterCard';
 import WorkFlowCard from '../components/WorkFlowCard';
 import WorkProcess from '../components/WorkProcess';
+import Designcard from '../components/Designcard';
 
 function Home() {
   return (
@@ -19,6 +20,7 @@ function Home() {
 <WorkProcess/>
 <Stats/>
       <Footer/>
+      <Designcard/>
      
     </div>
     
