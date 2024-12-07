@@ -6,6 +6,8 @@ import Container from '../components/Container';
 import Stats from '../components/States';
 import './Home.css'
 import RegisterCard from '../components/RegisterCard';
+import WorkFlowCard from '../components/WorkFlowCard';
+import WorkProcess from '../components/WorkProcess';
 
 function Home() {
   return (
@@ -14,6 +16,7 @@ function Home() {
       <Card/>
 <Container/>
 <RegisterCard/>
+<WorkProcess/>
 <Stats/>
       <Footer/>
      

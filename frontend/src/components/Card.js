@@ -70,7 +70,7 @@ function App() {
   return (
     <div className="card">
       <div className="headingtag">
-        <b className="heading">Our Top Tutors</b>
+        <b className="heading font-robotoSlab">Our Top Tutors</b>
       </div>
       <div className="tutor-container">
         <Slider {...settings}>

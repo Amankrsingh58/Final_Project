@@ -9,6 +9,9 @@ module.exports = {
       screens: {
         'xs': '250px', 
       },
+      fontFamily: {
+        robotoSlab: ["'Roboto Slab'", "serif"],
+      },
     },
   },
   plugins: [],

@@ -3,7 +3,14 @@
   width: 100vw;
   margin-bottom: 45px;
   background-color: rgba(50, 108, 181, 0.95);
-  transition: background-color 0.3s ease, color 0.3s ease;
+  /* transition: background-color 0.3s ease, color 0.3s ease; */
+  transition: height 0.3s ease, padding 0.3s ease-in-out;
+
+}
+.navbar {
+  transition: height 0.3s ease, color 0.3s ease-in-out;
+  /* transition: height 0.3s ease-in-out; */
+  /* transition: height 0.3s ease, padding 0.3s ease; */
 
 }
 .section {
@@ -11,7 +18,7 @@
   color: aliceblue;
   margin-top: 30px;
   gap: 30px;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: height 0.3s ease, color 0.3s ease;
 
 
 }
@@ -45,13 +52,13 @@ border-radius: 0.2rem;
   font-weight: 500;
   background-color: #1D4FA6;
   top: 0; /* Fix at the top of the page */
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  transition: height 0.3s ease, box-shadow 0.3s ease;
 }
 
 .scrolled{
   background-color: rgba(50, 108, 181, 0.95);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: height 0.3s ease, color 0.3s ease;
 
 }
 
@@ -65,6 +72,8 @@ border-radius: 0.2rem;
   width: 9em;
   margin-left: 2rem;
   align-items: center;
+  transition: height 0.3s ease, color 0.3s ease;
+
 }
 
 /* Navigation Items */
@@ -76,19 +85,19 @@ border-radius: 0.2rem;
   margin-right: 2rem;
   width: 70vw;
   height: 10vh;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: height 0.3s ease, color 0.3s ease;
 
 }
 
 .navitem li {
   display: flex;
   align-items: center;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: height 0.3s ease, color 0.3s ease;
 
 }
 .navitem li :hover{
   color:#2569d1;
-  transition: all ease-in-out;
+  transition: height ease-in-out;
 }
 
 .navitem li a {
@@ -96,7 +105,7 @@ border-radius: 0.2rem;
   color: white; 
   font-size: 1.1rem;
   margin-right: 2rem;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: height 0.3s ease, color 0.3s ease;
 
 }
 
@@ -117,6 +126,8 @@ border-radius: 0.2rem;
   width: 20%;
   font-size: 1.1rem;
   align-items: center;
+  transition: height 0.3s ease, color 0.3s ease;
+
 }
 
 .auth li {
@@ -125,6 +136,8 @@ border-radius: 0.2rem;
   /* gap: 5px; */
   justify-content: center;
   align-items: center;
+  transition: height 0.3s ease, color 0.3s ease;
+
 }
 /* 
 .menu{
@@ -171,7 +184,7 @@ border-radius: 0.2rem;
 
 .login_page{
   background-color: rgba(50, 108, 181, 0.95);
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: height 0.3s ease, color 0.3s ease;
 
 }
 
@@ -190,7 +203,7 @@ border-radius: 0.2rem;
   background-color: #1D4FA6;
   top: 0; /* Fix at the top of the page */
   /* transition: background-color 0.3s ease, box-shadow 0.3s ease; */
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: height 0.3s ease, color 0.3s ease;
 
 }
  

@@ -52,7 +52,7 @@ const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
   }, []);
 
   return (
-<div className= {`nav navbar ${menuOpen?" menuopen": "box"}`}>
+<div className= {`nav navbar ${menuOpen?"menuopen": "box"}`}>
   <div className={isNavExpand?"flex justify-between items-center":"flex justify-between items-center  w-[100vw]"}>
 <Link to="/" className="navlogo">LOGO</Link>
 {!isNavExpand && <GiHamburgerMenu className='navlogo' onClick={()=>setMenuOpen(!menuOpen)}/>}
