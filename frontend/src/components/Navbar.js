@@ -61,19 +61,19 @@ const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
    {!isNavExpand && <div className='w-[80%] pt-4 ml-auto mr-auto text-white font-[1.5rem]'>
     {menuOpen && <ul>
       <hr className='bg-black text-black'></hr>
-    <li className='pb-2 pt-2' onClick={()=>setMenuOpen(!menuOpen)}>
+    <li className='pb-2 pt-2 sm:text-[10px] lg:text-[1.1rem]' onClick={()=>setMenuOpen(!menuOpen)}>
           <Link to="/">One-2-One-Class</Link>
         </li>
         <hr></hr>
-        <li className='pb-2 pt-2' onClick={()=>setMenuOpen(!menuOpen)}>
+        <li className='pb-2 pt-2 sm:text-[10px] lg:text-[1.1rem]' onClick={()=>setMenuOpen(!menuOpen)}>
           <Link to="/tutor">Top Tutors</Link>
         </li>
         <hr></hr>
-        <li className='pb-2 pt-2' onClick={()=>setMenuOpen(!menuOpen)}>
+        <li className='pb-2 pt-2 sm:text-[10px] lg:text-[1.1rem]' onClick={()=>setMenuOpen(!menuOpen)}>
           <Link to="/">Students</Link>
         </li>
         <hr></hr>
-        <li className='pb-2 pt-2' onClick={()=>setMenuOpen(!menuOpen)}>
+        <li className='pb-2 pt-2 sm:text-[10px] lg:text-[1.1rem]' onClick={()=>setMenuOpen(!menuOpen)}>
           <Link to="/">Online Class</Link>
         </li>
         <hr></hr>

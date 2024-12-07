@@ -1,10 +1,12 @@
 import React from "react";
 import pic from '../Images/pic.png';
 import './Container.css'
+import WorkFlowCard from "./WorkFlowCard";
 function Container(){
     return(
 <div className="demo-container w-full">
- <img src={pic}alt="picture"/>
+ {/* <img src={pic}alt="picture"/> */}
+ <WorkFlowCard/>
  
  <div className="demo">
 
