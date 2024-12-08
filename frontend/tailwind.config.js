@@ -15,6 +15,13 @@ module.exports = {
       fontFamily: {
         inter: ['Inter', 'sans-serif'],
       },
+      transitionProperty: {
+        'custom': 'background, border, border-radius, box-shadow, transform',
+      },
+      transitionDuration: {
+        'default': '300ms',
+        'long': '400ms',
+      },
     },
   },
   plugins: [],
