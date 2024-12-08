@@ -10,7 +10,10 @@ module.exports = {
         'xs': '250px', 
       },
       fontFamily: {
-        robotoSlab: ["'Roboto Slab'", "serif"],
+        robotoSlab: ["Roboto Slab", "serif"],
+      },
+      fontFamily: {
+        inter: ['Inter', 'sans-serif'],
       },
     },
   },

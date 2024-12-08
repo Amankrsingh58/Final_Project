@@ -20,7 +20,6 @@ function Home() {
 <WorkProcess/>
 <Stats/>
       <Footer/>
-      <Designcard/>
      
     </div>
     

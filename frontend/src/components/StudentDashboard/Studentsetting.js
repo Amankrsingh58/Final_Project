@@ -2,9 +2,9 @@ import React from "react";
 
 function Studentsetting(){
     return(
-      <div className="bg-purple-100">
-      <div className="bg-white-00">
-            <div className="w-full  bg-blue-600 text-white rounded-lg shadow-md p-6">
+      <div className="">
+      <div className="">
+            <div className="w-full  bg-blue-600 text-white rounded-lg shadow-md p-6 max-w-[700px]">
                 <div className="flex items-center justify-center mb-6">
                   <div className="flex flex-col items-center">
                     <div className="bg-teal-500 w-16 h-16 rounded-full flex items-center justify-center text-xl font-bold">
@@ -17,7 +17,7 @@ function Studentsetting(){
                   </div>
                 </div>
                 </div>
-                 <div className="mt-4 bg-blue-600 rounded-lg p-6 trxt-white">
+                 <div className="mt-4 bg-blue-600 rounded-lg p-6 trxt-white max-w-[700px]">
                 <form className="space-y-2">
                   <div className="flex space-x-4">
                     <div className="flex-1">
@@ -99,7 +99,7 @@ function Studentsetting(){
                 </div>
                 <button className="bg-yellow-400 p-2 rounded mt-1">Save Changes</button>
                 </div> 
-                <div className="bg-blue-600 p-4 rounded mt-5">
+                <div className="bg-blue-600 p-4 rounded mt-5 max-w-[700px]">
                 <div>
                     <label htmlFor="Old password" className="block text-sm text-white-700 mb-1">
                     Old password

@@ -10,12 +10,12 @@
       padding: 18px;
     }
     .heading{
-      font-size: 36px;
+      font-size: 20px;
       font-weight: 600;
       line-height: 1.1;
-      margin-bottom: 38px;
-      margin-top: 19px;  
-      color: #806868;
+      /* margin-bottom: 38px; */
+      margin-top: 12px;  
+      /* color: #806868; */
 
       /* font-family: Poppins, sans-serif !important; */
         }

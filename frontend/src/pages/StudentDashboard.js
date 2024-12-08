@@ -17,7 +17,7 @@ useEffect( ()=> {
         <div className="flex h-[100vh] mt-[10vh]  ">
             <Sliderbar/>
 
-            <div className="flex-1  text-white bg-white p-[2rem] w-[100%] h-[100%] ">
+            <div className="flex-1  text-white  p-[2rem] w-[100%] h-auto ">
             <Routes>
            <Route path="studentdashboardhome" element={<Studentdashboardhome/>} />
           <Route path="studentprofile" element={<StudentProfile />} />

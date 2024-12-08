@@ -61,31 +61,31 @@ const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
    {!isNavExpand && <div className='w-[80%] pt-4 ml-auto mr-auto text-white font-[1.5rem]'>
     {menuOpen && <ul>
       <hr className='bg-black text-black'></hr>
-    <li className='pb-2 pt-2 sm:text-[10px] lg:text-[1.1rem]' onClick={()=>setMenuOpen(!menuOpen)}>
+    <li className='pb-2 pt-2 font-inter' onClick={()=>setMenuOpen(!menuOpen)}>
           <Link to="/">One-2-One-Class</Link>
         </li>
         <hr></hr>
-        <li className='pb-2 pt-2 sm:text-[10px] lg:text-[1.1rem]' onClick={()=>setMenuOpen(!menuOpen)}>
+        <li className='pb-2 pt-2 font-inter' onClick={()=>setMenuOpen(!menuOpen)}>
           <Link to="/tutor">Top Tutors</Link>
         </li>
         <hr></hr>
-        <li className='pb-2 pt-2 sm:text-[10px] lg:text-[1.1rem]' onClick={()=>setMenuOpen(!menuOpen)}>
+        <li className='pb-2 pt-2 font-inter' onClick={()=>setMenuOpen(!menuOpen)}>
           <Link to="/">Students</Link>
         </li>
         <hr></hr>
-        <li className='pb-2 pt-2 sm:text-[10px] lg:text-[1.1rem]' onClick={()=>setMenuOpen(!menuOpen)}>
+        <li className='pb-2 pt-2 font-inter' onClick={()=>setMenuOpen(!menuOpen)}>
           <Link to="/">Online Class</Link>
         </li>
         <hr></hr>
         {(!isLoggedIn ? (
           <>
-            <Link to="/login"><li className='pb-2 pt-2' onClick={()=>setMenuOpen(!menuOpen)}>Login</li></Link>
+            <Link to="/login"><li className='pb-2 pt-2 font-inter' onClick={()=>setMenuOpen(!menuOpen)}>Login</li></Link>
             <hr></hr>
 
-            <Link to="/signup"><li className='pb-2 pt-2' onClick={()=>setMenuOpen(!menuOpen)}>I Need A Tutor</li></Link>
+            <Link to="/signup"><li className='pb-2 pt-2 font-inter' onClick={()=>setMenuOpen(!menuOpen)}>I Need A Tutor</li></Link>
             <hr></hr>
 
-            <Link to="/signup"><li className='pb-2 pt-2' onClick={()=>setMenuOpen(!menuOpen)}>Join As Tutor</li></Link>
+            <Link to="/signup"><li className='pb-2 pt-2 font-inter' onClick={()=>setMenuOpen(!menuOpen)}>Join As Tutor</li></Link>
             <hr></hr>
 
           </>
@@ -93,7 +93,7 @@ const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
           <>
             <Link to="/" >
               <button
-                className='pb-2 pt-2'
+                className='pb-2 pt-2 font-inter'
                 onClick={() => {
                   setIsLoggedIn(false);
                   setMenuOpen(!menuOpen)
@@ -106,7 +106,7 @@ const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
               <hr></hr>
             </Link>
             <Link to="/Studentdashboard">
-              <button onClick={()=>setMenuOpen(!menuOpen)} className='pb-2 pt-2'>Dashboard</button>
+              <button onClick={()=>setMenuOpen(!menuOpen)} className='pb-2 pt-2 font-inter'>Dashboard</button>
             </Link>
             <hr></hr>
           </>
@@ -115,16 +115,16 @@ const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
    </div> }
    <ul className={menuOpen ? "" : ""}/>
       {isNavExpand && <ul className="navitem">
-        <li >
-          <Link to="/" >One-2-One-Class</Link>
+        <li className='sm:text-[10px] lg:text-[1.1rem] font-inter'>
+          <Link to="/" >Enquiries</Link>
         </li>
-        <li>
+        <li className='sm:text-[10px] lg:text-[1.1rem] font-inter'>
           <Link to="/tutor">Top Tutors</Link>
         </li>
-        <li>
+        <li className='sm:text-[10px] lg:text-[1.1rem] font-inter'>
           <Link to="/">Students</Link>
         </li>
-        <li>
+        <li className='sm:text-[10px] lg:text-[1.1rem] font-inter'>
           <Link to="/">Online Class</Link>
         </li>
         <li
@@ -134,7 +134,7 @@ const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
           {dropdown === "serviceDropdown" && (
             <Dropdown serviceDropdown={serviceDropdown} />
           )}
-          <Link className="cursor" to="">
+          <Link className="cursor className='sm:text-[10px] lg:text-[1.1rem] font-inter" to="">
             More <FaChevronDown />
           </Link>
         </li>
@@ -144,11 +144,12 @@ const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
       <ul className={!isNavExpand?"":"auth"}>
       {isNavExpand &&  (!isLoggedIn ? (
           <>
-            <Link to="/login"><li>Login</li></Link>
+            <Link to="/login"><li className='sm:text-[10px] lg:text-[1.1rem] font-inter'>Login</li></Link>
             <Link to="/signup">
               <li
                 onMouseEnter={() => setDropdown("serviceDropdown2")}
                 onMouseLeave={() => setDropdown(null)}
+                className='sm:text-[10px] lg:text-[1.1rem] font-inter'
               >
                 {dropdown === "serviceDropdown2" && <Dropdown serviceDropdown={serviceDropdown2} />}
                 Sign Up <FaChevronDown />
@@ -168,7 +169,7 @@ const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
               </button>
             </Link>
             <Link to="/Studentdashboard">
-              <button>Dashboard</button>
+              <button className='font-inter'>Dashboard</button>
             </Link>
           </>
         ))}

@@ -2,6 +2,7 @@ import React from "react";
 import pic from '../Images/pic.png';
 import './Container.css'
 import WorkFlowCard from "./WorkFlowCard";
+import Designcard from "./Designcard";
 function Container(){
     return(
 <div className="demo-container w-full">
@@ -14,6 +15,7 @@ function Container(){
   and clear your confusions.</p>
  <button className="button">BOOK YOUR FREE DEMO</button>
  </div>
+ <Designcard/>
 </div>
     );
 }

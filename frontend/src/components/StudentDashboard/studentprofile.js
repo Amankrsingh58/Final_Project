@@ -7,7 +7,7 @@ const Studentprofile = () => {
   const Navigate = useNavigate();
   return (
  <div>
-    <div className="min-h-screen bg-white text-white flex flex-col items-center py-10 ">
+    <div className="min-h-screen bg-white text-white flex flex-col items-center  ">
       {/* Profile Header */}
       <div className="w-full bg-custom-blue rounded-lg p-6 mb-6 flex justify-between items-center">
         <div className="flex items-center">
