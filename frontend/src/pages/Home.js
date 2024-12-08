@@ -5,6 +5,10 @@ import Card from '../components/Card';
 import Container from '../components/Container';
 import Stats from '../components/States';
 import './Home.css'
+import RegisterCard from '../components/RegisterCard';
+import WorkFlowCard from '../components/WorkFlowCard';
+import WorkProcess from '../components/WorkProcess';
+import Designcard from '../components/Designcard';
 
 function Home() {
   return (
@@ -12,6 +16,8 @@ function Home() {
       <Header/>
       <Card/>
 <Container/>
+<RegisterCard/>
+<WorkProcess/>
 <Stats/>
       <Footer/>
      

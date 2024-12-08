@@ -1,17 +1,21 @@
 import React from "react";
 import pic from '../Images/pic.png';
 import './Container.css'
+import WorkFlowCard from "./WorkFlowCard";
+import Designcard from "./Designcard";
 function Container(){
     return(
-<div className="container">
- <img src={pic}alt="picture"/>
+<div className="demo-container w-full">
+ {/* <img src={pic}alt="picture"/> */}
+ <WorkFlowCard/>
  
  <div className="demo">
 
- <p className="text">Not sure? Take a free online counselling class from GharPeShiksha <br/>
+ <p className="text text-center">Not sure? Take a free online counselling <br/>
   and clear your confusions.</p>
  <button className="button">BOOK YOUR FREE DEMO</button>
  </div>
+ <Designcard/>
 </div>
     );
 }

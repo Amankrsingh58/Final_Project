@@ -13,7 +13,7 @@ function App() {
     dots: true,
     infinite: true,
     speed: 500,
-    slidesToShow: 4,
+    slidesToShow: 3,
     slidesToScroll: 2,
     autoplay: true,
     responsive: [
@@ -70,18 +70,18 @@ function App() {
   return (
     <div className="card">
       <div className="headingtag">
-        <b className="heading">Our Top Tutors</b>
+        <b className=" text-4xl font-semibold font-robotoSlab"> OUR TOP TUTORS</b>
       </div>
       <div className="tutor-container">
         <Slider {...settings}>
           {tutors.map((tutor, index) => (
             <motion.div
-              className="tutor-card"
+              className="tutor-cards"
               key={index}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
+              // whileHover={{ scale: 1.05 }}
+              // whileTap={{ scale: 0.95 }}
+              // initial={{ opacity: 0, y: 50 }}
+              // animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
             >
               <img src={tutor.imageUrl} alt="Tutor" className="tutor-image" />
