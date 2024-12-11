@@ -6,18 +6,37 @@ import Profile from "../components/Dashboard/Profile";
 import Notifications from "../components/Dashboard/Notifications";
 import "./DashBoard.css";
 import Tutor from "./Tutor";
+import { CiSearch } from "react-icons/ci";
 
 const DashBoard = () => {
+  const handleSearch = (query) => {
+    console.log("Search Query:", query);
+    // Add search logic here
+  };
 const Navigate = useNavigate();
 useEffect( ()=> {
   Navigate("/dashboard/dashboardhome");
 },[]);
+
   return (
-    <div className="dashboard">
+    <div className="flex h-screen mt-[10vh]">
       <Sidebar />
       <div className="dashboard-content">
-        <h2>Welcome to the DashBoard Admin</h2>
-        <Routes>
+
+        <div
+        className="flex items-center p-[0.5rem] lg:w-[60%] sm:w-[100%] md:w-[60%] bg-[#21222D] rounded-md border-none"
+        >
+          <CiSearch />
+        <input
+        className="p-[0.2rem] bg-transparent border-none w-[100%]"
+        type="text"
+        placeholder="Search here.."
+        />
+
+        </div>
+        
+
+            <Routes>
           <Route path="dashboardhome" element={<DashboardHome />} />
           <Route path="profile" element={<Profile />} />
           <Route path="notifications" element={<Notifications />} />

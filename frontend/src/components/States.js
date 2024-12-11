@@ -5,12 +5,12 @@ const Stats = () => {
   const stats = [
     {
       icon: '📄', // Use emojis or replace with an <img> or SVG tag for actual icons
-      value: '125000+',
+      value: '125+',
       label: 'Requirement Posted',
     },
     {
       icon: '👨‍🏫', // Replace with the tutor icon
-      value: '350000+',
+      value: '35+',
       label: 'Registered Tutors',
     },
     {
