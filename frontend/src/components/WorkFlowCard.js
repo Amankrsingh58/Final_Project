@@ -1,8 +1,19 @@
 import React from "react";
+import { useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 
 const WorkFlowCard = () => {
     const Navigate = useNavigate();
+    const [showModal, setShowModal] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState(true);
+
+    const handleClick = () => {
+      if (isLoggedIn) {
+        setShowModal(true); // Show modal if the user already posted
+      } else {
+        Navigate("/signup"); // Navigate to signup if not logged in or no post
+      }
+    };
   const data = [
     {
       title: "Parents",
@@ -46,13 +57,29 @@ const WorkFlowCard = () => {
                 {item.title}
               </h2>
               <p className="text-gray-600 mb-4">{item.description}</p>
-              <button onClick={ ()=> Navigate("/signup")} className="bg-custom-blue text-white font-semibold font-Roboto text-[14px] py-2 px-4 rounded hover:bg-[#133b80] transition">
+              <button onClick={handleClick} className="bg-custom-blue text-white font-semibold font-Roboto text-[14px] py-2 px-4 rounded hover:bg-[#133b80] transition">
                 {item.buttonText}
               </button>
             </div>
           </div>
         ))}
       </div>
+         {/* Modal for already posted users */}
+         {showModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+          <div className="bg-gray-800 p-5 rounded-lg shadow-lg w-[90%] max-w-md text-center">
+            <h2 className="text-2xl font-bold text-white">Alert</h2>
+            <p className="mt-3 text-white">You have already posted!</p>
+
+            <button
+              onClick={() => setShowModal(false)}
+              className="mt-4 bg-gray-600 hover:bg-gray-700 text-white py-2 px-5 rounded-lg"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

@@ -1,7 +1,7 @@
 .header {
-    margin-top: 3vh;
+    margin-top: 4vh;
     z-index: -1;
-    background-color: #1D4FA6;
+    background-color: #5F6fff;
     text-align: center; /* Center-align content */
   }
   
@@ -28,6 +28,9 @@
   }
   
   @media screen and (max-width: 480px) {
+    .header{
+      width: 50vh;
+    }
     .main-img {
       height: 60vh; /* Further reduce height for very small screens */
       transform: translateX(0); /* Remove any horizontal offset */

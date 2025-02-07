@@ -116,7 +116,7 @@ function Studenttutor(){
         },
       ];
     return(
-        <div className="bg-blue-600 w-full h-auto">
+        <div className=" w-full h-auto">
         <div className="flex flex-row gap-7 justify-center ">
         <h1 className="text-4xl ">Following tutors are near you</h1>
         </div>
@@ -124,15 +124,15 @@ function Studenttutor(){
      
             {
                 tutors.map((tutor,index)=>(
-                    <div className=" bg-[#221F3C] justify-center rounded m-3 shadow-md w-[21%]" key={index}>
+                    <div className=" bg-gray-700 justify-center rounded m-3 shadow-md sm:min-w-[21%] lg:w-[21%] " key={index}>
                         <img src={tutor.imageUrl}alt ="tutor" className="object-cover h-48 w-96 rounded "/>
                         <div className="tutorInfo">
-                      <p className="mt-[6px] ml-1 font-inter"> Tutor ID:{tutor.id}</p>
+                      <p className="mt-[6px] ml-1 font-inter "> Tutor ID:{tutor.id}</p>
                       <p className="mt-[5px] ml-1  font-inter">Exprince :{tutor.experience}</p>
                       <p className="mt-[5px] ml-1  font-inter">Exprince : {tutor.std}</p>
                       <p className="mt-[5px] ml-1  font-inter">Subjects : {tutor.subject}</p>
                         </div>
-                        <button onClick={ ()=> Navigate("/tutor")} className="bg-yellow-400 rounded p-2 mt-2 w-full">Get contect info</button>
+                        <button onClick={ ()=> Navigate("/tutor")} className="bg-[#1abc9c] rounded p-2 mt-2 w-full">Get contect info</button>
                         </div>
                     
 

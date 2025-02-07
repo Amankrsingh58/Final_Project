@@ -4,9 +4,11 @@ import Sidebar from "../components/Dashboard/Slidebar";
 import DashboardHome from "../components/Dashboard/DashboardHome";
 import Profile from "../components/Dashboard/Profile";
 import Notifications from "../components/Dashboard/Notifications";
+import SettingsPage from "../components/Dashboard/setting";
 import "./DashBoard.css";
-import Tutor from "./Tutor";
+import Tutor from "../components/Dashboard/Tutors";
 import { CiSearch } from "react-icons/ci";
+import Student from "../components/Dashboard/Student";
 
 const DashBoard = () => {
   const handleSearch = (query) => {
@@ -41,6 +43,8 @@ useEffect( ()=> {
           <Route path="profile" element={<Profile />} />
           <Route path="notifications" element={<Notifications />} />
           <Route path="tutors" element={<Tutor />} />
+          <Route path="students" element={<Student />} />
+          <Route path="adminsetting" element={<SettingsPage/>} />
           <Route path="*" element={<div>Page not found in Dashboard!</div>} />
         </Routes>
       </div>

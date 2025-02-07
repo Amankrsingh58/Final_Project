@@ -62,7 +62,7 @@ const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
     {menuOpen && <ul>
       <hr className='bg-black text-black'></hr>
     <li className='pb-2 pt-2 font-inter' onClick={()=>setMenuOpen(!menuOpen)}>
-          <Link to="/">One-2-One-Class</Link>
+          <Link to="/">Enquiries</Link>
         </li>
         <hr></hr>
         <li className='pb-2 pt-2 font-inter' onClick={()=>setMenuOpen(!menuOpen)}>
