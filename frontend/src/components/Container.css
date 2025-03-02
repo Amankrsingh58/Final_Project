@@ -3,7 +3,7 @@
     background-color: #fff7ff;
     height: auto;
     display: flex;
-    width: 100vw;
+    /* width: 100vw; */
     flex-direction: column;
     
     }

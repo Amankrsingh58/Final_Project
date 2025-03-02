@@ -7,7 +7,6 @@
   
   .main-img {
     height: 85vh;
-    width: 100%;
     object-fit: contain;
     transform: translateX(150px);
     transition: transform 0.3s ease-in-out; /* Smooth transition for responsiveness */

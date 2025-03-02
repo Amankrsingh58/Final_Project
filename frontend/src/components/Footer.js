@@ -1,142 +1,118 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import './Footer.css';
-import DeveloperFooter from './DeveloperFooter.jsx';
+import { BookOpen, Mail, Phone, MapPin, Facebook, Twitter, Instagram } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import DeveloperFooter from '../components/DeveloperFooter'
 
- function Footer() {
-  // const navigate = useNavigate(); // hook to navigate
-
-  //Function to handle the click and navigate
-  const handleNavigation = (path) => {
-    
-    
-  };
-
+const Footer = () => {
   return (
-    <div>
+    <footer className="bg-gray-800 text-white pt-12 pb-8">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div>
+            <div className="flex items-center space-x-2 mb-4">
+              <BookOpen className="h-8 w-8 text-indigo-400" />
+              <span className="text-xl font-bold">TutorMatch</span>
+            </div>
+            <p className="text-gray-300 mb-4">
+              Connecting students with expert tutors for personalized learning experiences.
+            </p>
+            <div className="flex space-x-4">
+              <a href="#" className="text-gray-300 hover:text-white transition-colors">
+                <Facebook className="h-5 w-5" />
+              </a>
+              <a href="#" className="text-gray-300 hover:text-white transition-colors">
+                <Twitter className="h-5 w-5" />
+              </a>
+              <a href="#" className="text-gray-300 hover:text-white transition-colors">
+                <Instagram className="h-5 w-5" />
+              </a>
+            </div>
+          </div>
 
-    <footer className="footer">
-      <div className="footer-content">
-        <div className="footer-section">
-          <h4>OUR SERVICES</h4>
-          <ul>
-            <li>
-              <button onClick={() => handleNavigation("/one-to-one-classes")}>
-                One-to-One Classes
-              </button>
-            </li>
-            <li>
-              <button onClick={() => handleNavigation("/online-tuition")}>
-                Online Tuition Classes
-              </button>
-            </li>
-            <li>
-              <button onClick={() => handleNavigation("/cbse-courses")}>
-                CBSE Online Courses
-              </button>
-            </li>
-            <li>
-              <button onClick={() => handleNavigation("/part-time-earning")}>
-                Part Time Earning For Tutor
-              </button>
-            </li>
-          </ul>
+          <div>
+            <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
+            <ul className="space-y-2">
+              <li>
+                <Link to="/" className="text-gray-300 hover:text-white transition-colors">
+                  Home
+                </Link>
+              </li>
+              <li>
+                <Link to="/tutors" className="text-gray-300 hover:text-white transition-colors">
+                  Find Tutors
+                </Link>
+              </li>
+              <li>
+                <Link to="/about" className="text-gray-300 hover:text-white transition-colors">
+                  About Us
+                </Link>
+              </li>
+              <li>
+                <Link to="/become-tutor" className="text-gray-300 hover:text-white transition-colors">
+                  Become a Tutor
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 className="text-lg font-semibold mb-4">Subjects</h3>
+            <ul className="space-y-2">
+              <li>
+                <Link to="/tutors?subject=mathematics" className="text-gray-300 hover:text-white transition-colors">
+                  Mathematics
+                </Link>
+              </li>
+              <li>
+                <Link to="/tutors?subject=science" className="text-gray-300 hover:text-white transition-colors">
+                  Science
+                </Link>
+              </li>
+              <li>
+                <Link to="/tutors?subject=english" className="text-gray-300 hover:text-white transition-colors">
+                  English
+                </Link>
+              </li>
+              <li>
+                <Link to="/tutors?subject=programming" className="text-gray-300 hover:text-white transition-colors">
+                  Programming
+                </Link>
+              </li>
+              <li>
+                <Link to="/tutors?subject=languages" className="text-gray-300 hover:text-white transition-colors">
+                  Languages
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 className="text-lg font-semibold mb-4">Contact Us</h3>
+            <ul className="space-y-3">
+              <li className="flex items-start">
+                <MapPin className="h-5 w-5 text-indigo-400 mr-2 mt-0.5" />
+                <span className="text-gray-300">123 Education St, Learning City, 10001</span>
+              </li>
+              <li className="flex items-center">
+                <Phone className="h-5 w-5 text-indigo-400 mr-2" />
+                <span className="text-gray-300">(123) 456-7890</span>
+              </li>
+              <li className="flex items-center">
+                <Mail className="h-5 w-5 text-indigo-400 mr-2" />
+                <span className="text-gray-300">contact@tutormatch.com</span>
+              </li>
+            </ul>
+          </div>
         </div>
 
-        <div className="footer-section">
-          <h4>ONLINE COURSES</h4>
-          <ul>
-            <li>
-              <button onClick={() => handleNavigation("/cbse-class-9")}>
-                Course for CBSE Class 9th
-              </button>
-            </li>
-            <li>
-              <button onClick={() => handleNavigation("/cbse-class-10")}>
-                Course for CBSE Class 10th
-              </button>
-            </li>
-            <li>
-              <button onClick={() => handleNavigation("/study-material-9")}>
-                Study Material for Class 9th
-              </button>
-            </li>
-            <li>
-              <button onClick={() => handleNavigation("/study-material-10")}>
-                Study Material for Class 10th
-              </button>
-            </li>
-          </ul>
-        </div>
+        {/* <DeveloperFooter/> */}
 
-        <div className="footer-section">
-          <h4>ONE-TO-ONE CLASSES</h4>
-          <ul>
-            <li>
-              <button onClick={() => handleNavigation("/home-tuition")}>
-                One-to-One Home Tuition
-              </button>
-            </li>
-            <li>
-              <button onClick={() => handleNavigation("/online-tuition")}>
-                One-to-One Online Tuition
-              </button>
-            </li>
-            <li>
-              <button onClick={() => handleNavigation("/online-tuition")}>
-                One-to-One Online Tuition
-              </button>
-            </li>
-            <li>
-              <button onClick={() => handleNavigation("/group-tuition")}>
-                One-to-One Group Tuition
-              </button>
-            </li>
-          </ul>
-        </div>
-
-        <div className="footer-section">
-          <h4>TUTOR ZONE</h4>
-          <ul>
-            <li>
-              <button onClick={() => handleNavigation("/search-tutor")}>
-                Search for Tutor
-              </button>
-            </li>
-            <li>
-              <button onClick={() => handleNavigation("/search-student")}>
-                Search for Student
-              </button>
-            </li>
-            <li>
-              <button onClick={() => handleNavigation("/earn-part-time")}>
-                Earn Part Time
-              </button>
-            </li>
-            <li>
-              <button onClick={() => handleNavigation("/teach-nearby")}>
-                Teach Nearby Student
-              </button>
-            </li>
-          </ul>
-        </div>
-
-        <div className="footer-section contact">
-          <h4>CONTACT US</h4>
-          <ul>
-            <li>Beta I, Knowledge park, Greater_Noida, UP - 201326</li>
-            <li>Service: +91 9811328336</li>
-            <li>WhatsApp: +91 7065-80-4545</li>
-            <li>Email: info@gharpetshiksha.com</li>
-          </ul>
-        </div>
-      <hr></hr>
+        {/* <div className="border-t border-gray-700 mt-8 pt-6 text-center text-gray-400">
+          <p>&copy; {new Date().getFullYear()} TutorMatch. All rights reserved.</p>
+        </div> */}
       </div>
-      </footer>
-      <DeveloperFooter/>
-    </div>
+    </footer>
+  );
+};
 
-            )
-          };
-            
 export default Footer;

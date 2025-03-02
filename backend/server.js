@@ -6,27 +6,32 @@ const cors = require('cors');
 
 const connectDB = require('./config/database');
 const userRoutes = require('./routes/userRoutes');
-// const tutorRoutes = require('./routes/tutorRoutes');
-// const studentRoutes = require('./routes/studentRoutes');
-// const enquiryRoutes = require('./routes/enquiryRoutes');
-// const authRoutes = require('./routes/authRoutes');
 
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors());
 
-// // Define routes
+// ✅ Correct CORS configuration
+app.use(
+    cors({
+      origin: "http://localhost:3001", // Allow requests from frontend
+      credentials: true, // Allow cookies (important for authentication)
+    })
+);
+
+// Define routes
 app.use('/api/users', userRoutes);
-// app.use('/api/tutors', tutorRoutes);
-// app.use('/api/students', studentRoutes);
-// app.use('/api/enquiries', enquiryRoutes);
-// app.use('/api/auth', authRoutes);
 
-//db connection
+// Database connection
 connectDB();
 
-const PORT = process.env.PORT || 3000;
+// ✅ Add a default route to prevent "Cannot GET /" error
+app.get("/", (req, res) => {
+    res.send("Server is running...");
+});
+
+
+const PORT = process.env.PORT || 6001;
 
 app.listen(PORT, () => {
-    console.log(`started on port ${PORT}`);
+    console.log(`Server started on port ${PORT}`);
 });

@@ -106,7 +106,8 @@ const registerUser = async(req,res) => {
     // Set cookies with the tokens
     const options = {
         httpOnly: true,
-        secure: true,
+    secure: false,  // ✅ Use `false` for localhost (set `true` in production)
+    sameSite: "Lax",
     };
 
     return res.status(200)

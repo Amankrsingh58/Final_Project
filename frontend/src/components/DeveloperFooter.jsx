@@ -3,7 +3,7 @@ import "./DeveloperFooter.css";
 
 const DeveloperFooter = () => {
   return (
-    <footer className="developer-footer">
+    <footer className="developer-footer bg-gray-900">
       <div className="footer-main">
         <h1> Developer Connect</h1>
         <p>

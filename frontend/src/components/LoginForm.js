@@ -16,8 +16,9 @@ const LoginForm = () => {
 
   const onSubmit = async (data) => {
     try {
-      const response = await axios.post("http://localhost:3000/api/users/login", data); // Replace "url" with your API endpoint
+      const response = await axios.post("http://localhost:6001/api/users/login", data, {withCredentials: true }); // Replace "url" with your API endpoint
       console.log(response.data); // Handle the response
+      
       toast.success("Login successful!");
       setIsLoggedIn(true);
       
