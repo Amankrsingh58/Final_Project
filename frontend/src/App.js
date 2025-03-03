@@ -10,6 +10,7 @@ import Student from "./pages/Student";
 import Notfound from "./pages/Notfound";
 import Navbar from "./components/Navbar";
 import Dashboard from "./pages/DashBoard";
+import TutorDetail from "./pages/TutorDetail";
 
 // import StudentDashboard from "./pages/StudentDashboard";
 
@@ -32,6 +33,7 @@ function App() {
         <Route path="/tutor" element={<Tutor />} />
         <Route path="/student" element={<Student />} />
         <Route path="/tutor" element={<Tutor />} />
+        <Route path="/tutordetail" element={<TutorDetail />} />
         <Route path="/student" element={<Student />} />
         <Route path="/studentdashboard/*" element={<StudentDashboard/>} />
         <Route path="*" element={<Notfound />} />

@@ -1,129 +1,106 @@
-import React from "react";
-import { useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
-import axios from "axios"; // Import Axios
+import React from 'react'
+import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import { Search, BookOpen, Clock, Award, Users } from 'lucide-react';
 
-  
-  const RegisterCard = () => {
-  const [showModal, setShowModal] = useState(false);
-  const [formData, setFormData] = useState({
-    name: "",
-    phone: "",
-    grade: "",
-    subjects: "",
-  });
 
-  // Handle input changes
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+function RegisterCard() {
+  const fadeIn = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      transition: { duration: 0.6 }
+    }
   };
 
-  // Handle form submission (Send Data to Backend)
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await axios.post(
-        "http://localhost:5000/api/enquiries",
-        formData
-      );
-      alert(response.data.message); // Show success message
-      setShowModal(false); // Close modal
-    } catch (error) {
-      console.error("Error submitting enquiry:", error);
-      alert("Failed to submit enquiry. Try again!");
+  const staggerContainer = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2
+      }
     }
   };
   return (
-    <div
-      className="flex justify-center items-center lg:h-screen sm:h-auto bg-cover bg-center bg-no-repeat bg-slate-400"
-      style={{ backgroundImage: "url('https://plus.unsplash.com/premium_photo-1682787494765-44d02d12f5be?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')" }}
+<section className="py-16">
+<div className="max-w-7xl mx-auto px-6">
+  <motion.div 
+    className="text-center mb-12"
+    initial="hidden"
+    whileInView="visible"
+    viewport={{ once: true }}
+    variants={fadeIn}
+  >
+    <h2 className="text-3xl font-bold mb-4">Why Choose TutorMatch?</h2>
+    <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+      We make it easy to connect with qualified tutors who can help you succeed in your academic journey.
+    </p>
+  </motion.div>
+
+  <motion.div 
+    className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
+    variants={staggerContainer}
+    initial="hidden"
+    whileInView="visible"
+    viewport={{ once: true }}
+  >
+    <motion.div 
+      className="bg-white p-6 rounded-lg shadow-md text-center"
+      variants={fadeIn}
     >
-     <div className="w-[100%] h-[100%] bg-gray-300 bg-opacity-70  bg-center flex justify-center items-center">
-     <div className="  rounded-lg p-6 md:p-8  text-center">
-        <h1 className="text-2xl md:text-3xl font-bold text-custom-blue mb-4">
-          Register as a Tuition Teacher
-        </h1>
-        <p className="text-black mb-6">
-          Looking for some home tuition jobs and to make some extra income in Patna?
-        </p>
-        <button
-        onClick={() => setShowModal(true)}
-         className="bg-custom-blue text-white font-semibold py-2 px-4 rounded-lg hover:bg-[#133b80] transition">
-          ENQUIRE NOW
-        </button>
-        <p className="text-sm text-custom-blue mt-4">
-          TERMS & CONDITIONS.
-        </p>
+      <div className="bg-indigo-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+        <Search className="h-8 w-8 text-indigo-600" />
       </div>
-     </div>
+      <h3 className="text-xl font-semibold mb-2">Easy to Find</h3>
+      <p className="text-gray-600">
+        Search for tutors based on subject, price, and experience level to find your perfect match.
+      </p>
+    </motion.div>
 
-     {showModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-          <div className="bg-gray-800 p-5 rounded-lg shadow-lg w-[90%] max-w-md">
-            <h2 className="text-2xl text-white font-bold text-center">Enquiry Form</h2>
+    <motion.div 
+      className="bg-white p-6 rounded-lg shadow-md text-center"
+      variants={fadeIn}
+    >
+      <div className="bg-indigo-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+        <Award className="h-8 w-8 text-indigo-600" />
+      </div>
+      <h3 className="text-xl font-semibold mb-2">Qualified Tutors</h3>
+      <p className="text-gray-600">
+        All our tutors are vetted professionals with proven experience in their subject areas.
+      </p>
+    </motion.div>
 
-            <form onSubmit={handleSubmit} className="mt-4">
-              <input
-                type="text"
-                name="name"
-                placeholder="Your Name"
-                value={formData.name}
-                onChange={handleChange}
-                className="w-full p-2 mt-2 bg-gray-700 text-white rounded"
-                required
-              />
+    <motion.div 
+      className="bg-white p-6 rounded-lg shadow-md text-center"
+      variants={fadeIn}
+    >
+      <div className="bg-indigo-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+        <Clock className="h-8 w-8 text-indigo-600" />
+      </div>
+      <h3 className="text-xl font-semibold mb-2">Flexible Scheduling</h3>
+      <p className="text-gray-600">
+        Book sessions at times that work for you, with easy rescheduling options.
+      </p>
+    </motion.div>
 
-              <input
-                type="tel"
-                name="phone"
-                placeholder="Phone Number"
-                value={formData.phone}
-                onChange={handleChange}
-                className="w-full p-2 mt-2 bg-gray-700 text-white rounded"
-                required
-              />
+    <motion.div 
+      className="bg-white p-6 rounded-lg shadow-md text-center"
+      variants={fadeIn}
+    >
+      <div className="bg-indigo-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+        <BookOpen className="h-8 w-8 text-indigo-600" />
+      </div>
+      <h3 className="text-xl font-semibold mb-2">Personalized Learning</h3>
+      <p className="text-gray-600">
+        Get customized instruction tailored to your specific learning needs and goals.
+      </p>
+    </motion.div>
+  </motion.div>
+</div>
+</section>
+  )
+}
 
-              <input
-                type="text"
-                name="grade"
-                placeholder="Grade"
-                value={formData.grade}
-                onChange={handleChange}
-                className="w-full p-2 mt-2 bg-gray-700 text-white rounded"
-                required
-              />
-
-              <input
-                type="text"
-                name="subjects"
-                placeholder="Subjects Interested"
-                value={formData.subjects}
-                onChange={handleChange}
-                className="w-full p-2 mt-2 bg-gray-700 text-white rounded"
-                required
-              />
-
-              <div className="flex justify-between mt-4">
-                <button
-                  type="button"
-                  onClick={() => setShowModal(false)}
-                  className="bg-gray-600 hover:bg-gray-700 text-white py-2 px-4 rounded"
-                >
-                  Cancel
-                </button>
-                <button
-                  type="submit"
-                  className="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded"
-                >
-                  Submit
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      )}
-    </div>
-  );
-};
-
-export default RegisterCard;
+export default RegisterCard
