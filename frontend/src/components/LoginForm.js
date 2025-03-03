@@ -1,12 +1,14 @@
-import React, { useContext, useState,useEffect } from "react";
+import React, { useNavigate,useContext, useState,useEffect } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import "./LoginForm.css";
 import { AuthContext } from "../hooks/AuthContext";
 import LOGIN from "../Images/login12.jpg";
 import { toast } from "react-toastify";
+import { Navigate } from "react-router-dom";
 
 const LoginForm = () => {
+  const navigate = useNavigate();
   const { setIsLoggedIn } = useContext(AuthContext);
   const {
     register,
@@ -21,6 +23,7 @@ const LoginForm = () => {
       
       toast.success("Login successful!");
       setIsLoggedIn(true);
+      navigate("/dashboard");
       
       // Optionally store a token in local storage (if you use tokens)
       // localStorage.setItem("token", response.data.token);

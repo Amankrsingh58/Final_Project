@@ -1,179 +1,128 @@
-import React, { useState,useEffect, useContext } from 'react';
-import './Navbar.css';
-import { Link ,useLocation } from 'react-router-dom';
-import { FaChevronDown } from 'react-icons/fa';
-import Dropdown from './Dropdown';
-import { toast } from "react-toastify";
-import { AuthContext } from '../hooks/AuthContext';
-import { GiHamburgerMenu } from "react-icons/gi";
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { Menu, X, BookOpen, User, LogOut } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
+const Navbar = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-export default function Navbar() {
-  const [dropdown, setDropdown] = useState(null);
-  const [isScrolled, setIsScrolled] = useState(false);
-   const[menuOpen , setMenuOpen] = useState(false);
-   const[isNavExpand , setIsNavExpand] = useState(true);
-   const location = useLocation();
-  const isHomePage = location.pathname !== '/';
-const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
-
-  const serviceDropdown = [
-    
-    { id: 1, title: "About", path: "/about", cName: "s-item" },
-    { id: 2, title: "Contact Us", path: "/contact", cName: "s-item" },
-  ];
-
-  const serviceDropdown2 = [
-    { id: 1, title: "As Student", path: "/signup", cName: "s-item" },
-    { id: 2, title: "As Tutor", path: "/signup", cName: "s-item" },
-  ];
-
-  useEffect(() => {
-    
-  }, []);
- 
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth < 800) { 
-        setIsNavExpand(false); 
-      }
-      if (window.innerWidth > 800) { 
-        setIsNavExpand(true); 
-      }
-    };
-  
-    window.addEventListener('resize', handleResize);
-  
-    handleResize();
-  
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
 
   return (
-<div className= {`nav navbar ${menuOpen?"menuopen": "box"}`}>
-  <div className={isNavExpand?"flex justify-between items-center":"flex justify-between items-center  w-[100vw]"}>
-<Link to="/" className="navlogo">LOGO</Link>
-{!isNavExpand && <GiHamburgerMenu className='navlogo' onClick={()=>setMenuOpen(!menuOpen)}/>}
-<br></br>
-</div>
-   {!isNavExpand && <div className='w-[80%] pt-4 ml-auto mr-auto text-white font-[1.5rem]'>
-    {menuOpen && <ul>
-      <hr className='bg-black text-black'></hr>
-    <li className='pb-2 pt-2 font-inter' onClick={()=>setMenuOpen(!menuOpen)}>
-          <Link to="/">Enquiries</Link>
-        </li>
-        <hr></hr>
-        <li className='pb-2 pt-2 font-inter' onClick={()=>setMenuOpen(!menuOpen)}>
-          <Link to="/tutor">Top Tutors</Link>
-        </li>
-        <hr></hr>
-        <li className='pb-2 pt-2 font-inter' onClick={()=>setMenuOpen(!menuOpen)}>
-          <Link to="/">Students</Link>
-        </li>
-        <hr></hr>
-        <li className='pb-2 pt-2 font-inter' onClick={()=>setMenuOpen(!menuOpen)}>
-          <Link to="/">Online Class</Link>
-        </li>
-        <hr></hr>
-        {(!isLoggedIn ? (
-          <>
-            <Link to="/login"><li className='pb-2 pt-2 font-inter' onClick={()=>setMenuOpen(!menuOpen)}>Login</li></Link>
-            <hr></hr>
+    <nav className="bg-gray-100 shadow-md py-4 px-6 fixed w-full top-0 z-50">
+      <div className="max-w-7xl mx-auto flex justify-between items-center">
+        <Link to="/" className="flex items-center space-x-2">
+          <BookOpen className="h-8 w-8 text-indigo-600" />
+          <span className="text-xl font-bold text-gray-800">TutorMatch</span>
+        </Link>
 
-            <Link to="/signup"><li className='pb-2 pt-2 font-inter' onClick={()=>setMenuOpen(!menuOpen)}>I Need A Tutor</li></Link>
-            <hr></hr>
-
-            <Link to="/signup"><li className='pb-2 pt-2 font-inter' onClick={()=>setMenuOpen(!menuOpen)}>Join As Tutor</li></Link>
-            <hr></hr>
-
-          </>
-        ) : (
-          <>
-            <Link to="/" >
-              <button
-                className='pb-2 pt-2 font-inter'
-                onClick={() => {
-                  setIsLoggedIn(false);
-                  setMenuOpen(!menuOpen)
-                  toast.success("Logged Out");
-                }}
-              >
-                Logout
-              </button>
-              <br/>
-              <hr></hr>
-            </Link>
-            <Link to="/Studentdashboard">
-              <button onClick={()=>setMenuOpen(!menuOpen)} className='pb-2 pt-2 font-inter'>Dashboard</button>
-            </Link>
-            <hr></hr>
-          </>
-        ))}
-    </ul>}
-   </div> }
-   <ul className={menuOpen ? "" : ""}/>
-      {isNavExpand && <ul className="navitem">
-        <li className='sm:text-[10px] lg:text-[1.1rem] font-inter'>
-          <Link to="/" >Enquiries</Link>
-        </li>
-        <li className='sm:text-[10px] lg:text-[1.1rem] font-inter'>
-          <Link to="/tutor">Top Tutors</Link>
-        </li>
-        <li className='sm:text-[10px] lg:text-[1.1rem] font-inter'>
-          <Link to="/">Students</Link>
-        </li>
-        <li className='sm:text-[10px] lg:text-[1.1rem] font-inter'>
-          <Link to="/">Online Class</Link>
-        </li>
-        <li
-          onMouseEnter={() => setDropdown("serviceDropdown")}
-          onMouseLeave={() => setDropdown(null)}
-        >
-          {dropdown === "serviceDropdown" && (
-            <Dropdown serviceDropdown={serviceDropdown} />
-          )}
-          <Link className="cursor className='sm:text-[10px] lg:text-[1.1rem] font-inter" to="">
-            More <FaChevronDown />
+        {/* Desktop Navigation */}
+        <div className="hidden md:flex items-center space-x-6">
+          <Link to="/tutor" className="text-gray-700 hover:text-indigo-600 transition-colors">
+            Find Tutors
           </Link>
-        </li>
-      </ul>}
-
-
-      <ul className={!isNavExpand?"":"auth"}>
-      {isNavExpand &&  (!isLoggedIn ? (
-          <>
-            <Link to="/login"><li className='sm:text-[10px] lg:text-[1.1rem] font-inter'>Login</li></Link>
-            <Link to="/signup">
-              <li
-                onMouseEnter={() => setDropdown("serviceDropdown2")}
-                onMouseLeave={() => setDropdown(null)}
-                className='sm:text-[10px] lg:text-[1.1rem] font-inter'
-              >
-                {dropdown === "serviceDropdown2" && <Dropdown serviceDropdown={serviceDropdown2} />}
-                Sign Up <FaChevronDown />
-              </li>
-            </Link>
-          </>
-        ) : (
-          <>
-            <Link to="/">
+          <Link to="/about" className="text-gray-700 hover:text-indigo-600 transition-colors">
+            About Us
+          </Link>
+          {/* Dummy links for UI */}
+          <Link to="/bookings" className="text-gray-700 hover:text-indigo-600 transition-colors">
+            My Bookings
+          </Link>
+          <Link to="/tutor-dashboard" className="text-gray-700 hover:text-indigo-600 transition-colors">
+            Tutor Dashboard
+          </Link>
+          <div className="relative group">
+            <button className="flex items-center space-x-1 text-gray-700 hover:text-indigo-600 transition-colors">
+              <User className="h-5 w-5" />
+              <span>Account</span>
+            </button>
+            <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+              <Link to="/profile" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                Profile Settings
+              </Link>
               <button
-                onClick={() => {
-                  setIsLoggedIn(false);
-                  toast.success("Logged Out");
-                }}
+                // Removed actual sign-out logic for simplicity
+                className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
               >
-                Logout
+                Sign Out
               </button>
-            </Link>
-            <Link to="/Studentdashboard">
-              <button className='font-inter'>Dashboard</button>
-            </Link>
-          </>
-        ))}
-      </ul>
-    </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Mobile Menu Button */}
+        <button className="md:hidden" onClick={toggleMenu}>
+          {isMenuOpen ? (
+            <X className="h-6 w-6 text-gray-700" />
+          ) : (
+            <Menu className="h-6 w-6 text-gray-700" />
+          )}
+        </button>
+      </div>
+
+      {/* Mobile Navigation */}
+      <AnimatePresence>
+        {isMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3 }}
+            className="md:hidden mt-4"
+          >
+            <div className="flex flex-col space-y-4 px-4 py-2">
+              <Link
+                to="/tutor"
+                className="text-gray-700 hover:text-indigo-600 transition-colors py-2"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Find Tutors
+              </Link>
+              <Link
+                to="/about"
+                className="text-gray-700 hover:text-indigo-600 transition-colors py-2"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                About Us
+              </Link>
+              {/* Dummy links for UI */}
+              <Link
+                to="/bookings"
+                className="text-gray-700 hover:text-indigo-600 transition-colors py-2"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                My Bookings
+              </Link>
+              <Link
+                to="/tutor-dashboard"
+                className="text-gray-600 hover:text-indigo-600 transition-colors py-2"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Tutor Dashboard
+              </Link>
+              <Link
+                to="/profile"
+                className="text-gray-700 hover:text-indigo-600 transition-colors py-2"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Profile Settings
+              </Link>
+              <button
+                // Removed actual sign-out logic for simplicity
+                onClick={() => setIsMenuOpen(false)}
+                className="flex items-center text-gray-700 hover:text-indigo-600 transition-colors py-2"
+              >
+                <LogOut className="h-5 w-5 mr-2" />
+                Sign Out
+              </button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </nav>
   );
-}
+};
+
+export default Navbar;

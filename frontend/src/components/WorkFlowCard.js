@@ -1,26 +1,19 @@
-import React from "react";
-import { useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const WorkFlowCard = () => {
-    const Navigate = useNavigate();
-    const [showModal, setShowModal] = useState(false);
-    const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const navigate = useNavigate();
+  const [showModal, setShowModal] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [displayedData, setDisplayedData] = useState([]);
 
-    const handleClick = () => {
-      if (isLoggedIn) {
-        setShowModal(true); // Show modal if the user already posted
-      } else {
-        Navigate("/signup"); // Navigate to signup if not logged in or no post
-      }
-    };
   const data = [
     {
       title: "Parents",
       description:
         "Give us your learning needs and our team will quickly find the well-qualified and experienced tutor who makes learning a fun-filled process.",
       buttonText: "POST YOUR REQUIREMENT",
-      image: "https://apnahometuition.com/images/course_2.jpg", 
+      image: "https://apnahometuition.com/images/course_2.jpg",
     },
     {
       title: "Tutors",
@@ -34,14 +27,43 @@ const WorkFlowCard = () => {
       description:
         "We provide exciting Home Tuition Jobs in Academics for KG-12th & Co-Curricular Tuition also, tons of opportunities waiting for you.",
       buttonText: "APPLY FOR VACANCIES",
-      image: "https://plus.unsplash.com/premium_photo-1661344287754-5b54e8feb18b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", 
+      image: "https://plus.unsplash.com/premium_photo-1661344287754-5b54e8feb18b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     },
   ];
 
+  // Function to adjust the length of the data array based on screen width
+  const adjustArrayLength = () => {
+    const screenWidth = window.innerWidth;
+
+    if (screenWidth > 810) {
+      setDisplayedData(data.slice(0, 3)); // Show 3 items on larger screens
+    } else {
+      setDisplayedData(data.slice(0, 2)); // Show 2 items on smaller screens
+    }
+  };
+
+  // Use effect hook to handle resizing
+  useEffect(() => {
+    adjustArrayLength(); // Adjust on initial load
+    window.addEventListener('resize', adjustArrayLength); // Listen for window resize
+
+    // Clean up event listener
+    return () => {
+      window.removeEventListener('resize', adjustArrayLength);
+    };
+  }, []);
+
+  const handleClick = () => {
+    if (isLoggedIn) {
+      setShowModal(true); // Show modal if user is logged in
+    } else {
+      navigate("/signup"); // Navigate to signup if not logged in
+    }
+  };
   return (
     <div className="bg-gray-200 py-10 px-6">
         <h1 className="w-full pb-8 font-bold text-[2rem] font-robotoSlab text-center">Welcome To Sunny Tution Finder !</h1>
-      <div className="max-w-7xl mx-auto grid gap-6 lg:grid-cols-3 sm:grid-cols-1 md:grid-cols-2">
+      <div className="max-w-7xl mx-auto grid gap-6 lg:grid-cols-3 sm:grid-cols-1 md:grid-cols-3">
         {data.map((item, index) => (
           <div
             key={index}
