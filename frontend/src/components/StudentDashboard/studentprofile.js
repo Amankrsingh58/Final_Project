@@ -13,7 +13,7 @@ const Studentprofile = () => {
         <div className="flex items-center">
           {/* Profile Icon */}
           <div className="w-12 h-12 bg-custom-blue rounded-full flex items-center justify-center text-xl font-bold">
-           S
+           A
           </div>
           {/* Profile Info */}
           <div className="ml-4">

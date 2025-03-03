@@ -2,7 +2,7 @@
   position: fixed;
   width: 100vw;
   margin-bottom: 45px;
-  background-color: rgba(50, 108, 181, 0.95);
+  background-color: rgba(55, 101, 219, 0.95);
   /* transition: background-color 0.3s ease, color 0.3s ease; */
   transition: height 0.3s ease, padding 0.3s ease-in-out;
 

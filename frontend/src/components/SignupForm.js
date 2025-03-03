@@ -67,6 +67,24 @@ const SignupForm = () => {
         <h1>Signup</h1>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="input-group">
+            <label>First name</label>
+            <input
+              type="text"
+              {...register("first name", { required: " first name is required" })}
+              placeholder="Enter your first name"
+            />
+            {errors.username && <span className="error">{errors.username.message}</span>}
+          </div>
+          <div className="input-group">
+            <label>Last name</label>
+            <input
+              type="text"
+              {...register("last name", { required: "Username is required" })}
+              placeholder="Enter your last name"
+            />
+            {errors.username && <span className="error">{errors.username.message}</span>}
+          </div>
+          <div className="input-group">
             <label>Username</label>
             <input
               type="text"
@@ -91,8 +109,58 @@ const SignupForm = () => {
             />
             {errors.email && <span className="error">{errors.email.message}</span>}
           </div>
-
           <div className="input-group">
+            <label>what is your cell number</label>
+            <input
+              type="number"
+              placeholder="what is your cell number"
+            />
+           
+          </div>
+         <div className="input-group">
+            <label>Street Address</label>
+            <input
+              type="text"
+          
+              placeholder="Street Address"
+            />
+      
+          </div>
+          <div className="input-group">
+            <label>State</label>
+            <input
+              type="text"
+          
+            placeholder="State"
+            />
+      
+          </div>
+         <div className="input-group">
+            <label>City</label>
+            <input
+              type="text"
+          
+              placeholder="City"
+            />
+          </div>
+         <div className="input-group">
+            <label>Expriance</label>
+            <input
+              type="number"
+          
+              placeholder="Expriance"
+            />
+          </div>
+         <div className="input-group">
+            <label>Subjects</label>
+            <input
+              type="text"
+          
+              placeholder="subject"
+            />
+          </div>
+
+            <div className="input-group">
             <label>Password</label>
             <input
               type="password"
@@ -101,8 +169,8 @@ const SignupForm = () => {
             />
             {errors.password && <span className="error">{errors.password.message}</span>}
           </div>
-
-          <div className="input-group">
+          
+         <div className="input-group">
             <label>Confirm Password</label>
             <input
               type="password"
@@ -116,7 +184,7 @@ const SignupForm = () => {
               <span className="error">{errors.confirmPassword.message}</span>
             )}
           </div>
-
+         
           <button className="signup-btn" type="submit">Sign Up</button>
         </form>
         </div>

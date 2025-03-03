@@ -51,6 +51,7 @@
   justify-content: center;
   width: 100%;
   width: 50vw;
+  border-radius: 75%;
 
 }
 
@@ -99,7 +100,7 @@
 
 .signup-btn {
   width: 100%;
-  background: #3a00d4;
+  background: #855eef;
   color: white;
   border: none;
   padding: 10px;
