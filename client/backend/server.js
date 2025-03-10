@@ -13,7 +13,7 @@ app.use(cookieParser());
 // ✅ Correct CORS configuration
 app.use(
     cors({
-      origin: "http://localhost:3001", // Allow requests from frontend
+      origin: `http://localhost:${5173||5174}`, // Allow requests from frontend
       credentials: true, // Allow cookies (important for authentication)
     })
 );
@@ -30,7 +30,7 @@ app.get("/", (req, res) => {
 });
 
 
-const PORT = process.env.PORT || 6001;
+const PORT = 8000;
 
 app.listen(PORT, () => {
     console.log(`Server started on port ${PORT}`);

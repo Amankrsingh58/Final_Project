@@ -1,13 +1,32 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useLogoutMutation } from '../features/auth/userApi';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { Menu, X, BookOpen, User, LogOut } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useDispatch, useSelector } from 'react-redux';
+import { setLogout } from '../features/auth/authSlice';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isAccountMenuOpen, setIsAccountMenuOpen] = useState(false);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { token } = useSelector((state) => state.auth);
+  const [logout] = useLogoutMutation();
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+  const toggleAccountMenu = () => setIsAccountMenuOpen(!isAccountMenuOpen);
+
+  const handleLogout = async () => {
+    try {
+      await logout().unwrap(); 
+      dispatch(setLogout()); 
+      localStorage.removeItem('authToken'); 
+      localStorage.removeItem('user');
+      navigate('/login'); 
+    } catch (err) {
+      console.error('Logout failed:', err.message);
+    }
   };
 
   return (
@@ -26,43 +45,55 @@ const Navbar = () => {
           <Link to="/about" className="text-gray-700 hover:text-indigo-600 transition-colors">
             About Us
           </Link>
-          {/* Dummy links for UI */}
           <Link to="/bookings" className="text-gray-700 hover:text-indigo-600 transition-colors">
             My Bookings
           </Link>
-          <Link to="/dashboard" className="text-gray-700 hover:text-indigo-600 transition-colors">
-             Dashboard
-          </Link>
-          <div className="relative group">
-            <button className="flex items-center space-x-1 text-gray-700 hover:text-indigo-600 transition-colors">
-              <User className="h-5 w-5" />
-              <span>Account</span>
-            </button>
-            <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-              <Link to="/profile" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                Profile Settings
-              </Link>
+          
+          {/* Show Dashboard if logged in */}
+          {token ? (
+            <Link to="/dashboard" className="text-gray-700 hover:text-indigo-600 transition-colors">
+              Dashboard
+            </Link>
+          ) : (
+            <Link to="/login" className="text-gray-700 hover:text-indigo-600 transition-colors">
+              Login
+            </Link>
+          )}
+
+          {/*  Dropdown */}
+          {token && (
+            <div className="relative">
               <button
-                // Removed actual sign-out logic for simplicity
-                className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                className="flex items-center space-x-1 text-gray-700 hover:text-indigo-600 transition-colors"
+                onClick={toggleAccountMenu}
               >
-                Sign Out
+                <User className="h-5 w-5" />
+                <span>Account</span>
               </button>
+              {isAccountMenuOpen && (
+                <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 transition-all duration-200">
+                  <Link to="/dashboard/profile" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                    Profile Settings
+                  </Link>
+                  <button
+                    onClick={handleLogout}
+                    className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  >
+                    Sign Out
+                  </button>
+                </div>
+              )}
             </div>
-          </div>
+          )}
         </div>
 
-        {/* Mobile Menu Button */}
+        {/* Mobile ke liye */}
         <button className="md:hidden" onClick={toggleMenu}>
-          {isMenuOpen ? (
-            <X className="h-6 w-6 text-gray-700" />
-          ) : (
-            <Menu className="h-6 w-6 text-gray-700" />
-          )}
+          {isMenuOpen ? <X className="h-6 w-6 text-gray-700" /> : <Menu className="h-6 w-6 text-gray-700" />}
         </button>
       </div>
 
-      {/* Mobile Navigation */}
+      {/* Mobile  */}
       <AnimatePresence>
         {isMenuOpen && (
           <motion.div
@@ -73,50 +104,37 @@ const Navbar = () => {
             className="md:hidden mt-4"
           >
             <div className="flex flex-col space-y-4 px-4 py-2">
-              <Link
-                to="/tutor"
-                className="text-gray-700 hover:text-indigo-600 transition-colors py-2"
-                onClick={() => setIsMenuOpen(false)}
-              >
+              <Link to="/tutor" className="text-gray-700 hover:text-indigo-600 transition-colors py-2" onClick={toggleMenu}>
                 Find Tutors
               </Link>
-              <Link
-                to="/about"
-                className="text-gray-700 hover:text-indigo-600 transition-colors py-2"
-                onClick={() => setIsMenuOpen(false)}
-              >
+              <Link to="/about" className="text-gray-700 hover:text-indigo-600 transition-colors py-2" onClick={toggleMenu}>
                 About Us
               </Link>
-              {/* Dummy links for UI */}
-              <Link
-                to="/bookings"
-                className="text-gray-700 hover:text-indigo-600 transition-colors py-2"
-                onClick={() => setIsMenuOpen(false)}
-              >
+              <Link to="/bookings" className="text-gray-700 hover:text-indigo-600 transition-colors py-2" onClick={toggleMenu}>
                 My Bookings
               </Link>
-              <Link
-                to="/tutor-dashboard"
-                className="text-gray-600 hover:text-indigo-600 transition-colors py-2"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Tutor Dashboard
-              </Link>
-              <Link
-                to="/profile"
-                className="text-gray-700 hover:text-indigo-600 transition-colors py-2"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Profile Settings
-              </Link>
-              <button
-                // Removed actual sign-out logic for simplicity
-                onClick={() => setIsMenuOpen(false)}
-                className="flex items-center text-gray-700 hover:text-indigo-600 transition-colors py-2"
-              >
-                <LogOut className="h-5 w-5 mr-2" />
-                Sign Out
-              </button>
+              {token && (
+                <Link to="/dashboard" className="text-gray-700 hover:text-indigo-600 transition-colors py-2" onClick={toggleMenu}>
+                  Dashboard
+                </Link>
+              )}
+              {token && (
+                <button onClick={toggleAccountMenu} className="flex items-center text-gray-700 hover:text-indigo-600 transition-colors py-2">
+                  <User className="h-5 w-5 mr-2" />
+                  Account
+                </button>
+              )}
+              {isAccountMenuOpen && token && (
+                <div className="bg-white rounded-md shadow-lg py-2 transition-all duration-200">
+                  <Link to="/dashboard/profile" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                    Profile Settings
+                  </Link>
+                  <button onClick={handleLogout} className="flex items-center text-gray-700 hover:text-indigo-600 transition-colors py-2">
+                    <LogOut className="h-5 w-5 mr-2" />
+                    Sign Out
+                  </button>
+                </div>
+              )}
             </div>
           </motion.div>
         )}

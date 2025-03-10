@@ -1,45 +1,46 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
 import { motion } from 'framer-motion';
 import { LogIn, AlertCircle } from 'lucide-react';
-import { useForm } from 'react-hook-form';
+import { Link } from 'react-router-dom';
+import { useLoginMutation } from '../features/auth/userApi';  
+import { useDispatch } from 'react-redux';
+import { setUser, setError } from '../features/auth/authSlice';
 
 const Login = () => {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  // Using useForm to handle form state and validation
   const { register, handleSubmit, formState: { errors } } = useForm();
+  const [login] = useLoginMutation(); 
 
   const onSubmit = async (data) => {
     setError(null);
     setIsLoading(true);
 
-    // Call the sign-in function (mocked for now)
     try {
-      // Replace with your signIn logic
-      const signInResponse = await mockSignIn(data.email, data.password);
-      
-      if (signInResponse.error) {
-        setError(signInResponse.error.message);
-      } else {
-        navigate('/');
-      }
+      const result = await login({
+        email: data.email,
+        password: data.password,
+      }).unwrap(); 
+
+      const user  = result.user;
+      const token  = result.user.refreshToken;
+      console.log(user,token)
+
+      localStorage.setItem('authToken', result.user.refreshToken);
+      localStorage.setItem('user', JSON.stringify(result.user));
+
+      dispatch(setUser({ user, token }));
+
+      navigate('/');
     } catch (err) {
-      setError('An unexpected error occurred. Please try again.');
-      console.error(err);
+      setError(err.message || 'An unexpected error occurred. Please try again.');
     } finally {
       setIsLoading(false);
-    }
-  };
-
-  // Mock function for sign-in (replace with your actual sign-in function)
-  const mockSignIn = (email, password) => {
-    if (email === 'test@example.com' && password === 'password123') {
-      return { success: true };
-    } else {
-      return { error: { message: 'Invalid credentials' } };
     }
   };
 

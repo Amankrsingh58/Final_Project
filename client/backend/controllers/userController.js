@@ -115,6 +115,7 @@ const registerUser = async(req,res) => {
         .cookie("refreshToken", refreshToken, options)
         .json({
             success: true,
+            user:user,
             message: 'User logged in successfully',
         });
    } catch (error) {
