@@ -1,197 +1,346 @@
-import React, { useState,useEffect } from "react";
-import { useForm } from "react-hook-form";
-import bgimg from '../Images/5156366.jpg'
-import "./SignupForm.css";
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import { motion } from 'framer-motion';
+import { AlertCircle } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { useSignupMutation } from '../features/auth/userApi';
+import { useDispatch } from 'react-redux';
+import { setUser, setError } from '../features/auth/authSlice';
+import Select from 'react-select'; // For searchable dropdowns
 
-const SignupForm = () => {
-  const [isExpand,setIsExpand] =useState(true);
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm();
+// Example subjects and states/cities
+const subjects = ["Math", "Science", "English", "History", "Geography"];
+const states = [
+  { value: "California", label: "California" },
+  { value: "Texas", label: "Texas" },
+  { value: "Florida", label: "Florida" },
+];
 
-  const watchPassword = watch("password");
+const cities = {
+  California: ["Los Angeles", "San Francisco", "San Diego"],
+  Texas: ["Houston", "Dallas", "Austin"],
+  Florida: ["Miami", "Orlando", "Tampa"],
+};
+
+const Signup = () => {
+  const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [selectedState, setSelectedState] = useState(null);
+  const [selectedCity, setSelectedCity] = useState("");
+  const [role, setRole] = useState("Tutor"); // To toggle between tutor and student
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const { register, handleSubmit, formState: { errors }, watch } = useForm();
+  const [signup] = useSignupMutation();
 
   const onSubmit = async (data) => {
+    setError(null);
+    setIsLoading(true);
+
     try {
-      console.log("Form Data:", data);
-      // Simulate API call
-      const response = await fetch("https://jsonplaceholder.typicode.com/posts", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
-      const result = await response.json();
-      console.log("Server Response:", result);
-      alert("Signup Successful");
-    } catch (error) {
-      console.error("Error in Signup:", error);
+      const result = await signup({
+        userName: data.userName,
+        email: data.email,
+        phoneNo: data.phoneNo,
+        experience: data.experience,
+        subject: data.subject,
+        state: selectedState?.value,
+        city: selectedCity,
+        bio: data.bio,
+        fee: data.fee,
+        password: data.password,
+        role, // Adding the selected role (tutor/student)
+      }).unwrap();
+
+      const user = result.user;
+      const token = result.user.refreshToken;
+
+      localStorage.setItem('authToken', result.user.refreshToken);
+      localStorage.setItem('user', JSON.stringify(result.user));
+
+      dispatch(setUser({ user, token }));
+
+      navigate('/'); // Redirect to home/dashboard
+    } catch (err) {
+      setError(err.message || 'An unexpected error occurred. Please try again.');
+    } finally {
+      setIsLoading(false);
     }
   };
 
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth < 700) { 
-        setIsExpand(false); 
-      }
-      if (window.innerWidth > 700) { 
-        setIsExpand(true); 
-      }
-    };
-  
-    window.addEventListener('resize', handleResize);
-  
-    handleResize();
-  
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
+  // Handle state change and update city dropdown
+  const handleStateChange = (selectedOption) => {
+    setSelectedState(selectedOption);
+    setSelectedCity(""); // Reset selected city when state changes
+  };
+
+  // Handle role toggle (Tutor/Student)
+  const handleRoleToggle = (roleType) => {
+    setRole(roleType);
+  };
+
   return (
-
-
-    <div className="signup-page">
-    {/* Left section */}
-    {isExpand &&
-    <div className="signup-page-left">
-      <div className="welcome-message">
-        <img src={bgimg} alt="Login visual" />
-      </div>
-    </div>}
-
-    {/* Right section */}
-    <div className="signup-page-right">
-      <div className="signup-container">
-        <h1>Signup</h1>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="input-group">
-            <label>First name</label>
-            <input
-              type="text"
-              {...register("first name", { required: " first name is required" })}
-              placeholder="Enter your first name"
-            />
-            {errors.username && <span className="error">{errors.username.message}</span>}
-          </div>
-          <div className="input-group">
-            <label>Last name</label>
-            <input
-              type="text"
-              {...register("last name", { required: "Username is required" })}
-              placeholder="Enter your last name"
-            />
-            {errors.username && <span className="error">{errors.username.message}</span>}
-          </div>
-          <div className="input-group">
-            <label>Username</label>
-            <input
-              type="text"
-              {...register("username", { required: "Username is required" })}
-              placeholder="Enter your username"
-            />
-            {errors.username && <span className="error">{errors.username.message}</span>}
-          </div>
-
-          <div className="input-group">
-            <label>Email</label>
-            <input
-              type="email"
-              {...register("email", {
-                required: "Email is required",
-                pattern: {
-                  value: /\S+@\S+\.\S+/,
-                  message: "Enter a valid email address",
-                },
-              })}
-              placeholder="Enter your email"
-            />
-            {errors.email && <span className="error">{errors.email.message}</span>}
-          </div>
-          <div className="input-group">
-            <label>what is your cell number</label>
-            <input
-              type="number"
-              placeholder="what is your cell number"
-            />
-           
-          </div>
-         <div className="input-group">
-            <label>Street Address</label>
-            <input
-              type="text"
-          
-              placeholder="Street Address"
-            />
-      
-          </div>
-          <div className="input-group">
-            <label>State</label>
-            <input
-              type="text"
-          
-            placeholder="State"
-            />
-      
-          </div>
-         <div className="input-group">
-            <label>City</label>
-            <input
-              type="text"
-          
-              placeholder="City"
-            />
-          </div>
-         <div className="input-group">
-            <label>Expriance</label>
-            <input
-              type="number"
-          
-              placeholder="Expriance"
-            />
-          </div>
-         <div className="input-group">
-            <label>Subjects</label>
-            <input
-              type="text"
-          
-              placeholder="subject"
-            />
-          </div>
-
-            <div className="input-group">
-            <label>Password</label>
-            <input
-              type="password"
-              {...register("password", { required: "Password is required" })}
-              placeholder="Enter your password"
-            />
-            {errors.password && <span className="error">{errors.password.message}</span>}
-          </div>
-          
-         <div className="input-group">
-            <label>Confirm Password</label>
-            <input
-              type="password"
-              {...register("confirmPassword", {
-                validate: (value) =>
-                  value === watchPassword || "Passwords do not match",
-              })}
-              placeholder="Confirm your password"
-            />
-            {errors.confirmPassword && (
-              <span className="error">{errors.confirmPassword.message}</span>
-            )}
-          </div>
-         
-          <button className="signup-btn" type="submit">Sign Up</button>
-        </form>
+    <div className="min-h-screen pt-16 flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+      <motion.div 
+        className="max-w-md w-full space-y-8 bg-white p-8 rounded-lg shadow-md"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+      >
+        <div>
+          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+            Create a new account
+          </h2>
         </div>
-      </div>
-  </div>
 
+        {error && (
+          <motion.div 
+            className="bg-red-50 border-l-4 border-red-400 p-4 text-red-700 flex items-center"
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            transition={{ duration: 0.3 }}
+          >
+            <AlertCircle className="h-5 w-5 mr-2" />
+            <span>{error}</span>
+          </motion.div>
+        )}
+
+        <form className="mt-8 space-y-6" onSubmit={handleSubmit(onSubmit)}>
+          <div className="rounded-md shadow-sm -space-y-px">
+            {/* UserName */}
+            <div>
+              <label htmlFor="userName" className="sr-only">
+                User Name
+              </label>
+              <input
+                id="userName"
+                name="userName"
+                type="text"
+                autoComplete="name"
+                {...register('userName', { required: 'User name is required' })}
+                className={`appearance-none rounded-md relative block w-full px-3 py-2 border mb-4 border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm ${errors.userName ? 'border-red-500' : ''}`}
+                placeholder="User Name"
+              />
+              {errors.userName && <p className="text-red-500 text-xs">{errors.userName.message}</p>}
+            </div>
+
+            {/* Email */}
+            <div>
+              <label htmlFor="email" className="sr-only">
+                Email Address
+              </label>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                autoComplete="email"
+                {...register('email', { 
+                  required: 'Email is required', 
+                  pattern: { value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, message: 'Invalid email address' }
+                })}
+                className={`appearance-none rounded-md relative block w-full px-3 py-2 border mb-4 border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm ${errors.email ? 'border-red-500' : ''}`}
+                placeholder="Email Address"
+              />
+              {errors.email && <p className="text-red-500 text-xs">{errors.email.message}</p>}
+            </div>
+
+            {/* PhoneNo */}
+            <div>
+              <label htmlFor="phoneNo" className="sr-only">
+                Phone Number
+              </label>
+              <input
+                id="phoneNo"
+                name="phoneNo"
+                type="text"
+                autoComplete="tel"
+                {...register('phoneNo', { required: 'Phone number is required' })}
+                className={`appearance-none rounded-md relative block w-full px-3 py-2 border mb-4 border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm ${errors.phoneNo ? 'border-red-500' : ''}`}
+                placeholder="Phone Number"
+              />
+              {errors.phoneNo && <p className="text-red-500 text-xs">{errors.phoneNo.message}</p>}
+            </div>
+
+            {/* Experience */}
+            <div>
+              <label htmlFor="experience" className="sr-only">
+                Experience (Years)
+              </label>
+              <input
+                id="experience"
+                name="experience"
+                type="number"
+                {...register('experience', { required: 'Experience is required' })}
+                className={`appearance-none rounded-md relative block w-full px-3 py-2 border mb-4 border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm ${errors.experience ? 'border-red-500' : ''}`}
+                placeholder="Experience (in Years)"
+              />
+              {errors.experience && <p className="text-red-500 text-xs">{errors.experience.message}</p>}
+            </div>
+
+            {/* Subjects (Multiple selection) */}
+            <div>
+              <label htmlFor="subject" className="sr-only">
+                Subjects
+              </label>
+              <select
+                id="subject"
+                name="subject"
+                multiple
+                {...register('subject', { required: 'Please select at least one subject' })}
+                className={`appearance-none rounded-md relative block w-full px-3 py-2 border mb-4 border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm ${errors.subject ? 'border-red-500' : ''}`}
+              >
+                {subjects.map((subject) => (
+                  <option key={subject} value={subject}>{subject}</option>
+                ))}
+              </select>
+              {errors.subject && <p className="text-red-500 text-xs">{errors.subject.message}</p>}
+            </div>
+
+            {/* State Dropdown (Searchable) */}
+            <div>
+              <label htmlFor="state" className="sr-only">
+                State
+              </label>
+              <Select
+                id="state"
+                name="state"
+                options={states}
+                value={selectedState}
+                onChange={handleStateChange}
+                isSearchable
+                placeholder="Select a State"
+                className={`${errors.state ? 'border-red-500' : ''}`}
+              />
+              {errors.state && <p className="text-red-500 text-xs">{errors.state.message}</p>}
+            </div>
+
+            {/* City Dropdown */}
+            <div>
+              <label htmlFor="city" className="sr-only">
+                City
+              </label>
+              <select
+                id="city"
+                name="city"
+                {...register('city', { required: 'Please select a city' })}
+                onChange={(e) => setSelectedCity(e.target.value)}
+                value={selectedCity}
+                className={`appearance-none rounded-md relative block w-full px-3 py-2 border mb-4 border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm ${errors.city ? 'border-red-500' : ''}`}
+              >
+                {selectedState && cities[selectedState.value] && cities[selectedState.value].map((city) => (
+                  <option key={city} value={city}>{city}</option>
+                ))}
+              </select>
+              {errors.city && <p className="text-red-500 text-xs">{errors.city.message}</p>}
+            </div>
+
+            {/* Bio */}
+            <div>
+              <label htmlFor="bio" className="sr-only">
+                Bio
+              </label>
+              <textarea
+                id="bio"
+                name="bio"
+                rows="4"
+                {...register('bio', { required: 'Bio is required' })}
+                className={`appearance-none rounded-md relative block w-full px-3 py-2 border mb-4 border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm ${errors.bio ? 'border-red-500' : ''}`}
+                placeholder="Tell us about yourself"
+              />
+              {errors.bio && <p className="text-red-500 text-xs">{errors.bio.message}</p>}
+            </div>
+
+            {/* Fee per Month */}
+            <div>
+              <label htmlFor="fee" className="sr-only">
+                Fee per Month
+              </label>
+              <input
+                id="fee"
+                name="fee"
+                type="number"
+                {...register('fee', { required: 'Fee per month is required' })}
+                className={`appearance-none rounded-md relative block w-full px-3 py-2 border mb-4 border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm ${errors.fee ? 'border-red-500' : ''}`}
+                placeholder="Fee per Month"
+              />
+              {errors.fee && <p className="text-red-500 text-xs">{errors.fee.message}</p>}
+            </div>
+
+            {/* Password */}
+            <div>
+              <label htmlFor="password" className="sr-only">
+                Password
+              </label>
+              <input
+                id="password"
+                name="password"
+                type="password"
+                {...register('password', { required: 'Password is required', minLength: { value: 6, message: 'Password must be at least 6 characters' } })}
+                className={`appearance-none rounded-md relative block w-full px-3 py-2 border mb-4 border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm ${errors.password ? 'border-red-500' : ''}`}
+                placeholder="Password"
+              />
+              {errors.password && <p className="text-red-500 text-xs">{errors.password.message}</p>}
+            </div>
+
+            {/* Confirm Password */}
+            <div>
+              <label htmlFor="confirmPassword" className="sr-only">
+                Confirm Password
+              </label>
+              <input
+                id="confirmPassword"
+                name="confirmPassword"
+                type="password"
+                {...register('confirmPassword', { 
+                  required: 'Please confirm your password', 
+                  validate: (value) => value === watch('password') || 'Passwords do not match' 
+                })}
+                className={`appearance-none rounded-md relative block w-full px-3 py-2 border mb-4 border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm ${errors.confirmPassword ? 'border-red-500' : ''}`}
+                placeholder="Confirm Password"
+              />
+              {errors.confirmPassword && <p className="text-red-500 text-xs">{errors.confirmPassword.message}</p>}
+            </div>
+          </div>
+
+          <div className="flex justify-center space-x-4">
+            <button
+              type="button"
+              onClick={() => handleRoleToggle('tutor')}
+              className={`py-2 px-4 border rounded-md ${role === 'tutor' ? 'bg-indigo-600 text-white' : 'bg-gray-200'}`}
+            >
+              Tutor
+            </button>
+            <button
+              type="button"
+              onClick={() => handleRoleToggle('student')}
+              className={`py-2 px-4 border rounded-md ${role === 'student' ? 'bg-indigo-600 text-white' : 'bg-gray-200'}`}
+            >
+              Student
+            </button>
+          </div>
+
+          <div>
+            <button
+              type="submit"
+              disabled={isLoading}
+              className={`group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 ${isLoading ? 'opacity-70 cursor-not-allowed' : ''}`}
+            >
+              {isLoading ? 'Signing up...' : 'Sign Up'}
+            </button>
+          </div>
+        </form>
+
+        <p className="mt-2 text-center text-sm text-gray-600">
+          Already have an account?{' '}
+          <Link to="/login" className="font-medium text-indigo-600 hover:text-indigo-500">
+            Login here
+          </Link>
+        </p>
+      </motion.div>
+    </div>
   );
 };
 
-export default SignupForm;
+export default Signup;

@@ -9,7 +9,7 @@ const HelpRequestSchema = new mongoose.Schema({
     },
     role:{
         type:String,
-        enum:["admin", "student", "tutor"],
+        enum:["Admin", "Student", "Tutor"],
         required:true
     },
     subject: {
@@ -24,6 +24,10 @@ const HelpRequestSchema = new mongoose.Schema({
         type:Date,
         default:Date.now
     },
+    solved:{
+        type:Boolean,
+        default:false
+    }
 });
 
 const HelpRequest = mongoose.model('HelpRequest', HelpRequestSchema);

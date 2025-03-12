@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { RiHomeFill } from "react-icons/ri";
 import { FaUser, FaBell, FaCog, FaChalkboardTeacher, FaUserGraduate, FaSignOutAlt } from "react-icons/fa";
+import { SiHomeassistantcommunitystore } from "react-icons/si";
 import "./Slidebar.css";
 
 const Sidebar = () => {
@@ -30,17 +31,17 @@ useEffect(() => {
   };
 
   return (
-    <div className={isExpand ? "sidebar" : "sidebar notExpand"}>
+    <div className={isExpand ? "stsidebar border-r-2 border-[#BEBEBE] overflow-x-hidden" : "stsidebar stnotExpand overflow-x-hidden"}>
       <div className="logo">
         {isExpand && <h2 className=" font-bold">Admin</h2>}
-        <GiHamburgerMenu className="menu-toggle" onClick={toggleSidebar} />
+        <GiHamburgerMenu className="stmenu-toggle" onClick={toggleSidebar} />
       </div>
 
-      <ul className="menu">
+      <ul className="stmenu">
         <li>
           <NavLink
-            to="/dashboard/"
-            className={({ isActive }) => (isActive ? "active-link" : "")}
+            to="/studentsdashboard"
+            className={({ isActive }) => (isActive ? " bg-[#d8d9e5b3]" : "")}
           >  
             <RiHomeFill className="icon" />
             {isExpand && <span>Dashboard</span>}
@@ -48,8 +49,8 @@ useEffect(() => {
         </li>
         <li>
           <NavLink
-            to="/dashboard/profile"
-            className={({ isActive }) => (isActive ? "active-link" : "")}
+            to="/studentsdashboard/profile"
+            className={({ isActive }) => (isActive ? " bg-[#d8d9e5b3]" : "")}
           >
             <FaUser className="icon" />
             {isExpand && <span>Profile</span>}
@@ -57,17 +58,17 @@ useEffect(() => {
         </li>
         <li>
           <NavLink
-            to="/dashboard/tutors"
-            className={({ isActive }) => (isActive ? "active-link" : "")}
+            to="/studentsdashboard/my-booking"
+            className={({ isActive }) => (isActive ? " bg-[#d8d9e5b3]" : "")}
           >
-            <FaChalkboardTeacher className="icon" />
-            {isExpand && <span>Tutors</span>}
+            <SiHomeassistantcommunitystore  className="icon" />
+            {isExpand && <span>My Booking</span>}
           </NavLink>
         </li>
         <li>
           <NavLink
-            to="/dashboard/students"
-            className={({ isActive }) => (isActive ? "active-link" : "")}
+            to="/studentsdashboard/students"
+            className={({ isActive }) => (isActive ? " bg-[#d8d9e5b3]" : "")}
           >
             <FaUserGraduate className="icon" />
             {isExpand && <span>Students</span>}
@@ -75,8 +76,8 @@ useEffect(() => {
         </li>
         <li>
           <NavLink
-            to="/dashboard/notifications"
-            className={({ isActive }) => (isActive ? "active-link" : "")}
+            to="/studentsdashboard/notifications"
+            className={({ isActive }) => (isActive ? " bg-[#d8d9e5b3]" : "")}
           >
             <FaBell className="icon" />
             {isExpand && <span>Notifications</span>}
@@ -84,8 +85,8 @@ useEffect(() => {
         </li>
         <li>
           <NavLink
-            to="/dashboard/adminsetting"
-            className={({ isActive }) => (isActive ? "active-link" : "")}
+            to="/studentsdashboard/usersetting"
+            className={({ isActive }) => (isActive ? " bg-[#d8d9e5b3]" : "")}
           >
             <FaCog className="icon" />
             {isExpand && <span>Settings</span>}
@@ -94,7 +95,7 @@ useEffect(() => {
         <li>
           <NavLink
             to="/logout"
-            className={({ isActive }) => (isActive ? "active-link" : "")}
+            className={({ isActive }) => (isActive ? " bg-[#d8d9e5b3]" : "")}
           >
             <FaSignOutAlt className="icon" />
             {isExpand && <span>Signout</span>}

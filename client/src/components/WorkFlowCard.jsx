@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const WorkFlowCard = () => {
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [displayedData, setDisplayedData] = useState([]);
+  const {token} = useSelector((state) => state.auth)
 
   const data = [
     {
@@ -54,7 +55,7 @@ const WorkFlowCard = () => {
   }, []);
 
   const handleClick = () => {
-    if (isLoggedIn) {
+    if (token) {
       setShowModal(true); // Show modal if user is logged in
     } else {
       navigate("/signup"); // Navigate to signup if not logged in
@@ -79,7 +80,7 @@ const WorkFlowCard = () => {
                 {item.title}
               </h2>
               <p className="text-gray-600 mb-4">{item.description}</p>
-              <button onClick={handleClick} className="bg-custom-blue text-white font-semibold font-Roboto text-[14px] py-2 px-4 rounded hover:bg-[#133b80] transition">
+              <button onClick={handleClick} className="bg-blue-600 text-white font-semibold font-Roboto text-[14px] py-2 px-4 rounded hover:bg-blue-700 transition">
                 {item.buttonText}
               </button>
             </div>

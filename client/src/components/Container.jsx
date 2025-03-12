@@ -4,6 +4,8 @@ import "./Container.css";
 import WorkFlowCard from "./WorkFlowCard";
 import Designcard from "./Designcard";
 import axios from "axios"; // Import Axios
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 function Container() {
   const [formData, setFormData] = useState({
@@ -11,10 +13,12 @@ function Container() {
     message: "",
   });
 
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
   const [showModal, setShowModal] = useState(false);
+  const {token} = useSelector( (state) => state.auth);
 
   // Handle input changes
   const handleChange = (e) => {
@@ -32,17 +36,16 @@ function Container() {
     try {
       
       const response = await axios.post(
-        "http://localhost:6001/api/users/submithelpform",
-        { subject: formData.subject, message: formData.message }, // Correct keys
-        { withCredentials: true,
-          headers: { "Content-Type": "application/json" }
-
-         }, // Send cookies (token)
-        
+        "http://localhost:8000/api/helprequests/submithelpform",
+        { subject: formData.subject, message: formData.message },
+        { 
+          withCredentials: true,
+      
+        }
       );
-
+      // toast.success("Help request submitted successfully!")
       setSuccess("Help request submitted successfully!");
-      alert(response.data.message);
+      alert(response.message);
       setShowModal(false); // Close modal
       setFormData({ subject: "", message: "" }); // Reset form
     } catch (error) {
@@ -53,6 +56,10 @@ function Container() {
     }
   };
 
+  function clickHandler(){
+    navigate("/login")
+  }
+
   return (
     <div className="demo-container w-full">
       <WorkFlowCard />
@@ -62,7 +69,7 @@ function Container() {
           Not sure? Take a free online counseling <br />
           and clear your confusions.
         </p>
-        <button onClick={() => setShowModal(true)} className="button">
+        <button  onClick={ token ? (() => setShowModal(true)) :(clickHandler)} className="cursor-pointer button">
           DROP YOUR ISSUE HERE!
         </button>
       </div>

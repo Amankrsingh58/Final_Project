@@ -17,11 +17,11 @@ const registerUser = async(req,res) => {
             return res.status(400).json({ message: 'Please enter required details' });
         }
         
-        if (role === 'tutor') {
+        if (role === 'Tutor') {
             if (!subjects || subjects.length === 0) {
                 return res.status(400).json({ message: 'Please enter subjects for tutor' });
             }
-        } else if (role === 'student') {
+        } else if (role === 'Student') {
             if (!grade || !subjectInterested || subjectInterested.length === 0) {
                 return res.status(400).json({ message: 'Please enter grade and subjects for student' });
             }
@@ -40,7 +40,7 @@ const registerUser = async(req,res) => {
         console.log("alright");
 
         //save tutor/student entry based on role
-        if(role === 'tutor'){
+        if(role === 'Tutor'){
             const tutor = new Tutor({
                 userId: user._id,
                 subjects,
@@ -48,7 +48,7 @@ const registerUser = async(req,res) => {
                 bio:req.body.bio // If included
             });
             await tutor.save();
-        } else if (role === 'student') {
+        } else if (role === 'Student') {
             const student = new Student({
                 userId: user._id,
                 grade,
@@ -62,7 +62,7 @@ const registerUser = async(req,res) => {
 
         return res.status(201).json({ message: 'User registered successfully' });
     } catch (error) {
-        console.error("Registration error: ", error);  // This will log the error in the console
+        console.error("Registration error: ", error);  
         return res.status(500).json({ error: 'Registration failed' });
     }
 };
@@ -99,17 +99,18 @@ const registerUser = async(req,res) => {
     const accessToken = await user.generateAccessToken();
     const refreshToken =await user.generateRefreshToken();
     console.log("User not found",user);
-    user.refreshToken = refreshToken
+    user.refreshToken = refreshToken;
     await user.save();
     console.log(refreshToken);
     
+    user.password = undefined;
     // Set cookies with the tokens
     const options = {
         httpOnly: true,
-    secure: false,  // ✅ Use `false` for localhost (set `true` in production)
+    secure: false,  
     sameSite: "Lax",
     };
-
+    
     return res.status(200)
         .cookie("accessToken", accessToken, options)
         .cookie("refreshToken", refreshToken, options)
@@ -129,6 +130,9 @@ const registerUser = async(req,res) => {
  //Logout user
  const logoutUser = asyncHandler(async(req,res) => {
     try {
+        if (!req.user) {
+            return res.status(401).json({ success: false, message: "User not found" });
+        }
         await User.findByIdAndUpdate( req.user._id,{$set:{refreshToken:undefined}},
                                              {new:true});
 

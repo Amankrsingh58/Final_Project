@@ -11,11 +11,14 @@ const Navbar = () => {
   const [isAccountMenuOpen, setIsAccountMenuOpen] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { token } = useSelector((state) => state.auth);
+  const { token, user } = useSelector((state) => state.auth);
   const [logout] = useLogoutMutation();
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
   const toggleAccountMenu = () => setIsAccountMenuOpen(!isAccountMenuOpen);
+  useEffect(() => {
+    setIsAccountMenuOpen(false);
+  }, [navigate]);
 
   const handleLogout = async () => {
     try {
@@ -39,15 +42,15 @@ const Navbar = () => {
 
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center space-x-6">
-          <Link to="/tutor" className="text-gray-700 hover:text-indigo-600 transition-colors">
-            Find Tutors
-          </Link>
+         {token &&  <Link to={user.role === "Tutor" ? "/tutor" : "/student"} className="text-gray-700 hover:text-indigo-600 transition-colors">
+           {user.role ==="Tutor" ? "Find Tutors" : 'Find Students' }
+          </Link>}
           <Link to="/about" className="text-gray-700 hover:text-indigo-600 transition-colors">
             About Us
           </Link>
-          <Link to="/bookings" className="text-gray-700 hover:text-indigo-600 transition-colors">
+         {token && <Link to="/bookings" className="text-gray-700 hover:text-indigo-600 transition-colors">
             My Bookings
-          </Link>
+          </Link>}
           
           {/* Show Dashboard if logged in */}
           {token ? (
@@ -61,14 +64,14 @@ const Navbar = () => {
           )}
 
           {/*  Dropdown */}
-          {token && (
+          {(token && user) ? (
             <div className="relative">
               <button
                 className="flex items-center space-x-1 text-gray-700 hover:text-indigo-600 transition-colors"
                 onClick={toggleAccountMenu}
               >
                 <User className="h-5 w-5" />
-                <span>Account</span>
+                <span>{user.userName}</span>
               </button>
               {isAccountMenuOpen && (
                 <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 transition-all duration-200">
@@ -84,6 +87,10 @@ const Navbar = () => {
                 </div>
               )}
             </div>
+          ):(
+            <Link to="/signup" className="text-gray-700 hover:text-indigo-600 transition-colors">
+              SignUp
+            </Link>
           )}
         </div>
 
@@ -104,37 +111,32 @@ const Navbar = () => {
             className="md:hidden mt-4"
           >
             <div className="flex flex-col space-y-4 px-4 py-2">
-              <Link to="/tutor" className="text-gray-700 hover:text-indigo-600 transition-colors py-2" onClick={toggleMenu}>
+             {token && <Link to="/tutor" className="text-gray-700 hover:text-indigo-600 transition-colors py-2" onClick={toggleMenu}>
                 Find Tutors
-              </Link>
+              </Link>}
               <Link to="/about" className="text-gray-700 hover:text-indigo-600 transition-colors py-2" onClick={toggleMenu}>
                 About Us
               </Link>
-              <Link to="/bookings" className="text-gray-700 hover:text-indigo-600 transition-colors py-2" onClick={toggleMenu}>
+             {token && <Link to="/bookings" className="text-gray-700 hover:text-indigo-600 transition-colors py-2" onClick={toggleMenu}>
                 My Bookings
-              </Link>
+              </Link>}
               {token && (
                 <Link to="/dashboard" className="text-gray-700 hover:text-indigo-600 transition-colors py-2" onClick={toggleMenu}>
                   Dashboard
                 </Link>
               )}
-              {token && (
-                <button onClick={toggleAccountMenu} className="flex items-center text-gray-700 hover:text-indigo-600 transition-colors py-2">
+                {(token && user) ? <button  className="flex items-center text-gray-700 hover:text-indigo-600 transition-colors py-2">
                   <User className="h-5 w-5 mr-2" />
-                  Account
-                </button>
-              )}
-              {isAccountMenuOpen && token && (
-                <div className="bg-white rounded-md shadow-lg py-2 transition-all duration-200">
-                  <Link to="/dashboard/profile" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                    Profile Settings
-                  </Link>
-                  <button onClick={handleLogout} className="flex items-center text-gray-700 hover:text-indigo-600 transition-colors py-2">
+                  {user.userName}
+                </button> : ( <Link to="/login" className="text-gray-700 hover:text-indigo-600 transition-colors py-2" onClick={toggleMenu}>
+                  Login
+                </Link>)}
+                 {token ? <button onClick={handleLogout} className="flex items-center text-gray-700 hover:text-indigo-600 transition-colors py-2">
                     <LogOut className="h-5 w-5 mr-2" />
                     Sign Out
-                  </button>
-                </div>
-              )}
+                  </button> : ( <Link to="/signup" className="text-gray-700 hover:text-indigo-600 transition-colors py-2" onClick={toggleMenu}>
+                  SignUp
+                </Link>)}
             </div>
           </motion.div>
         )}

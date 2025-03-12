@@ -1,7 +1,12 @@
 const express = require("express");
 const router = express.Router();
 
-const auth = require("../middlewares/authMiddleware");
-const { HelpRequest } = require("../controllers/helpRequestController");
+const { HelpRequestHandler, getAllHelpRequest, markedSolved } = require("../controllers/helpRequestController");
+const { auth } = require("../middlewares/authMiddleware");
 
-router.post("/submithelpform", auth, HelpRequest);
+router.post("/submithelpform",auth, HelpRequestHandler);
+router.get("/getallhelprequest", getAllHelpRequest);
+router.put("/marksolved/:id", markedSolved);
+
+
+module.exports = router;

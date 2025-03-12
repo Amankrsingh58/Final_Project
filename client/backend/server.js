@@ -6,6 +6,7 @@ const cors = require('cors');
 
 const connectDB = require('./config/database');
 const userRoutes = require('./routes/userRoutes');
+const helpRequestRoutes = require('./routes/helpRequestRoutes');
 
 app.use(express.json());
 app.use(cookieParser());
@@ -13,13 +14,17 @@ app.use(cookieParser());
 // ✅ Correct CORS configuration
 app.use(
     cors({
-      origin: `http://localhost:${5173||5174}`, // Allow requests from frontend
-      credentials: true, // Allow cookies (important for authentication)
+        origin: [`http://localhost:5173`, `http://localhost:5174`],
+        credentials: true, // Allow cookies (important for authentication)
     })
 );
 
-// Define routes
+// Mount user routes at /api/users
 app.use('/api/users', userRoutes);
+
+// Mount help request routes at a different path, e.g., /api/helprequests
+app.use('/api/helprequests', helpRequestRoutes);
+
 
 // Database connection
 connectDB();

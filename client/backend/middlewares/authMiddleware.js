@@ -35,7 +35,7 @@ exports.isStudent = async (req, res, next) => {
 	try {
 		const userDetails = await Tutor.findOne({ email: req.user.email });
 
-		if (userDetails.role !== "student") {
+		if (userDetails.role !== "Student") {
 			return res.status(401).json({
 				success: false,
 				message: "This is a Protected Route for Students",
@@ -72,7 +72,7 @@ exports.isTutor = async (req, res, next) => {
 
 		console.log(userDetails.accountType);
 
-		if (userDetails.role !== "tutor") {
+		if (userDetails.role !== "Tutor") {
 			return res.status(401).json({
 				success: false,
 				message: "This is a Protected Route for Instructor",
