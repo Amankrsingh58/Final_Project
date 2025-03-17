@@ -8,7 +8,7 @@ const HelpRequestHandler = async(req,res) =>{
 
         if(!subject || !message){
             return res.status(400).json({
-                error:"All field requir"
+                error:"All field required"
             });
         }
 
