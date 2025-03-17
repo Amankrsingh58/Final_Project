@@ -61,13 +61,14 @@ const Profile = () => {
 
   const [user,setUser]= useState([]);
   useEffect(() => {
+    
     const token = JSON.parse(localStorage.getItem("user"));
     console.log(token.role);
 
    if (token) {setUser(token)}
    
    }, []);
-
+   
   return (
     <div>
       <h2 className="text-2xl font-bold mb-4">My Profile</h2>

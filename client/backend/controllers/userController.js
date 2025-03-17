@@ -1,159 +1,70 @@
-
 const User = require("../models/User");
 const Tutor = require("../models/Tutor");
 const Student = require("../models/Student");
 const asyncHandler = require('express-async-handler');
-require('dotenv').config();
 
-
-
-  //register business logic
-const registerUser = async(req,res) => {
+const getUserData = asyncHandler(async (req, res) => {
     try {
-        const {userName, email, password, confirmpassword, role, subjects, experience, grade, subjectInterested} = req.body;
-        
-        //validate user data input
-        if (!userName || !email || !password || password !== confirmpassword) {
-            return res.status(400).json({ message: 'Please enter required details' });
+        const userId = req.user._id;
+        const user = await User.findById(userId); 
+
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
         }
-        
-        if (role === 'Tutor') {
-            if (!subjects || subjects.length === 0) {
-                return res.status(400).json({ message: 'Please enter subjects for tutor' });
+
+        if (user.role === 'Tutor') {
+            const tutorData = await Tutor.findOne({ userId: user._id }).populate('userId');
+            if (!tutorData) {
+                return res.status(404).json({ message: 'Tutor data not found' });
             }
-        } else if (role === 'Student') {
-            if (!grade || !subjectInterested || subjectInterested.length === 0) {
-                return res.status(400).json({ message: 'Please enter grade and subjects for student' });
+            return res.status(200).json({ profile: tutorData });
+        } else if (user.role === 'Student') {
+            const studentData = await Student.findOne({ userId: user._id }).populate('userId');
+            if (!studentData) {
+                return res.status(404).json({ message: 'Student data not found' });
             }
-        }
-        
-        // Check if user already exists
-        const existingUser = await User.findOne({ email });
-        if (existingUser) {
-            return res.status(400).json({ message: 'User with this email already exists' });
-        }
-        
-        //hash password
-        //save user entry
-        const user = new User({userName,email,password,role});
-        await user.save();
-        console.log("alright");
-
-        //save tutor/student entry based on role
-        if(role === 'Tutor'){
-            const tutor = new Tutor({
-                userId: user._id,
-                subjects,
-                experience,
-                bio:req.body.bio // If included
-            });
-            await tutor.save();
-        } else if (role === 'Student') {
-            const student = new Student({
-                userId: user._id,
-                grade,
-                subjectInterested,
-            });
-            await student.save();
+            return res.status(200).json({ profile: studentData });
+        } else {
+            return res.status(400).json({ message: 'Invalid user role' });
         }
 
-        //remove password and refresh token field from response
-        //check for user creaion
-
-        return res.status(201).json({ message: 'User registered successfully' });
     } catch (error) {
-        console.error("Registration error: ", error);  
-        return res.status(500).json({ error: 'Registration failed' });
+        console.error("Error fetching user data:", error);
+        return res.status(500).json({ message: 'Server error' });
     }
-};
-
-  //Log In handler
-  const loginUser = asyncHandler(async (req, res) => {
-    // Extract email and password from request body
-   try {
-    const { email, password } = req.body;
-
-    // Check if email is provided
-    if (!email) return res.status(400).json({ success: false, message: 'Email is required' });
-    
-    // Find user by email
-    const user = await User.findOne({ email });
-    if (!user) {
-        return res.status(404).json({
-            status: false,
-            message: 'User not found',
-        });
-    }
-    
-    // Password check
-    const isPasswordValid = await user.isPasswordCorrect(password);
-    if (!isPasswordValid) {
-        console.log("Password does not match");
-        return res.status(404).json({
-            status: false,
-            message: 'Password does not match',
-        });
-    }
-    
-    // Generate access and refresh tokens
-    const accessToken = await user.generateAccessToken();
-    const refreshToken =await user.generateRefreshToken();
-    console.log("User not found",user);
-    user.refreshToken = refreshToken;
-    await user.save();
-    console.log(refreshToken);
-    
-    user.password = undefined;
-    // Set cookies with the tokens
-    const options = {
-        httpOnly: true,
-    secure: false,  
-    sameSite: "Lax",
-    };
-    
-    return res.status(200)
-        .cookie("accessToken", accessToken, options)
-        .cookie("refreshToken", refreshToken, options)
-        .json({
-            success: true,
-            user:user,
-            message: 'User logged in successfully',
-        });
-   } catch (error) {
-    return res.status(404).json({
-        status: false,
-        message: 'error while login',
-    });
-   }
 });
 
- //Logout user
- const logoutUser = asyncHandler(async(req,res) => {
-    try {
-        if (!req.user) {
-            return res.status(401).json({ success: false, message: "User not found" });
-        }
-        await User.findByIdAndUpdate( req.user._id,{$set:{refreshToken:undefined}},
-                                             {new:true});
+    const updateProfile = async (req,res) => {
+        try {
+            const {id} = req.params;
+            const ID = req.user._id;
+            const {profile} = req.body;
+            console.log("alrights",id)
 
-        const options = {
-            httpOnly:true,
-            secure:true
-        }
+            const user = await User.findById(ID);
+            if (!user) {
+                return res.status(404).json({ message: 'User not found' });
+            }
 
-        return res.status(200).clearCookie("accessToken", options).clearCookie("refreshToken", options).json({
-            sucess:true,
-            message:'User Logged Out Successfully'
-        });
-       
-    } catch (error) {
-        console.error("Logout Error: ", error);
-        return res.status(500).json({
-            success: false,
-            message: 'Error while logging out',
-            error: error.message
-        });
+            if(user.role === 'Tutor'){
+                const updatedTutor = await Tutor.findByIdAndUpdate(id, { $set: profile },{new:true});
+                if (!updatedTutor) {
+                    return res.status(404).json({ message: 'Tutor not found' });
+                  }
+                  return res.status(200).json({ message: 'Tutor updated successfully', data: updatedTutor });
+            }
+            else if(user.role === 'Student'){
+                const updatedStudent = await Student.findByIdAndUpdate(id, { $set: profile },{new:true});
+
+                if (!updatedStudent) {
+                    return res.status(404).json({ message: 'Student not found' });
+                  }
+                  return res.status(200).json({ message: 'Student updated successfully', data: updatedStudent });
+            }
+        } catch (error) {
+            return res.status(500).json({ message: 'Server error' });
+
+        }
     }
- }); //last paranthesis
 
-module.exports = { registerUser, loginUser, logoutUser };
+module.exports = { getUserData, updateProfile };

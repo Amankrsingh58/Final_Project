@@ -18,6 +18,12 @@ const studentSchema = new mongoose.Schema({
         type:[String],
         require:true
     },
+    city:{
+        type:String
+    },
+    state:{
+        type:String
+    }
     
 },{timestamps:true});
 

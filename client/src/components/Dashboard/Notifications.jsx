@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useGetAllHelpFormsQuery, useMarkMessageAsSolvedMutation } from '../../features/auth/helpFormApi';
 
 const MessageCard = () => {
-  const { data: helpForms, error, isLoading, isError } = useGetAllHelpFormsQuery();
+  const { data: helpForms, error, isLoading, isError } = useGetAllHelpFormsQuery( undefined,{ pollingInterval:3000,
+                                                                                             refetchOnMountOrArgChange:true,});
   const [messages, setMessages] = useState([]);
   const [markMessageAsSolved] = useMarkMessageAsSolvedMutation();
 
@@ -22,7 +23,11 @@ const MessageCard = () => {
   };
 
   if (isLoading) {
-    return <div>Loading issues form...</div>;
+    return  (
+      <div className="flex justify-center items-center h-64">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-indigo-500"></div>
+      </div>
+    );
   }
 
   if (isError) {

@@ -5,6 +5,7 @@ const initialState = {
   token: localStorage.getItem('authToken') ? localStorage.getItem('authToken') : null,
   loading: false,
   error: null,
+  isAuthenticated: !!localStorage.getItem('authToken'), 
 };
 
 const authSlice = createSlice({
@@ -14,6 +15,9 @@ const authSlice = createSlice({
     setUser: (state, action) => {
       state.user = action.payload.user;
       state.token = action.payload.token;
+      state.isAuthenticated = true;
+      localStorage.setItem('user', JSON.stringify(action.payload.user));
+      localStorage.setItem('authToken', action.payload.token);
     },
     setLoading: (state, action) => {
       state.loading = action.payload;
@@ -24,7 +28,10 @@ const authSlice = createSlice({
     setLogout: (state) => {
       state.user = null;
       state.token = null;
-    }
+      state.isAuthenticated = false;
+      localStorage.removeItem('authToken');
+      localStorage.removeItem('user');
+    },
   },
 });
 

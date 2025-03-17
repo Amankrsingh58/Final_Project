@@ -1,40 +1,38 @@
-import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 export const helpFormApi = createApi({
-    reducerPath : "helpFormApi",
-    baseQuery:fetchBaseQuery({
-        baseUrl:"http://localhost:8000/api/helprequests",
+    reducerPath: "helpFormApi",
+    baseQuery: fetchBaseQuery({
+        baseUrl: "http://localhost:8000/api/helprequests",
         credentials: 'include',
-        tagTypes : ["A"],
     }),
-
+    tagTypes: ['HelpForm'],
     endpoints: (builder) => ({
-        submithelpform : builder.mutation({
+        submithelpform: builder.mutation({
             query: (data) => ({
-              url: '/submithelpform',
-              method: 'POST',
-              body: data,
+                url: '/submithelpform',
+                method: 'POST',
+                body: data,
             }),
-          }),
+            invalidatesTags: ['HelpForm'],
+        }),
 
-          getAllHelpForms: builder.query({
+        getAllHelpForms: builder.query({
             query: () => ({
-              url: '/getallhelprequest',
-              method: 'GET',
+                url: '/getallhelprequest',
+                method: 'GET',
             }),
-            providesTags:["A"],
+            providesTags: ['HelpForm'],
         }),
 
-    markMessageAsSolved: builder.mutation({
-        query: ({ id }) => ({
-          url: `/marksolved/${id}`, 
-          method: 'PUT', 
-          body: { solved: true }, 
+        markMessageAsSolved: builder.mutation({
+            query: ({ id }) => ({
+                url: `/marksolved/${id}`,
+                method: 'PUT',
+                body: { solved: true },
+            }),
+            invalidatesTags: ['HelpForm'],
         }),
-        invalidatesTags:["A"],
-      }),
-
-
     })
 });
 

@@ -6,6 +6,7 @@ import Designcard from "./Designcard";
 import axios from "axios"; // Import Axios
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { useSubmithelpformMutation } from "../features/auth/helpFormApi";
 
 function Container() {
   const [formData, setFormData] = useState({
@@ -19,6 +20,7 @@ function Container() {
   const [success, setSuccess] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const {token} = useSelector( (state) => state.auth);
+  const [submithelpform] = useSubmithelpformMutation();
 
   // Handle input changes
   const handleChange = (e) => {
@@ -35,14 +37,10 @@ function Container() {
 
     try {
       
-      const response = await axios.post(
-        "http://localhost:8000/api/helprequests/submithelpform",
+      const response = submithelpform(
         { subject: formData.subject, message: formData.message },
-        { 
-          withCredentials: true,
-      
-        }
-      );
+       
+      ).unwrap()
       // toast.success("Help request submitted successfully!")
       setSuccess("Help request submitted successfully!");
       alert(response.message);

@@ -11,7 +11,7 @@ const Navbar = () => {
   const [isAccountMenuOpen, setIsAccountMenuOpen] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { token, user } = useSelector((state) => state.auth);
+  const { token, user, isAuthenticated } = useSelector((state) => state.auth);
   const [logout] = useLogoutMutation();
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
@@ -22,10 +22,10 @@ const Navbar = () => {
 
   const handleLogout = async () => {
     try {
-      await logout().unwrap(); 
       dispatch(setLogout()); 
       localStorage.removeItem('authToken'); 
       localStorage.removeItem('user');
+      await logout().unwrap(); 
       navigate('/login'); 
     } catch (err) {
       console.error('Logout failed:', err.message);
@@ -42,8 +42,8 @@ const Navbar = () => {
 
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center space-x-6">
-         {token &&  <Link to={user.role === "Tutor" ? "/tutor" : "/student"} className="text-gray-700 hover:text-indigo-600 transition-colors">
-           {user.role ==="Tutor" ? "Find Tutors" : 'Find Students' }
+         {token &&  <Link to={user.role === "Tutor" ? "/student" : "/tutor"} className="text-gray-700 hover:text-indigo-600 transition-colors">
+           {user.role ==="Tutor" ? "Find Students" : 'Find Tutor' }
           </Link>}
           <Link to="/about" className="text-gray-700 hover:text-indigo-600 transition-colors">
             About Us
@@ -54,7 +54,7 @@ const Navbar = () => {
           
           {/* Show Dashboard if logged in */}
           {token ? (
-            <Link to="/dashboard" className="text-gray-700 hover:text-indigo-600 transition-colors">
+            <Link to={user.role === "Tutor"||"Student" ? "/userdashboard" :( user.role === "Admin"? "/dashboard" : "/userdashboard")} className="text-gray-700 hover:text-indigo-600 transition-colors">
               Dashboard
             </Link>
           ) : (
@@ -75,7 +75,7 @@ const Navbar = () => {
               </button>
               {isAccountMenuOpen && (
                 <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 transition-all duration-200">
-                  <Link to="/dashboard/profile" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                  <Link to="/userdashboard/profile" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                     Profile Settings
                   </Link>
                   <button
