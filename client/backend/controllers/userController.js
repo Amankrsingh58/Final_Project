@@ -2,6 +2,9 @@ const User = require("../models/User");
 const Tutor = require("../models/Tutor");
 const Student = require("../models/Student");
 const asyncHandler = require('express-async-handler');
+const { uploadImageToCloudinary } = require("../utils/imageUploader");
+const cloudinary = require("cloudinary").v2; 
+
 
 const getUserData = asyncHandler(async (req, res) => {
     try {
@@ -65,6 +68,51 @@ const getUserData = asyncHandler(async (req, res) => {
             return res.status(500).json({ message: 'Server error' });
 
         }
-    }
+    };
 
-module.exports = { getUserData, updateProfile };
+    const imageUpload = async (req, res) => {
+        try {
+            const file = req.files?.imageFile;
+            const id = req.user._id;
+          
+            
+            if (!file) return res.status(400).json({
+                success: false,
+                message: 'Image not found',
+            });
+    
+            const user = await User.findById(id);
+            if (user && user.imageCloudinaryId) {
+                await cloudinary.uploader.destroy(user.imageCloudinaryId);
+                console.log('Old image deleted from Cloudinary');
+            }
+    
+            const uploadResult = await uploadImageToCloudinary(file, 'user_images');
+    
+            const updatedUser = await User.findByIdAndUpdate(id, {
+                image: uploadResult.secure_url,
+                imageCloudinaryId: uploadResult.public_id, 
+            }, { new: true });
+    
+            if (!updatedUser) {
+                return res.status(404).json({
+                    success: false,
+                    message: 'User not found',
+                });
+            }
+    
+            return res.status(200).json({
+                success: true,
+                message: 'File uploaded successfully',
+                user: updatedUser,
+            });
+    
+        } catch (error) {
+            console.error(error);
+            return res.status(500).json({ message: 'Server error while uploading file',error:error.message });
+        }
+    };
+    
+    
+
+module.exports = { getUserData, updateProfile, imageUpload };

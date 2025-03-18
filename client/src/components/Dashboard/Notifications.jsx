@@ -22,7 +22,7 @@ const MessageCard = () => {
     }
   };
 
-  if (isLoading) {
+  if (isLoading || !messages) {
     return  (
       <div className="flex justify-center items-center h-64">
         <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-indigo-500"></div>
@@ -31,7 +31,7 @@ const MessageCard = () => {
   }
 
   if (isError) {
-    return <div>Error: {error.message}</div>;
+    return <div className='text-white'>Error: {error.message}</div>;
   }
 
   if (helpForms?.data?.length <= 0) {
@@ -46,7 +46,7 @@ const MessageCard = () => {
 
   return (
     <div className="w-full max-w-full mt-2 mx-auto bg-gray-800 text-white p-6 rounded-lg shadow-lg">
-      {sortedMessages.map((message) => (
+      {messages.user && sortedMessages && sortedMessages.map((message) => (
         <div
           key={message._id}
           className={`relative mb-4 p-4 bg-gray-900 rounded-lg shadow-md ${message.solved ? 'opacity-50' : ''}`}

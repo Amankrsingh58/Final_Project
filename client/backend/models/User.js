@@ -30,6 +30,9 @@ const UserSchema = new mongoose.Schema(
                 return `https://api.dicebear.com/5.x/initials/svg?seed=${this.userName.replace(/\s+/g, '%20') || 'default'}`;
             },     
            },
+        imageCloudinaryId:{
+            type:String,
+        },
         refreshToken: {
             type: String,
         },

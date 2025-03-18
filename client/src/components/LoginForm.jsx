@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import { useLoginMutation } from '../features/auth/userApi';  
 import { useDispatch } from 'react-redux';
 import { setUser, setError } from '../features/auth/authSlice';
+import { toast } from 'react-hot-toast';
 
 const Login = () => {
   const [error, setError] = useState(null);
@@ -17,15 +18,22 @@ const Login = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
   const [login] = useLoginMutation(); 
 
+
+
   const onSubmit = async (data) => {
     setError(null);
     setIsLoading(true);
 
+
+  const toastId = toast.loading("Signing in...");
+
     try {
+      
       const result = await login({
         email: data.email,
         password: data.password,
       }).unwrap(); 
+      toast.success("Login successful!", { id: toastId });
 
       const user  = result.user;
       const token  = result.user.refreshToken;
@@ -38,10 +46,12 @@ const Login = () => {
 
       navigate('/');
     } catch (err) {
+      toast.error(err.message || "An unexpected error occurred.", { id: toastId });
+
       setError(err.message || 'An unexpected error occurred. Please try again.');
     } finally {
       setIsLoading(false);
-    }
+      setTimeout(() => toast.dismiss(toastId), 2000);}
   };
 
   return (

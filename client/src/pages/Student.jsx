@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation,Link } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Search, Filter, Star, Clock, DollarSign, BookOpen } from 'lucide-react';
 import { useGetAllStudentQuery } from '../features/auth/studentApi';
@@ -10,10 +10,9 @@ const StudentsList = () => {
   const [showFilters, setShowFilters] = useState(false);
 
   const [subjectFilter, setSubjectFilter] = useState('');
-  const [priceRange, setPriceRange] = useState('');
-  const [experienceLevel, setExperienceLevel] = useState('');
+  const [gradeFilter, setGradeFilter] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
-  
+
   const location = useLocation();
 
   const { data: allStudent, isLoading, isError } = useGetAllStudentQuery();
@@ -37,68 +36,60 @@ const StudentsList = () => {
     if (allStudent?.allStudent) {
       applyFilters();
     }
-  }, [subjectFilter, priceRange, experienceLevel, searchQuery, allStudent]);
+  }, [subjectFilter,gradeFilter, searchQuery, allStudent]);
 
   const applyFilters = () => {
     if (!allStudent?.allStudent) return;
-    
+
     let filtered = [...allStudent.allStudent];
-    
+
     if (subjectFilter) {
-      filtered = filtered.filter(student => 
-        student.subjects.some(subject => 
+      filtered = filtered.filter(student =>
+        student.subjectInterested.some(subject =>
           subject.toLowerCase().includes(subjectFilter.toLowerCase())
         )
       );
     }
-    
-    // Apply price range filter
-    if (priceRange) {
-      const [min, max] = priceRange.split('-').map(Number);
-      if (max) {
-        filtered = filtered.filter(student => 
-          student.hourly_rate >= min && student.hourly_rate <= max
-        );
-      } else {
-        filtered = filtered.filter(student => student.hourly_rate >= min);
-      }
+
+    // Apply grade range filter
+    if (gradeFilter) {
+      filtered = filtered.filter(student => {
+        if (typeof student.grade === 'number') {
+          return student.grade === parseInt(gradeFilter, 10); 
+        } else if (Array.isArray(student.grade)) {
+          return student.grade.includes(gradeFilter);
+        } else {
+          return false;
+        }
+      });
     }
-    
-    // Apply experience level filter
-    if (experienceLevel) {
-      const experienceYears = Number(student.experience);
-      switch (experienceLevel) {
-        case 'beginner':
-          filtered = filtered.filter(student => experienceYears <= 2);
-          break;
-        case 'intermediate':
-          filtered = filtered.filter(student => 
-            experienceYears > 2 && experienceYears <= 5
-          );
-          break;
-        case 'expert':
-          filtered = filtered.filter(student => experienceYears > 5);
-          break;
-      }
-    }
-    
+
     // Apply search query
     if (searchQuery) {
       const query = searchQuery.toLowerCase();
-      filtered = filtered.filter(student => 
-        student.userId.userName.toLowerCase().includes(query) || student.city.toLowerCase().includes(query) ||
-        student.subjects.some(subject => subject.toLowerCase().includes(query)) ||
-        (student.bio && student.bio.toLowerCase().includes(query))
-      );
+    
+      filtered = filtered.filter(student => {
+        const userNameMatch = student.userId?.userName?.toLowerCase().includes(query);
+        const cityMatch = student.city?.toLowerCase().includes(query);
+        const subjectMatch = student.subjectInterested?.some(subject => 
+          subject.toLowerCase().includes(query)
+        );
+        const gradeMatch = typeof student.grade === 'string' 
+          ? student.grade.toLowerCase().includes(query) 
+          : student.grade.toString().includes(query); 
+        const bioMatch = student.bio?.toLowerCase().includes(query);
+    
+        return userNameMatch || cityMatch || subjectMatch || gradeMatch || bioMatch;
+      });
     }
     
+
     setFilteredStudents(filtered);
   };
 
   const resetFilters = () => {
     setSubjectFilter('');
-    setPriceRange('');
-    setExperienceLevel('');
+    setGradeFilter('');
     setSearchQuery('');
   };
 
@@ -145,7 +136,7 @@ const StudentsList = () => {
             <h1 className="text-3xl font-bold text-gray-900">Find Your Perfect Student</h1>
             <p className="mt-2 text-gray-600">Browse our qualified students and find the right match for your learning needs</p>
           </div>
-          <button 
+          <button
             onClick={() => setShowFilters(!showFilters)}
             className="mt-4 md:mt-0 flex items-center bg-white px-4 py-2 rounded-md shadow-sm text-gray-700 hover:bg-gray-50 transition-colors"
           >
@@ -154,7 +145,7 @@ const StudentsList = () => {
           </button>
         </div>
 
-        <motion.div 
+        <motion.div
           className={`bg-white rounded-lg shadow-md p-6 mb-8 ${showFilters ? 'block' : 'hidden'}`}
           initial={{ height: 0, opacity: 0 }}
           animate={{ height: showFilters ? 'auto' : 0, opacity: showFilters ? 1 : 0 }}
@@ -162,13 +153,13 @@ const StudentsList = () => {
         >
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             {/* Search Input */}
-            <div className="relative">
+            <div className="relative text-gray-700">
               <input
                 type="text"
                 placeholder="Search subject,city, name..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500"
+                className="w-full px-4 py-2 border text-gray-700 border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500"
               />
               <Search className="absolute right-3 top-2.5 h-5 w-5 text-gray-400" />
             </div>
@@ -177,7 +168,7 @@ const StudentsList = () => {
             <select
               value={subjectFilter}
               onChange={(e) => setSubjectFilter(e.target.value)}
-              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500"
+              className="w-full px-4 py-2 border text-gray-700 border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500"
             >
               <option value="">All Subjects</option>
               <option value="mathematics">Mathematics</option>
@@ -187,32 +178,29 @@ const StudentsList = () => {
               <option value="english">English</option>
             </select>
 
-            {/* Price Range Filter */}
+            {/* Grade Filter */}
             <select
-              value={priceRange}
-              onChange={(e) => setPriceRange(e.target.value)}
-              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500"
+              value={gradeFilter}
+              onChange={(e) => setGradeFilter(e.target.value)}
+              className="w-full px-4 py-2 text-gray-700 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500"
             >
-              <option value="">Any Price</option>
-              <option value="0-25">2000 - 2500/m</option>
-              <option value="25-50">2500 - 3000/m</option>
-              <option value="50-75">3000 - 4000/m</option>
-              <option value="75">5000+ /hr</option>
+              <option value="">All Grades</option>
+              <option value="1">1st Grade</option>
+              <option value="2">2nd Grade</option>
+              <option value="3">3rd Grade</option>
+              <option value="4">4th Grade</option>
+              <option value="5">5th Grade</option>
+              <option value="6">6th Grade</option>
+              <option value="7">7th Grade</option>
+              <option value="8">8th Grade</option>
+              <option value="9">9th Grade</option>
+              <option value="10">10th Grade</option>
+              <option value="11">11th Grade</option>
+              <option value="12">12th Grade</option>
             </select>
 
-            {/* Experience Level Filter */}
-            <select
-              value={experienceLevel}
-              onChange={(e) => setExperienceLevel(e.target.value)}
-              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500"
-            >
-              <option value="">Any Experience</option>
-              <option value="beginner">Beginner (0-2 years)</option>
-              <option value="intermediate">Intermediate (3-5 years)</option>
-              <option value="expert">Expert (5+ years)</option>
-            </select>
           </div>
-          
+
           <div className="mt-4 flex justify-end">
             <button
               onClick={resetFilters}
@@ -244,7 +232,7 @@ const StudentsList = () => {
             </button>
           </div>
         ) : (
-          <motion.div 
+          <motion.div
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
             variants={containerVariants}
             initial="hidden"
@@ -256,10 +244,10 @@ const StudentsList = () => {
                 className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
                 variants={itemVariants}
               >
-                  <div className="h-48 overflow-hidden">
-                  <img 
-                    src={student.userId.image || "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"} 
-                    alt={student.name} 
+                <div className="h-48 overflow-hidden">
+                  <img
+                    src={student.userId.image || "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"}
+                    alt={student.name}
                     className="w-full h-full object-cover"
                   />
                 </div>
@@ -270,7 +258,7 @@ const StudentsList = () => {
                       <h3 className="text-lg font-semibold text-gray-900">{student.userId.userName}</h3>
                       <div className="flex flex-wrap gap-1 mt-1">
                         {student.subjectInterested.map((subject, index) => (
-                          <span 
+                          <span
                             key={index}
                             className="inline-block bg-indigo-100 text-indigo-800 text-xs px-3 py-1 rounded-full"
                           >
@@ -279,35 +267,34 @@ const StudentsList = () => {
                         ))}
                       </div>
                     </div>
-                 
+
                   </div>
-                  
+
                   {/* <div className="mt-4 flex items-center text-sm text-gray-500">
                     <Clock className="h-4 w-4 mr-1" />
                     <span>{student.experience} years experience</span>
                   </div> */}
-                  
+
                   {student.city && (
                     <div className="mt-1 flex items-center text-sm text-gray-500">
-                      <span>Location: {student.city}</span>
+                      <span>Location: {student.city}, {student.state}</span>
                     </div>
                   )}
-                  
-                  {/* <div className="mt-1 flex items-center text-sm text-gray-500">
-                    <Star className="h-4 w-4 mr-1 text-yellow-400" />
-                    <span>4.9 (120 reviews)</span>
-                  </div> */}
-                  
+
+                  <div className="mt-1 flex items-center text-sm text-gray-500">
+                    <span>Grade : {student.grade}</span>
+                  </div>
+
                   {/* {student.bio && (
                     <p className="mt-4 text-gray-600 line-clamp-3">{student.bio}</p>
                   )} */}
-                  
+
                   <div className="mt-6 flex justify-between items-center">
                     <Link to={`/student/${student._id}`} className="text-indigo-600 hover:text-indigo-800 font-medium text-sm">
                       View Profile
                     </Link>
                     <Link to={`/student/${student._id}`} className="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition-colors text-sm font-medium">
-                    Offer Tuition
+                      Offer Tuition
                     </Link>
                   </div>
                 </div>

@@ -6,13 +6,14 @@ export const  profileApi = createApi({
         baseUrl:"http://localhost:8000/api/users",
         credentials:"include",
     }),
-
+    tagTypes:["Profile"],
     endpoints:(builder) => ({
         getProfile:builder.query({
             query:() => ({
                 url:'profile',
                 method:'GET'
-            })
+            }),
+            providesTags:["Profile"],
         }),
 
         updateProfile:builder.mutation({
@@ -20,14 +21,25 @@ export const  profileApi = createApi({
                 url:`profile/${id}`,
                 method:'PUT',
                 body:{profile}
-           })
+           }),
+           invalidatesTags:["Profile"]
         }),
+
+        uploadImage: builder.mutation({
+            query: (formData) => ({
+              url: '/upload-image', 
+              method: 'POST',  
+              body: formData, 
+            }),
+            invalidatesTags:["Profile"]
+          }),
     })
 })
 
 export const {
     useGetProfileQuery,
     useUpdateProfileMutation,
+    useUploadImageMutation,
 } = profileApi;
 
 

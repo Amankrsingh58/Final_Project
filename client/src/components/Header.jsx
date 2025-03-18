@@ -4,7 +4,35 @@ import App from './Card';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import "./Header.css"
+import { useSelector } from 'react-redux';
+import { authApi } from '../features/auth/userApi';
+import {useState, useEffect} from 'react'
 function Header(){
+
+  const {token,user,isAuthenticated} = useSelector( (state) => state.auth);
+
+  const [isTablet, setIsTablet] = useState(true);
+
+  const handleResize = () => {
+    // Update state based on window width (768px is typical tablet size)
+    if (window.innerWidth < 768) {
+      setIsTablet(false);
+    } else {
+      setIsTablet(true);
+    }
+  };
+
+  useEffect(() => {
+    // Listen for resize events
+    window.addEventListener('resize', handleResize);
+    
+    // Initial check when the component is mounted
+    handleResize();
+
+    // Clean up the event listener on component unmount
+    // return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   
     const fadeIn = {
       hidden: { opacity: 0, y: 20 },
@@ -39,16 +67,15 @@ function Header(){
           <p className="text-xl mb-8">Connect with expert tutors for personalized learning experiences that help you achieve your academic goals.</p>
           <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
             <Link 
-              to="/tutor" 
+              to={user && user.role === 'Tutor' ? "/student" : "/tutor"}
               className="bg-white text-indigo-600 px-6 py-3 rounded-md font-medium hover:bg-gray-100 transition-colors text-center"
-            >
-              Find a Tutor
+            >{user && user.role === 'Tutor' ? "Look For Students" : "Find a Tutor"}
+              
             </Link>
             <Link 
               to="/signup" 
               className="bg-transparent border-2 border-white text-white px-6 py-3 rounded-md font-medium hover:bg-white hover:text-indigo-600 transition-colors text-center"
-            >
-              Become a Tutor
+            >{isAuthenticated ? "Enquire Now" : "Become a Tutor"}
             </Link>
           </div>
         </motion.div>
@@ -58,11 +85,11 @@ function Header(){
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8 }}
         >
-          <img 
+         {isTablet && <img 
             src={Mainimage}
             alt="Online tutoring" 
             className="xs:hidden md:block"
-          />
+          />}
         </motion.div>
       </div>
     </div>

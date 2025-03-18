@@ -42,60 +42,65 @@ const TutorsList = () => {
 
   const applyFilters = () => {
     if (!allTutor?.allTutor) return;
-    
+  
     let filtered = [...allTutor.allTutor];
-    
+  
     // Apply subject filter
     if (subjectFilter) {
-      filtered = filtered.filter(tutor => 
-        tutor.subjects.some(subject => 
+      filtered = filtered.filter(tutor =>
+        tutor.subjects.some(subject =>
           subject.toLowerCase().includes(subjectFilter.toLowerCase())
         )
       );
     }
-    
+  
     // Apply price range filter
     if (priceRange) {
       const [min, max] = priceRange.split('-').map(Number);
       if (max) {
-        filtered = filtered.filter(tutor => 
+        filtered = filtered.filter(tutor =>
           tutor.hourly_rate >= min && tutor.hourly_rate <= max
         );
       } else {
         filtered = filtered.filter(tutor => tutor.hourly_rate >= min);
       }
     }
-    
+  
     // Apply experience level filter
     if (experienceLevel) {
-      const experienceYears = Number(tutor.experience);
-      switch (experienceLevel) {
-        case 'beginner':
-          filtered = filtered.filter(tutor => experienceYears <= 2);
-          break;
-        case 'intermediate':
-          filtered = filtered.filter(tutor => 
-            experienceYears > 2 && experienceYears <= 5
-          );
-          break;
-        case 'expert':
-          filtered = filtered.filter(tutor => experienceYears > 5);
-          break;
-      }
+      filtered = filtered.filter(tutor => {
+        const experienceYears = Number(tutor.experience);
+  
+        if (isNaN(experienceYears)) return false;
+  
+        switch (experienceLevel) {
+          case 'beginner':
+            return experienceYears <= 2;
+          case 'intermediate':
+            return experienceYears > 2 && experienceYears <= 5;
+          case 'expert':
+            return experienceYears > 5;
+          default:
+            return true; 
+        }
+      });
     }
-    
+  
     // Apply search query
     if (searchQuery) {
       const query = searchQuery.toLowerCase();
-      filtered = filtered.filter(tutor => 
-        tutor.userId.userName.toLowerCase().includes(query) || tutor.city.toLowerCase().includes(query) ||
+      filtered = filtered.filter(tutor =>
+        tutor.userId.userName.toLowerCase().includes(query) ||
+        tutor.city.toLowerCase().includes(query) ||
         tutor.subjects.some(subject => subject.toLowerCase().includes(query)) ||
         (tutor.bio && tutor.bio.toLowerCase().includes(query))
       );
     }
-    
+  
+    // Update the filtered tutors
     setFilteredTutors(filtered);
   };
+  
 
   const resetFilters = () => {
     setSubjectFilter('');
@@ -164,13 +169,13 @@ const TutorsList = () => {
         >
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             {/* Search Input */}
-            <div className="relative">
+            <div className="relative text-gray-700">
               <input
                 type="text"
                 placeholder="Search subject,city, name..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500"
+                className="w-full px-4 py-2 border text-gray-700 border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500"
               />
               <Search className="absolute right-3 top-2.5 h-5 w-5 text-gray-400" />
             </div>
@@ -179,7 +184,7 @@ const TutorsList = () => {
             <select
               value={subjectFilter}
               onChange={(e) => setSubjectFilter(e.target.value)}
-              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500"
+              className="w-full px-4 py-2 border text-gray-700 border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500"
             >
               <option value="">All Subjects</option>
               <option value="mathematics">Mathematics</option>
@@ -193,7 +198,7 @@ const TutorsList = () => {
             <select
               value={priceRange}
               onChange={(e) => setPriceRange(e.target.value)}
-              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500"
+              className="w-full px-4 py-2 text-gray-700 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500"
             >
               <option value="">Any Price</option>
               <option value="0-25">2000 - 2500/m</option>
@@ -206,7 +211,7 @@ const TutorsList = () => {
             <select
               value={experienceLevel}
               onChange={(e) => setExperienceLevel(e.target.value)}
-              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500"
+              className="w-full px-4 py-2 border text-gray-700 border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500"
             >
               <option value="">Any Experience</option>
               <option value="beginner">Beginner (0-2 years)</option>

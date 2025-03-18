@@ -1,8 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { useSelector } from 'react-redux';
 
 function TwoTimesCard() {
+  const {token,user,isAuthenticated} = useSelector( (state) => state.auth);
+
     const fadeIn = {
         hidden: { opacity: 0, y: 20 },
         visible: { 
@@ -37,16 +40,16 @@ function TwoTimesCard() {
             </p>
             <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
               <Link 
-                to="/tutor" 
+               to={user && user.role === 'Tutor' ? "/student" : "/tutor"} 
                 className="bg-white text-indigo-600 px-6 py-3 rounded-md font-medium hover:bg-gray-100 transition-colors"
               >
-                Find a Tutor
+               {user && user.role === 'Tutor' ? "Look For Students" : "Find a Tutor"}
               </Link>
               <Link 
                 to="/signup" 
                 className="bg-transparent border-2 border-white text-white px-6 py-3 rounded-md font-medium hover:bg-white hover:text-indigo-600 transition-colors"
               >
-                Sign Up Now
+                {isAuthenticated ? "Enquire Now" : "Signup Now"}
               </Link>
             </div>
           </motion.div>
