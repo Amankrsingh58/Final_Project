@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import {useGetProfileQuery, useUpdateProfileMutation} from '../../features/auth/profileApi'
+import {useGetProfileQuery, useUpdateProfileMutation, useUploadImageMutation} from '../../features/auth/profileApi'
+import toast from "react-hot-toast";
 
 const Profile = () => {
+  const [file, setFile] = useState(null);
   const [user, setUser] = useState({});
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -15,6 +17,8 @@ const Profile = () => {
 //redux ka logic
   const { data: profileData, error, isLoading, isError } = useGetProfileQuery();
   const [updateProfile] = useUpdateProfileMutation();
+
+  const [uploadImage] = useUploadImageMutation();
 
   useEffect(() => {
     const token = localStorage.getItem("user");
@@ -30,29 +34,34 @@ const Profile = () => {
   }, []);
 
   useEffect(() => {
+    setLoading(true);
     if (profileData && profileData.profile) {
       setUserData(profileData.profile);
       setLoading(false);
-      // setImage(profileData.profile.image || image); // Set initial image if available
     }
   }, [profileData]);
 
 
-  const handleEditToggle = async () => {
+const handleEditToggle = async () => {
     if (isEditing) {
+      const toastId = toast.loading("Updating...")
       try {
         const updatedProfile = {
-          ...profile, // updated profile data
-          // image: image, // if you changed the image
+          ...profile,
         };
         const response = await updateProfile({ id: profileData.profile._id, profile: updatedProfile }).unwrap();
-  
+        
         if (response) {
           setUserData(response.data);
+          toast.success("Updated Successful!",{id:toastId})
         }
       } catch (error) {
+        toast.error(error.message || 'Faild to Update', {id:toastId})
+
         console.error('Error updating profile:', error);
         alert(error.message)
+      }
+      finally{      setTimeout( () => toast.dismiss(toastId), 2000);
       }
     }
     setIsEditing(!isEditing);
@@ -68,27 +77,41 @@ const Profile = () => {
   };
 
   const handleImageChange = async (e) => {
-    if (!e.target.files?.length) return;
+    const selectedFile = e.target.files[0];
 
-    const file = e.target.files[0];
-    const formData = new FormData();
-    formData.append("image", file);
+    if (!selectedFile) return;
 
-    try {
-      const response = await axios.post(
-        'http://localhost:8000/api/users/upload-image',
-        formData,
-        {
-          withCredentials: true,
-          headers: { "Content-Type": "multipart/form-data" },
-        }
-      );
-      setImage(response.data.imageUrl);
-      // setError("");
-    } catch (error) {
-      // setError("Failed to upload image");
-      // console.error("Error uploading image:", error);
+    if (!selectedFile.type.startsWith('image/')) {
+      alert('Please select a valid image file');
+      return;
     }
+
+    if (selectedFile.size > 5 * 1024 * 1024) {  
+      alert('File size exceeds 5MB');
+      return;
+    }
+
+    setFile(selectedFile);
+
+    const formData = new FormData();
+    formData.append('imageFile', selectedFile);
+
+    const toastId = toast.loading("Uploading...")
+    try {
+      const result = await uploadImage(formData).unwrap();
+      toast.success("Updated Successful!",{id:toastId})
+      if (result?.user?.image) {
+        setUser((prev) => ({ ...prev, image: result.user.image }));
+      }
+    } catch (error) {
+      toast.error(error.message || 'Faild to Update', {id:toastId})
+      setLoading(false)
+
+      console.error("Error uploading image:", error);
+    }finally{
+      setTimeout( () => toast.dismiss(toastId), 2000);
+    }
+    
   };
 
   if (loading || isLoading) {
@@ -128,7 +151,7 @@ const Profile = () => {
                 accept="image/*"
               />
               <img
-                src={user.image}
+                src={userData.userId.image}
                 alt="Profile"
                 className="w-32 h-32 rounded-full border-2 border-gray-200 object-cover transition-transform group-hover:opacity-80"
               />

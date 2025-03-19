@@ -18,6 +18,7 @@ import { useVerifyTokenExpiryQuery } from "./features/auth/userApi";
 import { setLogout } from "./features/auth/authSlice";
 import { useEffect } from "react";
 import StudentDetail from "./pages/StudentDetails";
+import { Toaster } from "react-hot-toast";
 
 
 
@@ -34,6 +35,8 @@ function App() {
 
   return (
     <div className="App">
+      <Toaster position="top-center" reverseOrder={false} />
+
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />

@@ -5,6 +5,7 @@ import { Menu, X, BookOpen, User, LogOut } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useDispatch, useSelector } from 'react-redux';
 import { setLogout } from '../features/auth/authSlice';
+import { toast } from 'react-hot-toast';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -21,15 +22,24 @@ const Navbar = () => {
   }, [navigate]);
 
   const handleLogout = async () => {
+    const toastId = toast.loading("Logging out...");
+
     try {
       dispatch(setLogout()); 
       localStorage.removeItem('authToken'); 
       localStorage.removeItem('user');
       await logout().unwrap(); 
+      toast.success('Logout Sucessful!',{id:toastId})
       navigate('/login'); 
     } catch (err) {
+      toast.error(err.message || 'Error occured', {id:toastId})
       console.error('Logout failed:', err.message);
     }
+    finally{
+      setTimeout(() => toast.dismiss(toastId), 2000)
+
+    }
+   
   };
 
   return (
@@ -54,7 +64,13 @@ const Navbar = () => {
           
           {/* Show Dashboard if logged in */}
           {token ? (
-            <Link to={user.role === "Tutor"||"Student" ? "/userdashboard" :( user.role === "Admin"? "/dashboard" : "/userdashboard")} className="text-gray-700 hover:text-indigo-600 transition-colors">
+            <Link to={
+              user.role === "Tutor" || user.role === "Student"
+              ? "/userdashboard"
+              : user.role === "Admin"
+              ? "/dashboard"
+              : "/unauthorised"
+            } className="text-gray-700 hover:text-indigo-600 transition-colors">
               Dashboard
             </Link>
           ) : (

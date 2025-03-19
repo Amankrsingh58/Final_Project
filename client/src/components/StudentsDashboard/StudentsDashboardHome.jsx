@@ -18,9 +18,9 @@ function DashboardHome() {
         <div className='h-full bg-[#fff] rounded-md border-1 border-[#D8D8D8]'>
 
         <div className='w-[70%] h-[50%] mt-[1rem] md:flex  ml-[1rem] flex flex-col gap-1 '>
-          <p className='font-inter text-white font-semibold text-[18px]'>Earnings</p>
-          <p className='font-inter font-medium  text-[14px] text-[#87888C]'>Total Assests</p>
-          <p className='font-inter leading-widest font-bold text-[24px] text-[#A9DFD8]'>$0.00</p>
+          <p className='font-inter text-white font-semibold text-[18px]'></p>
+          <p className='font-inter font-medium  text-[14px] text-[#87888C]'></p>
+          <p className='font-inter leading-widest font-bold text-[24px] text-[#A9DFD8]'></p>
           </div>
 
         </div>

@@ -7,6 +7,7 @@ import axios from "axios"; // Import Axios
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useSubmithelpformMutation } from "../features/auth/helpFormApi";
+import toast from "react-hot-toast";
 
 function Container() {
   const [formData, setFormData] = useState({
@@ -34,7 +35,7 @@ function Container() {
     e.preventDefault();
     setLoading(true);
     setError(null);
-
+    const toastId = toast.loading('Submitting Request...');
     try {
       
       const response = submithelpform(
@@ -43,14 +44,15 @@ function Container() {
       ).unwrap()
       // toast.success("Help request submitted successfully!")
       setSuccess("Help request submitted successfully!");
-      alert(response.message);
+      toast.success('Submitted',{id:toastId});
       setShowModal(false); // Close modal
       setFormData({ subject: "", message: "" }); // Reset form
     } catch (error) {
-      setError("Failed to submit. Try again.");
-      alert("Error submitting help request:", error.response?.data?.error || error.message);
+      setError("Failed to submit. Try again.",{id:toastId});
+      toast.error("Error submitting help request:", error.response?.data?.error || error.message);
     } finally {
       setLoading(false);
+      setTimeout( () => toast.dismiss(toastId), 1000);
     }
   };
 

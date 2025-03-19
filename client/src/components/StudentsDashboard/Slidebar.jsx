@@ -81,19 +81,19 @@ useEffect(() => {
         </li>
         <li>{user.role === "Tutor" ?
           <NavLink
-            to="/userdashboard/tutors"
-            className={({ isActive }) => (isActive ? " bg-[#d8d9e5b3]" : "")}
-          >
-            <FaChalkboardTeacher  className="icon"/>
-            {isExpand && <span>Tutors</span>}
-          </NavLink>
-          :
-          <NavLink
             to="/userdashboard/students"
             className={({ isActive }) => (isActive ? " bg-[#d8d9e5b3]" : "")}
           >
             <FaUserGraduate className="icon" />
             {isExpand && <span>Students</span>}
+          </NavLink>
+          :
+          <NavLink
+            to="/userdashboard/tutors"
+            className={({ isActive }) => (isActive ? " bg-[#d8d9e5b3]" : "")}
+          >
+            <FaChalkboardTeacher  className="icon"/>
+            {isExpand && <span>Tutors</span>}
           </NavLink>
         }</li>
         <li>

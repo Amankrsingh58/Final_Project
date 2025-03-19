@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 import Sidebar from "../components/StudentsDashboard/Slidebar";
 import StudentsDashboardHome from "../components/StudentsDashboard/StudentsDashboardHome";
-import Notifications from "../components/Dashboard/Notifications";
+import Notifications from "../components/StudentsDashboard/Notifications";
 import SettingsPage from "../components/StudentsDashboard/setting";
 import "./DashBoard.css";
 import Tutor from "./Tutor";
@@ -28,8 +28,8 @@ const Navigate = useNavigate();
           <Route path="/" element={<StudentsDashboardHome />} />
           <Route path="profile" element={<Profile/>} />
           <Route path="notifications" element={<Notifications />} />
-          <Route path="tutors" element={<Tutor />} />
-          <Route path="students" element={<Student />} />
+          <Route path="tutors" element={<Tutor/>} />
+          <Route path="students" element={<Student/>} />
           <Route path="usersetting" element={<SettingsPage/>} />
           <Route path="*" element={<div>Page not found in Dashboard!</div>} />
         </Routes>
