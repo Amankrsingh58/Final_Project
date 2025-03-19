@@ -8,7 +8,6 @@ const UserSchema = new mongoose.Schema(
         userName: {
             type: String,
             required: true,
-            unique: true,
         },
         password: {
             type: String,
@@ -25,6 +24,12 @@ const UserSchema = new mongoose.Schema(
             enum: ['Admin','Tutor', 'Student'],
             required: true,
         },
+        image:{
+            type:String,
+            default: function() {
+                return `https://api.dicebear.com/5.x/initials/svg?seed=${this.userName.replace(/\s+/g, '%20') || 'default'}`;
+            },     
+           },
         refreshToken: {
             type: String,
         },

@@ -5,9 +5,23 @@ import { RiHomeFill } from "react-icons/ri";
 import { FaUser, FaBell, FaCog, FaChalkboardTeacher, FaUserGraduate, FaSignOutAlt } from "react-icons/fa";
 import { SiHomeassistantcommunitystore } from "react-icons/si";
 import "./Slidebar.css";
+import { useSelector } from "react-redux";
 
 const Sidebar = () => {
   const [isExpand, setIsExpand] = useState(true);
+  const { token, user, isAuthenticated } = useSelector((state) => state.auth);
+
+  const handleLogout = async () => {
+    try {
+      dispatch(setLogout()); 
+      localStorage.removeItem('authToken'); 
+      localStorage.removeItem('user');
+      await logout().unwrap(); 
+      navigate('/login'); 
+    } catch (err) {
+      console.error('Logout failed:', err.message);
+    }
+  };
 
 
 useEffect(() => {
@@ -31,16 +45,16 @@ useEffect(() => {
   };
 
   return (
-    <div className={isExpand ? "stsidebar border-r-2 border-[#BEBEBE] overflow-x-hidden" : "stsidebar stnotExpand overflow-x-hidden"}>
+    <div className={isExpand ? "stsidebar border-r-2 border-[#BEBEBE] overflow-x-hidden transition-all duration-150" : "stsidebar stnotExpand overflow-x-hidden"}>
       <div className="logo">
-        {isExpand && <h2 className=" font-bold">Admin</h2>}
+        {isExpand && <h2 className=" font-bold">{user.role}</h2>}
         <GiHamburgerMenu className="stmenu-toggle" onClick={toggleSidebar} />
       </div>
 
       <ul className="stmenu">
         <li>
           <NavLink
-            to="/studentsdashboard"
+            to="/userdashboard"
             className={({ isActive }) => (isActive ? " bg-[#d8d9e5b3]" : "")}
           >  
             <RiHomeFill className="icon" />
@@ -49,7 +63,7 @@ useEffect(() => {
         </li>
         <li>
           <NavLink
-            to="/studentsdashboard/profile"
+            to="/userdashboard/profile"
             className={({ isActive }) => (isActive ? " bg-[#d8d9e5b3]" : "")}
           >
             <FaUser className="icon" />
@@ -58,25 +72,33 @@ useEffect(() => {
         </li>
         <li>
           <NavLink
-            to="/studentsdashboard/my-booking"
+            to="/userdashboard/my-booking"
             className={({ isActive }) => (isActive ? " bg-[#d8d9e5b3]" : "")}
           >
             <SiHomeassistantcommunitystore  className="icon" />
             {isExpand && <span>My Booking</span>}
           </NavLink>
         </li>
-        <li>
+        <li>{user.role === "Tutor" ?
           <NavLink
-            to="/studentsdashboard/students"
+            to="/userdashboard/tutors"
+            className={({ isActive }) => (isActive ? " bg-[#d8d9e5b3]" : "")}
+          >
+            <FaChalkboardTeacher  className="icon"/>
+            {isExpand && <span>Tutors</span>}
+          </NavLink>
+          :
+          <NavLink
+            to="/userdashboard/students"
             className={({ isActive }) => (isActive ? " bg-[#d8d9e5b3]" : "")}
           >
             <FaUserGraduate className="icon" />
             {isExpand && <span>Students</span>}
           </NavLink>
-        </li>
+        }</li>
         <li>
           <NavLink
-            to="/studentsdashboard/notifications"
+            to="/userdashboard/notifications"
             className={({ isActive }) => (isActive ? " bg-[#d8d9e5b3]" : "")}
           >
             <FaBell className="icon" />
@@ -85,20 +107,11 @@ useEffect(() => {
         </li>
         <li>
           <NavLink
-            to="/studentsdashboard/usersetting"
+            to="/userdashboard/usersetting"
             className={({ isActive }) => (isActive ? " bg-[#d8d9e5b3]" : "")}
           >
             <FaCog className="icon" />
             {isExpand && <span>Settings</span>}
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to="/logout"
-            className={({ isActive }) => (isActive ? " bg-[#d8d9e5b3]" : "")}
-          >
-            <FaSignOutAlt className="icon" />
-            {isExpand && <span>Signout</span>}
           </NavLink>
         </li>
       </ul>

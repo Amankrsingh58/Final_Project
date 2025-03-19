@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { format } from 'date-fns';
-import { useGetTutorByIdQuery } from '../features/auth/tutorApi';
+import { useGetStudentByIdQuery } from '../features/auth/studentApi';
 import { Clock, DollarSign, Star, MapPin, Check, X, Calendar } from 'lucide-react';
-import { motion } from 'framer-motion';  
+import { motion } from 'framer-motion';  // For motion effects
 import toast from 'react-hot-toast';
 
-const TutorDetail = () => {
+const StudentDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -14,7 +14,7 @@ const TutorDetail = () => {
   const [bookingSuccess, setBookingSuccess] = useState(false);
   const [error, setError] = useState(null);
 
-  const { data: tutor, isLoading, isError } = useGetTutorByIdQuery(id);
+  const { data: student, isLoading, isError } = useGetStudentByIdQuery(id);
 
   const handleBookSession = async () => {
     // if (!selectedDate) {
@@ -38,7 +38,7 @@ const TutorDetail = () => {
           'Authorization': `Bearer ${localStorage.getItem('token')}`,
         },
         body: JSON.stringify({
-          tutorId: id,
+          studentId: id,
           userId: userId,
           date: selectedDate,
         }),
@@ -71,12 +71,12 @@ const TutorDetail = () => {
     );
   }
 
-  if (isError || !tutor) {
+  if (isError || !student) {
     toast.error("Try again")
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="bg-red-50 border-l-4 border-red-400 p-4 text-red-700">
-          Error loading tutor details. Please try again later.
+          Error loading student details. Please try again later.
         </div>
       </div>
     );
@@ -87,7 +87,7 @@ const TutorDetail = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="bg-white rounded-lg shadow-md overflow-hidden">
           <div className="md:flex">
-            {/* Tutor Image Section */}
+            {/* Student Image Section */}
             <div className="md:w-1/3">
               <motion.div 
                 className="h-64 md:h-full"
@@ -96,14 +96,14 @@ const TutorDetail = () => {
                 transition={{ duration: 0.5 }}
               >
                 <img 
-                  src={tutor.data.userId.image || "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"} 
-                  alt={tutor.data.userId.userName} 
+                  src={student.data.userId.image || "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"} 
+                  alt={student.data.userId.userName} 
                   className="w-full h-full object-cover"
                 />
               </motion.div>
             </div>
 
-            {/* Tutor Information and Details */}
+            {/* Student Information and Details */}
             <div className="md:w-2/3 p-6 md:p-8">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -112,40 +112,29 @@ const TutorDetail = () => {
               >
                 <div className="flex justify-between items-start">
                   <div>
-                    <h1 className="text-3xl font-bold text-gray-900">{tutor.data.userId.userName}</h1>
-                    <p className="text-indigo-600 font-medium text-lg">{tutor.data.subjects.join(', ')}</p>
+                    <h1 className="text-3xl font-bold text-gray-900">{student.data.userId.userName}</h1>
+                    <p className="text-indigo-600 font-medium text-lg">{student.data.subjectInterested.join(', ')}</p>
                   </div>
-                  <div className="bg-indigo-100 text-indigo-800 px-4 py-2 rounded-full text-lg font-bold">
-                  ₹{tutor.data.hourly_rate}/hr
-                  </div>
+               
                 </div>
                 
-                <div className="mt-6 flex flex-wrap gap-4">
-                  <div className="flex items-center text-gray-700">
-                    <Clock className="h-5 w-5 mr-2 text-indigo-600" />
-                    <span>{tutor.data.experience} years experience</span>
-                  </div>
-                  
-                  <div className="flex items-center text-gray-700">
-                    <Star className="h-5 w-5 mr-2 text-yellow-400" />
-                    <span>4.9 (120 reviews)</span>
-                  </div>
+                <div className="mt-6 flex flex-wrap gap-4"> 
                   
                   <div className="flex items-center text-gray-700">
                     <MapPin className="h-5 w-5 mr-2 text-indigo-600" />
-                    <span>{tutor.data.city}, {tutor.data.state}</span>
+                    <span>{student.data.city}, {student.data.state}</span>
                   </div>
                 </div>
                 
                 <div className="mt-6">
                   <h2 className="text-xl font-semibold mb-2">About Me</h2>
-                  <p className="text-gray-700">{tutor.data.bio || "No bio provided yet"}</p>
+                  <p className="text-gray-700">{student.data.bio || "No bio provided yet"}</p>
                 </div>
                 
                 <div className="mt-6">
-                  <h2 className="text-xl font-semibold mb-2">Expertise</h2>
+                  <h2 className="text-xl font-semibold mb-2">SubjectInterested</h2>
                   <div className="flex flex-wrap gap-2">
-                    {tutor.data.subjects.map((subject, index) => (
+                    {student.data.subjectInterested.map((subject, index) => (
                       <span key={index} className="bg-gray-100 text-gray-800 px-3 py-1 rounded-full text-sm">
                         {subject}
                       </span>
@@ -164,7 +153,7 @@ const TutorDetail = () => {
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.3, duration: 0.5 }}
               >
-                <h2 className="text-2xl font-bold mb-6">Request a Session</h2>
+                <h2 className="text-2xl font-bold mb-6">Reach Out to Student</h2>
 
                 {/* Error Handling */}
                 {error && (
@@ -207,11 +196,12 @@ const TutorDetail = () => {
                 <div className="mt-6">
                   <button
                     onClick={handleBookSession}
+                    // disabled={!selectedDate}
                     className={`w-full bg-indigo-600 text-white px-6 py-3 rounded-md font-medium hover:bg-indigo-700 transition-colors ${
                       selectedDate ? 'opacity-50 cursor-not-allowed' : ''
                     }`}
                   >
-                    Request Tuition
+                    Offer Tuition
                   </button>
                 </div>
 
@@ -227,4 +217,4 @@ const TutorDetail = () => {
   );
 };
 
-export default TutorDetail;
+export default StudentDetail;

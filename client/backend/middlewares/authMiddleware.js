@@ -14,7 +14,10 @@ const asyncHandler = require('express-async-handler');
         }
         console.log(token);
         console.log(process.env.ACCESS_TOKEN_SECRETE);
-        const decodeToken = jwt.verify(token, "amansingh")
+        const decodeToken = jwt.verify(token, "amansingh");
+
+		if(!decodeToken) return res.status(401).json({success:false,message:'token expire',
+			error:error.message});
         console.log("yhs tsk");
     
        const newuser =  await User.findById(decodeToken._id).select("-password-refreshToken")
@@ -26,7 +29,8 @@ const asyncHandler = require('express-async-handler');
        next();
     
     } catch (error) {
-        return res.status(401).json({success:false,message:error.message || 'access token verification faield'});
+        return res.status(401).json({success:false,message:'error in middleware check',
+			error:error.message});
 
     }
 });
