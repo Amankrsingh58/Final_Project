@@ -10,6 +10,7 @@ const helpRequestRoutes = require('./routes/helpRequestRoutes');
 const userRoutes = require('./routes/userRoutes');
 const tutorRoutes = require('./routes/tutorRoutes')
 const studentRoutes = require('./routes/studentRoutes');
+const noticeRoutes = require('./routes/noticeRoutes')
 const { cloudinaryConnect } = require('./config/cloudinary');
 const fileUpload = require('express-fileupload');
 
@@ -40,6 +41,7 @@ app.use('/api/users', tutorRoutes);
 app.use('/api/users', studentRoutes);
 
 app.use('/api/helprequests', helpRequestRoutes);
+app.use('/api/users', noticeRoutes);
 
 
 // Database connection

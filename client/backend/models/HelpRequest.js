@@ -20,10 +20,11 @@ const HelpRequestSchema = new mongoose.Schema({
         type:String,
         required:true
     },
-    reatedAt:{
-        type:Date,
-        default:Date.now
-    },
+    createdAt: {
+        type: Date,
+        default: Date.now
+    }
+    ,
     solved:{
         type:Boolean,
         default:false
