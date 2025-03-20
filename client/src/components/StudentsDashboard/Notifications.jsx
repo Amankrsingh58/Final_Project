@@ -1,90 +1,54 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
+import { useGetNoticeQuery } from "../../features/auth/noticeApi";
+import { useSelector } from "react-redux";
 
 const MessageCard = () => {
   const [messages, setMessages] = useState([]);
+  const { token, user, isAuthenticated } = useSelector((state) => state.auth);
+  const id = user._id;
+
+  const { data, isLoading, isError } = useGetNoticeQuery({id});
 
   useEffect(() => {
-    // const fetchMessage = async () => {
-    //   const response = await fetch('/api/getMessages'); // Your API endpoint
-    //   const data = await response.json();
-    //   setMessages(data);
-    // };
+    if (data?.data) {
+      setMessages(data.data);
+    }
+  }, [data]);
 
-    const dummyData = [
-      {
-        id: 1,
-        name: 'John Doe',
-        phone: '+1234567890',
-        msgSubjectDetail: 'Mathematics - Algebra',
-        msgDetails: 'Looking for a tutor for algebra to understand the basics and advanced concepts.',
-        solved: false
-      },
-      {
-        id: 2,
-        name: 'Jane Smith',
-        phone: '+0987654321',
-        msgSubjectDetail: 'Science - Biology',
-        msgDetails: 'Seeking a tutor to help with high school biology, focusing on cellular biology and genetics.',
-        solved: false
-      },
-      {
-        id: 3,
-        name: 'David Brown',
-        phone: '+1122334455',
-        msgSubjectDetail: 'English - Literature',
-        msgDetails: 'Looking for assistance with analyzing classic literature and improving writing skills.',
-        solved: false
-      }
-    ];
+  if (isLoading || !messages.length) {
+    return (
+      <div className="flex justify-center items-center h-64">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-indigo-500"></div>
+      </div>
+    );  }
 
-    setMessages(dummyData);
-  }, []);
-
-  const handleMarkSolved = (id) => {
-    const updatedMessages = messages.map((message) => {
-      if (message.id === id) {
-        message.solved = true;
-      }
-      return message;
-    });
-
-    setMessages(updatedMessages);
-
-    // fetch('/api/updateMessage', { method: 'POST', body: JSON.stringify({ id, solved: true }) })
-    //   .then((res) => res.json())
-    //   .then((data) => console.log(data));
-  };
-
-  const sortedMessages = [...messages].sort((a, b) => a.solved - b.solved);
-
-  if (!messages.length) {
-    return <div>Loading...</div>;
-  }
+    if (isError) {
+      return (
+        <div className="bg-red-50 border-l-4 border-red-400 p-4 text-red-700">
+          There was an error fetching the student data.
+        </div>
+      );
+    }
 
   return (
-    <div className="w-full max-w-full mt-2 mx-auto bg-gray-800 text-white p-6 rounded-lg shadow-lg">
-      {sortedMessages.map((message, index) => (
+    <div className="w-full max-w-full mt-2 mx-auto bg-white text-white p-6 rounded-lg shadow-lg">
+      {messages && messages.map((message) => (
         <div
-          key={message.id}
-          className={`relative mb-4 p-4 bg-gray-900 rounded-lg shadow-md ${message.solved ? 'opacity-50' : ''}`}
+          key={message._id}
+          className={`relative mb-4 p-4 bg-gray-100 rounded-lg shadow-md ${
+            message.solved ? "opacity-50" : ""
+          }`}
         >
-          <h3 className="text-2xl font-bold mb-2">{message.name}</h3>
-          <p className="text-gray-400 text-sm mb-2">Phone: {message.phone}</p>
-          <p className="text-gray-400 mb-4">{message.msgSubjectDetail}</p>
-          <div className="text-sm text-gray-300">
-            <p>{message.msgDetails}</p>
+          {/* <h3 className="text-2xl font-bold mb-2">{message.name}</h3> */}
+          {/* <p className="text-gray-400 text-sm mb-2">Phone: {message.phone}</p> */}
+          <p className="text-gray-900 mb-4">{message.subject}</p>
+          <div className="text-sm text-gray-800">
+            <p>{message.message}</p>
           </div>
-          
-          {!message.solved && (
-            <button
-              onClick={() => handleMarkSolved(message.id)}
-              className="absolute top-2 right-2 bg-[#1abc9c] text-white py-1 px-3 rounded-full text-sm"
-            >
-              Not Solved
-            </button>
-          )}
+
         </div>
       ))}
+      
     </div>
   );
 };

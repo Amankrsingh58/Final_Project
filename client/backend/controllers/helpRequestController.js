@@ -30,8 +30,8 @@ const HelpRequestHandler = async(req,res) =>{
 
 const getAllHelpRequest = async (req,res) => {
     try {
-        const allHelpRequest = await HelpRequest.find({}).populate("user");
-        if(!allHelpRequest|| allHelpRequest.length === 0)  res.status(404).json({error:'cannot fetch data'});
+        const allHelpRequest = await HelpRequest.find({}).populate("user").exec();
+        if(!allHelpRequest|| allHelpRequest.length === 0) return res.status(404).json({error:'cannot fetch data'});
 
         return res.status(200).json({
             success:true,
