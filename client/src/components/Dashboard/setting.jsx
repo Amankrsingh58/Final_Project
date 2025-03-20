@@ -1,9 +1,11 @@
 import { useState } from "react";
+import { usePasswordChangeMutation } from "../../features/auth/userApi";
 
 const SettingsPage = () => {
   const [expanded, setExpanded] = useState(null);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
 
+  const [passwordChange]=usePasswordChangeMutation();
   const toggleExpand = (section) => {
     setExpanded(expanded === section ? null : section);
   };

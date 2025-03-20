@@ -46,7 +46,7 @@ export const authApi = createApi({
     passwordChange: builder.mutation({
       query: () => ({
         url:'/change-password',
-        method:'POST'
+        method:'PUT'
       }),
       invalidatesTags:["Logout"],
     }),
@@ -67,4 +67,5 @@ export const {
   useLogoutMutation,
   useSignupMutation,
   useVerifyTokenExpiryQuery,
+  usePasswordChangeMutation,
 } = authApi;
