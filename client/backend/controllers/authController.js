@@ -199,11 +199,11 @@ const verifyToken = asyncHandler(async (req, res) => {
 
 const changePassword = asyncHandler(async (req, res) => {
     try {
-        const { currentPassword, password, confirmpassword } = req.body;
+        const { currentPassword, password, confirmPassword } = req.body;
         const  userId  = req.user._id;
-        console.log("user printing",userId)
+        console.log("password =>",password, "confirmpass =>", confirmPassword)
         //validate data
-        if (password !== confirmpassword) return res.status(400).send('Current password is incorrect');
+        if (password !== confirmPassword) return res.status(400).send('confirmpassword do not same');
         const userData = await User.findById(userId);
         if (!userData) return res.status(404).json({success:false, message:'User not found'});
 
@@ -220,7 +220,7 @@ const changePassword = asyncHandler(async (req, res) => {
         await userData.save();
 
         //return response
-        return res.send('Password changed successfully');
+        return res.status(200).json({success:true,message:'Password changed successfully'});
     } catch (err) {
         console.error(err);
         return res.status(500).send('Server error');

@@ -1,11 +1,43 @@
 import { useState } from "react";
 import { usePasswordChangeMutation } from "../../features/auth/userApi";
+import toast from "react-hot-toast";
 
 const SettingsPage = () => {
   const [expanded, setExpanded] = useState(null);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
-
   const [passwordChange]=usePasswordChangeMutation();
+  const [formData, setFormData] = useState({
+    currentPassword:"",
+    password:"",
+    confirmPassword:"",
+  })
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+    };
+
+  const handleUpdatePassword = async () => {
+      const toastId = toast.loading("Updating...");
+
+      try {
+        
+       const result =  await passwordChange(formData).unwrap(); 
+        toast.success("Update successful!", { id: toastId });
+        
+        
+      } catch (error) {
+        toast.error("Update faild!", { id: toastId });
+        console.error("Error updating profile:", error);
+      
+    }
+  };
+
+
+
   const toggleExpand = (section) => {
     setExpanded(expanded === section ? null : section);
   };
@@ -25,20 +57,34 @@ const SettingsPage = () => {
           <div className="mt-4 space-y-2">
             <input
               type="password"
+              onChange={handleChange}
+              name="currentPassword"
+              value={formData.currentPassword}
               placeholder="Current Password"
               className="w-full p-2 border rounded"
             />
             <input
               type="password"
+              onChange={handleChange}
+              name="password"
+              value={formData.password}
               placeholder="New Password"
               className="w-full p-2 border rounded"
             />
             <input
               type="password"
+              onChange={handleChange}
+              name="confirmPassword"
+              value={formData.confirmPassword}
               placeholder="Confirm Password"
               className="w-full p-2 border rounded"
             />
-            <button className="bg-blue-500 text-white px-4 py-2 rounded w-full mt-2 hover:bg-blue-600">
+            <button
+            onClick={() => {
+              handleUpdatePassword(); 
+              toggleExpand("password");
+            }}
+             className="bg-blue-500 text-white px-4 py-2 rounded w-full mt-2 hover:bg-blue-600">
               Update Password
             </button>
           </div>
