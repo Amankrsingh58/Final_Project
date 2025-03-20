@@ -11,6 +11,7 @@ const StudentsList = () => {
     subject: "",
     message: "",
     id:"",
+    role:"Student"
   });
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
@@ -46,7 +47,8 @@ const StudentsList = () => {
       const response = await sendNotice({
         id: selectedStudentId,
         subject: formData.subject,
-        message: formData.message
+        message: formData.message,
+        role:formData.role
       }).unwrap();
       
       setSuccess("Help request submitted successfully!");

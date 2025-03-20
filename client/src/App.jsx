@@ -56,7 +56,11 @@ function App() {
         <Route path="/student/:id" element={<StudentDetail />} />
         <Route path="/tutordetail" element={<TutorDetail />} />
         <Route path="/services" element={<Services />} />
+
+        <Route element={<ProtectedRoute allowedRoles={["Student","Tutor"]} />}>
         <Route path="/userdashboard/*" element={<StudentsDashboard/>} />
+        </Route>
+
         </Route> 
         <Route path="*" element={<Notfound />} />
       </Routes>

@@ -3,8 +3,20 @@ import { useLocation,Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Search, Filter, Star, Clock, DollarSign, BookOpen } from 'lucide-react';
 import { useGetAllTutorQuery } from '../../features/auth/tutorApi';
+import { useSendNoticeMutation } from '../../features/auth/noticeApi';
+import toast from 'react-hot-toast';
 
 const TutorsList = () => {
+  const [formData, setFormData] = useState({
+    subject: "",
+    message: "",
+    id:"",
+    role:"Tutor"
+  });
+
+  const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(null);
+
   const [filteredTutors, setFilteredTutors] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showFilters, setShowFilters] = useState(false);
@@ -14,10 +26,45 @@ const TutorsList = () => {
   const [priceRange, setPriceRange] = useState('');
   const [experienceLevel, setExperienceLevel] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
+
+  const [showModal, setShowModal] = useState(false);
+  const [selectedStudentId, setSelectedStudentId] = useState(null);
   
   const location = useLocation();
 
   const { data: allTutor, isLoading, isError } = useGetAllTutorQuery();
+
+  const [sendNotice] = useSendNoticeMutation();
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setSuccess(null);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    // setError(null);
+    const toastId = toast.loading('Submitting Request...');
+    try {
+      
+      const response = await sendNotice({
+        id: selectedStudentId,
+        subject: formData.subject,
+        message: formData.message,
+        role:formData.role
+
+      }).unwrap();
+      
+      setSuccess("Help request submitted successfully!");
+      toast.success('Submitted', { id: toastId });
+      setShowModal(false);
+      setFormData({ subject: "", message: "" });
+    } finally {
+      setLoading(false);
+      setTimeout( () => toast.dismiss(toastId), 2000);
+    }
+  };
 
   useEffect(() => {
     if (allTutor) {
@@ -315,9 +362,9 @@ const TutorsList = () => {
                     <Link to={`/tutor/${tutor._id}`} className="text-indigo-600 hover:text-indigo-800 font-medium text-sm">
                       View Profile
                     </Link>
-                    <Link to={`/tutor/${tutor._id}`} className="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition-colors text-sm font-medium">
-                    Request Tuition
-                    </Link>
+                    <button onClick={() =>{setSelectedStudentId(tutor._id), setShowModal(true)} } className="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition-colors text-sm font-medium">
+                      Send Notice
+                    </button>
                   </div>
                 </div>
               </motion.div>
@@ -325,6 +372,54 @@ const TutorsList = () => {
           </motion.div>
         )}
       </div>
+      {showModal && (
+  <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+    <div className="bg-gray-800 p-5 rounded-lg shadow-lg w-[90%] max-w-md">
+      <h2 className="text-2xl text-white font-bold text-center">Send Notice</h2>
+
+      <form onSubmit={handleSubmit} className="mt-4">
+        <input
+          type="text"
+          name="subject"
+          placeholder="Enter subject"
+          value={formData.subject}
+          onChange={handleChange}
+          className="w-full p-2 mt-2 bg-gray-700 text-white rounded"
+          required
+        />
+
+        <textarea
+          name="message"
+          placeholder="Enter your message..."
+          value={formData.message}
+          onChange={handleChange}
+          className="w-full p-2 mt-2 bg-gray-700 text-white rounded"
+          required
+        />
+
+        <div className="flex justify-between mt-4">
+          <button
+            type="button"
+            onClick={() => setShowModal(false)}
+            className="bg-gray-600 hover:bg-gray-700 text-white py-2 px-4 rounded"
+          >
+            Cancel
+          </button>
+          <button
+            type="submit"
+            className="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded"
+            disabled={loading}
+          >
+            {loading ? "Submitting..." : "Submit"}
+          </button>
+        </div>
+      </form>
+
+      {error && <p className="text-red-500 text-center mt-2">{error}</p>}
+      {success && <p className="text-green-500 text-center mt-2">{success}</p>}
+    </div>
+  </div>
+)}
     </div>
   );
 };

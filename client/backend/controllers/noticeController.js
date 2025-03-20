@@ -1,24 +1,44 @@
 const Notice = require("../models/Notice");
 const Student = require("../models/Student")
+const Tutor = require("../models/Tutor")
 const asyncHandler = require('express-async-handler');
 
 
 const sendNotice = asyncHandler(async(req,res) => {
     try {
-        const {id, subject, message} = req.body;
+        const {id, subject, message, role} = req.body;
 
-        if(!id || !subject || !message) return res.status(404).json({message:'Data not found'});
+        if(!id || !subject || !message || !role) return res.status(404).json({message:'Required Data not found'});
 
-        const student = await Student.findById(id);
-        
-        if(!student) return res.status(404).json({message:'Data not found'});
+        if(role === "Tutor"){
 
-        const noticeData = new Notice({user:student.userId, subject, message});
-        const saveNotice = await noticeData.save();
+            const tutor = await Tutor.findById(id);
+            
+            if(!tutor) return res.status(404).json({message:'Data not found'});
+    
+            const noticeData = new Notice({user:tutor.userId, subject, message});
+            const saveNotice = await noticeData.save();
+    
+            if(!saveNotice) return res.status(500).json({message:'Cannot send Notice'});
+    
+            return res.status(200).json({success:true, message:"Notice Sent Successfully"});
+        }
+        else if(role === "Student"){
 
-        if(!saveNotice) return res.status(500).json({message:'Cannot send Notice'});
-
-        return res.status(200).json({success:true, message:"Notice Sent Successfully"});
+            const student = await Student.findById(id);
+            
+            if(!student) return res.status(404).json({message:'Data not found'});
+    
+            const noticeData = new Notice({user:student.userId, subject, message});
+            const saveNotice = await noticeData.save();
+    
+            if(!saveNotice) return res.status(500).json({message:'Cannot send Notice'});
+    
+            return res.status(200).json({success:true, message:"Notice Sent Successfully"});
+        }
+        else{
+            return res.status(404).json({success:false, message:"Role not in List"});
+        }
     } catch (error) {
         return res.status(500).json({message:'Cannot send Notice',error:error.message});
     }

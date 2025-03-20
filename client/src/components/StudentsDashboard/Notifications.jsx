@@ -15,17 +15,25 @@ const MessageCard = () => {
     }
   }, [data]);
 
-  if (isLoading || !messages.length) {
+  if (isLoading) {
     return (
       <div className="flex justify-center items-center h-64">
         <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-indigo-500"></div>
       </div>
     );  }
+    
+    if (!messages.length) {
+      return (
+        <div className="bg-red-50 border-l-4 border-red-400 p-4 text-red-700">
+          There was no Notification to show.
+        </div>
+      );
+    }
 
     if (isError) {
       return (
         <div className="bg-red-50 border-l-4 border-red-400 p-4 text-red-700">
-          There was an error fetching the student data.
+          There was an error fetching the student data.{data.error.message}
         </div>
       );
     }

@@ -27,8 +27,16 @@ const getUserData = asyncHandler(async (req, res) => {
                 return res.status(404).json({ message: 'Student data not found' });
             }
             return res.status(200).json({ profile: studentData });
-        } else {
+        } else if(user.role === 'Admin'){
+            const admin = await User.findById(user._id);
+            if (!admin) {
+                return res.status(404).json({ message: 'Admin data not found' });
+            }
+            return res.status(200).json({ profile: admin });
+        }
+        else{
             return res.status(400).json({ message: 'Invalid user role' });
+
         }
 
     } catch (error) {
