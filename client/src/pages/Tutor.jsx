@@ -1,10 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation,Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Search, Filter, Star, Clock, DollarSign, BookOpen } from 'lucide-react';
+import { Search,Calendar, Filter,CheckCircle, Star, Clock, DollarSign, BookOpen, MapPin } from 'lucide-react';
 import { useGetAllTutorQuery } from '../features/auth/tutorApi';
+import { useSelector } from 'react-redux';
+import { format } from 'date-fns';
 
 const TutorsList = () => {
+  const {user, isAuthenticated} = useSelector( (state) => state.auth);
+
+  const [bookingData, setBookingData] = useState({
+    tutorId:"",
+    studentId:user._id,
+    booker:'Student'
+  });
+  
   const [filteredTutors, setFilteredTutors] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showFilters, setShowFilters] = useState(false);
@@ -298,14 +308,15 @@ const TutorsList = () => {
                   
                   {tutor.city && (
                     <div className="mt-1 flex items-center text-sm text-gray-500">
+                      <MapPin className="h-4 w-4 mr-1 text-green-400" />
                       <span>Location: {tutor.city}</span>
                     </div>
                   )}
                   
                   <div className="mt-1 flex items-center text-sm text-gray-500">
-                    <Star className="h-4 w-4 mr-1 text-yellow-400" />
-                    <span>4.9 (120 reviews)</span>
-                  </div>
+                    <Calendar className="h-4 w-4 mr-1 text-green-400" />
+                    <span>Posted On :{format(new Date(tutor.createdAt), 'MMMM d, yyyy')}</span>
+                    </div>
                   
                   {tutor.bio && (
                     <p className="mt-4 text-gray-600 line-clamp-3">{tutor.bio}</p>

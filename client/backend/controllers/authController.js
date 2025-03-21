@@ -52,6 +52,9 @@ const registerUser = async (req, res) => {
                 city,
             });
             await tutor.save();
+            user.tutorId = tutor._id;
+            await user.save();
+        
         } else if (role === 'Student') {
             const student = new Student({
                 userId: user._id,
@@ -61,6 +64,8 @@ const registerUser = async (req, res) => {
                 city,
             });
             await student.save();
+            user.studentId = student._id;
+            await user.save();
         }
 
         //remove password and refresh token field from response
@@ -104,10 +109,10 @@ const loginUser = asyncHandler(async (req, res) => {
         // Generate access and refresh tokens
         const accessToken = await user.generateAccessToken();
         const refreshToken = await user.generateRefreshToken();
-        console.log("User not found", user);
+        // console.log("User not found", user);
         user.refreshToken = refreshToken;
         await user.save();
-        console.log(refreshToken);
+        // console.log(refreshToken);
 
         user.password = undefined;
         // Set cookies with the tokens

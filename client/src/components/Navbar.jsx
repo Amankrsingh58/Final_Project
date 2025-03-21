@@ -58,7 +58,7 @@ const Navbar = () => {
           <Link to="/about" className="text-gray-700 hover:text-indigo-600 transition-colors">
             About Us
           </Link>
-         {token && <Link to="/bookings" className="text-gray-700 hover:text-indigo-600 transition-colors">
+         {token && <Link to="/my-bookings" className="text-gray-700 hover:text-indigo-600 transition-colors">
             My Bookings
           </Link>}
           
@@ -91,7 +91,7 @@ const Navbar = () => {
               </button>
               {isAccountMenuOpen && (
                 <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 transition-all duration-200">
-                  <Link to="/userdashboard/profile" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                  <Link to={user.role === 'Admin' ? "/dashboard/profile":"/userdashboard/profile"} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                     Profile Settings
                   </Link>
                   <button
@@ -127,24 +127,28 @@ const Navbar = () => {
             className="md:hidden mt-4"
           >
             <div className="flex flex-col space-y-4 px-4 py-2">
-             {token && <Link to="/tutor" className="text-gray-700 hover:text-indigo-600 transition-colors py-2" onClick={toggleMenu}>
-                Find Tutors
+             {token && <Link to={user.role === "Tutor" ? "/student" : "/tutor"} className="text-gray-700 hover:text-indigo-600 transition-colors py-2" onClick={toggleMenu}>
+             {user.role ==="Tutor" ? "Find Students" : 'Find Tutor' }
               </Link>}
               <Link to="/about" className="text-gray-700 hover:text-indigo-600 transition-colors py-2" onClick={toggleMenu}>
                 About Us
               </Link>
-             {token && <Link to="/bookings" className="text-gray-700 hover:text-indigo-600 transition-colors py-2" onClick={toggleMenu}>
+             {token && <Link to="/my-bookings" className="text-gray-700 hover:text-indigo-600 transition-colors py-2" onClick={toggleMenu}>
                 My Bookings
               </Link>}
               {token && (
-                <Link to="/dashboard" className="text-gray-700 hover:text-indigo-600 transition-colors py-2" onClick={toggleMenu}>
+                <Link  to ={ user.role === "Tutor" || user.role === "Student"
+                ? "/userdashboard"
+                : user.role === "Admin"
+                ? "/dashboard"
+                : "/unauthorised"} className="text-gray-700 hover:text-indigo-600 transition-colors py-2" onClick={toggleMenu}>
                   Dashboard
                 </Link>
               )}
-                {(token && user) ? <button  className="flex items-center text-gray-700 hover:text-indigo-600 transition-colors py-2">
+                {(token && user) ? <Link to ={user.role === 'Admin' ? "/dashboard/profile":"/userdashboard/profile"}  onClick={toggleMenu}  className="flex items-center text-gray-700 hover:text-indigo-600 transition-colors py-2">
                   <User className="h-5 w-5 mr-2" />
                   {user.userName}
-                </button> : ( <Link to="/login" className="text-gray-700 hover:text-indigo-600 transition-colors py-2" onClick={toggleMenu}>
+                </Link> : ( <Link to="/login" className="text-gray-700 hover:text-indigo-600 transition-colors py-2" onClick={toggleMenu}>
                   Login
                 </Link>)}
                  {token ? <button onClick={handleLogout} className="flex items-center text-gray-700 hover:text-indigo-600 transition-colors py-2">

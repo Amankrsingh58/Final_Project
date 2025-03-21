@@ -13,7 +13,6 @@ const UserSchema = new mongoose.Schema(
             type: String,
             required: true,
         },
-
         email: {
             type: String,
             required: true,
@@ -21,20 +20,28 @@ const UserSchema = new mongoose.Schema(
         },
         role: {
             type: String,
-            enum: ['Admin','Tutor', 'Student'],
+            enum: ['Admin', 'Tutor', 'Student'],
             required: true,
         },
-        image:{
-            type:String,
-            default: function() {
+        image: {
+            type: String,
+            default: function () {
                 return `https://api.dicebear.com/5.x/initials/svg?seed=${this.userName.replace(/\s+/g, '%20') || 'default'}`;
-            },     
-           },
-        imageCloudinaryId:{
-            type:String,
+            },
+        },
+        imageCloudinaryId: {
+            type: String,
         },
         refreshToken: {
             type: String,
+        },
+        tutorId: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Tutor',
+        },
+        studentId: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Student',
         },
     },
     { timestamps: true }
@@ -49,8 +56,8 @@ UserSchema.pre("save", async function (next) {
 
 // Password check method
 UserSchema.methods.isPasswordCorrect = async function (password) {
-    return await bcrypt.compare(password, this.password); 
- };
+    return await bcrypt.compare(password, this.password);
+};
 
 // Access token generation
 UserSchema.methods.generateAccessToken = function () {

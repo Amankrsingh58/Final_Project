@@ -9,6 +9,7 @@ import Tutor from "./Tutor";
 import { CiSearch } from "react-icons/ci";
 import Student from "./Student";
 import Profile from "../components/StudentsDashboard/Profile";
+import Bookings from "./Bookings";
 
 const DashBoard = () => {
   const handleSearch = (query) => {
@@ -29,6 +30,7 @@ const Navigate = useNavigate();
           <Route path="profile" element={<Profile/>} />
           <Route path="notifications" element={<Notifications />} />
           <Route path="tutors" element={<Tutor/>} />
+          <Route path="my-bookings" element={<Bookings/>} />
           <Route path="students" element={<Student/>} />
           <Route path="usersetting" element={<SettingsPage/>} />
           <Route path="*" element={<div>Page not found in Dashboard!</div>} />

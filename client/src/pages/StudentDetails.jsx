@@ -5,6 +5,8 @@ import { useGetStudentByIdQuery } from '../features/auth/studentApi';
 import { Clock, DollarSign, Star, MapPin, Check, X, Calendar } from 'lucide-react';
 import { motion } from 'framer-motion';  // For motion effects
 import toast from 'react-hot-toast';
+import { useCreateBokingMutation } from '../features/auth/bookingApi';
+import { useSelector } from 'react-redux';
 
 const StudentDetail = () => {
   const { id } = useParams();
@@ -14,52 +16,36 @@ const StudentDetail = () => {
   const [bookingSuccess, setBookingSuccess] = useState(false);
   const [error, setError] = useState(null);
 
+  const {user,isAuthenticated} = useSelector( (state) => state.auth);
+
   const { data: student, isLoading, isError } = useGetStudentByIdQuery(id);
 
-  const handleBookSession = async () => {
-    // if (!selectedDate) {
-    //   setError('Please select a date for your session');
-    //   return;
-    // }
+  const [createBooking] = useCreateBokingMutation();
 
+  const handleBookSession = async (id) => {
+    const toastId = toast.loading("Booking...")
     try {
-      const userId = localStorage.getItem('user');
 
-      if (!userId) {
-        setError('Please log in to book a session');
+      if (!user) {
+        toast.error('Please log in to book a Student');
         navigate('/login');
         return;
       }
 
-      const response = await fetch('http://localhost:8000/api/bookings', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('token')}`,
-        },
-        body: JSON.stringify({
-          studentId: id,
-          userId: userId,
-          date: selectedDate,
-        }),
-      });
+      result =  await createBooking({tutorId:user._id, studentId:id, bookerRole:user.role}).unwrap();
 
-      if (!response.ok) {
-        toast.error("Try again")
-        throw new Error('Failed to book session');
-      }
+        toast.success("Student Booked Successful!", {id:toastId})
 
-      const result = await response.json();
-      setBookingSuccess(true);
       setError(null);
       
-      setTimeout(() => {
-        setBookingSuccess(false);
-        setSelectedDate('');
-      }, 3000);
     } catch (err) {
+      toast.error(err?.message || "Failed to book. Please try again later.", {id:toastId})
       console.error('Error booking session:', err);
-      setError('Failed to book session. Please try again later.');
+    }
+    finally{
+      setTimeout(() => {
+        toast.dismiss(toastId)
+      }, 2000);
     }
   };
 
@@ -195,7 +181,7 @@ const StudentDetail = () => {
                 {/* Booking Button */}
                 <div className="mt-6">
                   <button
-                    onClick={handleBookSession}
+                    onClick={() => handleBookSession(student.data._id)}
                     // disabled={!selectedDate}
                     className={`w-full bg-indigo-600 text-white px-6 py-3 rounded-md font-medium hover:bg-indigo-700 transition-colors ${
                       selectedDate ? 'opacity-50 cursor-not-allowed' : ''

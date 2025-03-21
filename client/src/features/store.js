@@ -6,6 +6,7 @@ import { profileApi } from './auth/profileApi';
 import { tutorApi } from './auth/tutorApi';
 import { studentApi } from './auth/studentApi';
 import { noticeApi } from './auth/noticeApi';
+import { bookingApi } from './auth/bookingApi';
 
 export const store = configureStore({
   reducer: {
@@ -15,9 +16,10 @@ export const store = configureStore({
     [tutorApi.reducerPath]: tutorApi.reducer,
     [studentApi.reducerPath]: studentApi.reducer,
     [noticeApi.reducerPath]: noticeApi.reducer,
+    [bookingApi.reducerPath]: bookingApi.reducer,
     auth: authReducer,  
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(authApi.middleware).concat(helpFormApi.middleware).concat(profileApi.middleware)
-    .concat(tutorApi.middleware).concat(studentApi.middleware).concat(noticeApi.middleware),
+    .concat(tutorApi.middleware).concat(studentApi.middleware).concat(noticeApi.middleware).concat(bookingApi.middleware),
 });

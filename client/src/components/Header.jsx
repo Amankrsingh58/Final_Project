@@ -14,7 +14,6 @@ function Header(){
   const [isTablet, setIsTablet] = useState(true);
 
   const handleResize = () => {
-    // Update state based on window width (768px is typical tablet size)
     if (window.innerWidth < 768) {
       setIsTablet(false);
     } else {
@@ -23,14 +22,10 @@ function Header(){
   };
 
   useEffect(() => {
-    // Listen for resize events
     window.addEventListener('resize', handleResize);
     
-    // Initial check when the component is mounted
     handleResize();
 
-    // Clean up the event listener on component unmount
-    // return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   
@@ -73,9 +68,9 @@ function Header(){
               
             </Link>
             <Link 
-              to="/signup" 
+              to={isAuthenticated ? "/my-bookings" : "/signup"} 
               className="bg-transparent border-2 border-white text-white px-6 py-3 rounded-md font-medium hover:bg-white hover:text-indigo-600 transition-colors text-center"
-            >{isAuthenticated ? "Enquire Now" : "Become a Tutor"}
+            >{isAuthenticated ? "My Bookings" : "Become a Tutor"}
             </Link>
           </div>
         </motion.div>

@@ -72,7 +72,7 @@ useEffect(() => {
         </li>
         <li>
           <NavLink
-            to="/userdashboard/my-booking"
+            to="/my-bookings"
             className={({ isActive }) => (isActive ? " bg-[#d8d9e5b3]" : "")}
           >
             <SiHomeassistantcommunitystore  className="icon" />

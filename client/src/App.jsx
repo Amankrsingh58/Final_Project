@@ -12,13 +12,13 @@ import Dashboard from "./pages/DashBoard";
 import TutorDetail from "./pages/TutorDetail";
 import ProtectedRoute from "./components/Dashboard/ProtectedRoute";
 import Student from "./pages/Student";
-import Services from "./pages/Services";
 import { useDispatch, useSelector } from "react-redux";
 import { useVerifyTokenExpiryQuery } from "./features/auth/userApi";
 import { setLogout } from "./features/auth/authSlice";
 import { useEffect } from "react";
 import StudentDetail from "./pages/StudentDetails";
 import { Toaster } from "react-hot-toast";
+import Bookings from "./pages/Bookings";
 
 
 
@@ -55,7 +55,7 @@ function App() {
         <Route path="/student" element={<Student />} />
         <Route path="/student/:id" element={<StudentDetail />} />
         <Route path="/tutordetail" element={<TutorDetail />} />
-        <Route path="/services" element={<Services />} />
+        <Route path="/my-bookings" element={<Bookings />} />
 
         <Route element={<ProtectedRoute allowedRoles={["Student","Tutor"]} />}>
         <Route path="/userdashboard/*" element={<StudentsDashboard/>} />
