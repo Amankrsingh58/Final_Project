@@ -8,20 +8,8 @@ import { useSignupMutation } from '../features/auth/userApi';
 import { useDispatch } from 'react-redux';
 import { setUser, setError } from '../features/auth/authSlice';
 import Select from 'react-select'; // For searchable dropdowns
+import { FiBookOpen } from "react-icons/fi"
 
-// Example subjects and states/cities
-const subjects = ["Math", "Science", "English", "History", "Geography"];
-const states = [
-  { value: "California", label: "California" },
-  { value: "Texas", label: "Texas" },
-  { value: "Florida", label: "Florida" },
-];
-
-const cities = {
-  California: ["Los Angeles", "San Francisco", "San Diego"],
-  Texas: ["Houston", "Dallas", "Austin"],
-  Florida: ["Miami", "Orlando", "Tampa"],
-};
 
 const Signup = () => {
   const [error, setError] = useState(null);
@@ -35,7 +23,7 @@ const Signup = () => {
   const { register, handleSubmit, formState: { errors }, watch } = useForm();
   const [signup] = useSignupMutation();
 
-  const onSubmit = async (data) => {
+ const onSubmit = async (data) => {
     setError(null);
     setIsLoading(true);
 
@@ -70,16 +58,34 @@ const Signup = () => {
     }
   };
 
-  // Handle state change and update city dropdown
-  const handleStateChange = (selectedOption) => {
-    setSelectedState(selectedOption);
-    setSelectedCity(""); // Reset selected city when state changes
-  };
+  // // Handle state change and update city dropdown
+  // const handleStateChange = (selectedOption) => {
+  //   setSelectedState(selectedOption);
+  //   setSelectedCity(""); // Reset selected city when state changes
+  // };
 
-  // Handle role toggle (Tutor/Student)
-  const handleRoleToggle = (roleType) => {
-    setRole(roleType);
-  };
+  // // Handle role toggle (Tutor/Student)
+  // const handleRoleToggle = (roleType) => {
+  //   setRole(roleType);
+  // };
+  
+  const handleRoleToggle = (selectedRole) => {
+    setRole(selectedRole);
+};
+
+const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+        ...formData,
+        [name]: value,
+    });
+};
+
+// const  = (e) => {
+//     e.preventDefault();
+//     // Handle form submission
+//     console.log(formData);
+// };
 
   return (
     <div className="min-h-screen pt-16 flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
@@ -89,11 +95,12 @@ const Signup = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
+         
         <div>
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
             Create a new account
           </h2>
-        </div>
+          </div>
 
         {error && (
           <motion.div 
@@ -107,11 +114,25 @@ const Signup = () => {
           </motion.div>
         )}
 
-        <form className="mt-8 space-y-6" onSubmit={handleSubmit(onSubmit)}>
+        <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           <div className="rounded-md shadow-sm -space-y-px">
+          <button
+              type="button"
+              onClick={() => handleRoleToggle('tutor')}
+              className={`py-2 px-4 border rounded-md mr-8 ml-25 ${role === 'tutor' ? 'bg-indigo-600 text-white' : 'bg-gray-200'}`}
+            >
+              Tutor
+            </button>
+            <button
+              type="button"
+              onClick={() => handleRoleToggle('student')}
+              className={`py-2 px-4 border rounded-md  ${role === 'student' ? 'bg-indigo-600 text-white' : 'bg-gray-200'}`}
+            >
+              Student
+            </button>
             {/* UserName */}
             <div>
-              <label htmlFor="userName" className="sr-only">
+              <label htmlFor="userName" className="mt-10">
                 User Name
               </label>
               <input
@@ -164,37 +185,56 @@ const Signup = () => {
             </div>
 
             {/* Experience */}
-            <div>
-              <label htmlFor="experience" className="sr-only">
+            {role === 'tutor' ? (
+               <div>
+               <label htmlFor="experience" className="sr-only">
+                 Experience (Years)
+               </label>
+               <input
+                 id="experience"
+                 name="experience"
+                 type="number"
+                 {...register('experience', { required: 'Experience is required' })}
+                 className={`appearance-none rounded-md relative block w-full px-3 py-2 border mb-4 border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm ${errors.experience ? 'border-red-500' : ''}`}
+                 placeholder="Experience (in Years)"
+               />
+               {errors.experience && <p className="text-red-500 text-xs">{errors.experience.message}</p>}
+             </div>
+            ): role === 'student'?(
+              <div>
+              <label htmlFor="grade" className="sr-only">
                 Experience (Years)
               </label>
               <input
-                id="experience"
-                name="experience"
+                id="Grade"
+                name="Grade"
                 type="number"
-                {...register('experience', { required: 'Experience is required' })}
-                className={`appearance-none rounded-md relative block w-full px-3 py-2 border mb-4 border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm ${errors.experience ? 'border-red-500' : ''}`}
-                placeholder="Experience (in Years)"
+                {...register('Grade', { required: 'Grade  is required' })}
+                className={`appearance-none rounded-md relative block w-full px-3 py-2 border mb-4 border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm ${errors.grade ? 'border-red-500' : ''}`}
+                placeholder="Grade"
               />
-              {errors.experience && <p className="text-red-500 text-xs">{errors.experience.message}</p>}
+              {errors.grade && <p className="text-red-500 text-xs">{errors.grade.message}</p>}
             </div>
+            ):null}
+           
 
             {/* Subjects (Multiple selection) */}
             <div>
               <label htmlFor="subject" className="sr-only">
                 Subjects
               </label>
-              <select
+              <input 
                 id="subject"
                 name="subject"
                 multiple
                 {...register('subject', { required: 'Please select at least one subject' })}
                 className={`appearance-none rounded-md relative block w-full px-3 py-2 border mb-4 border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm ${errors.subject ? 'border-red-500' : ''}`}
+                 placeholder="Enter intrested subjects"
               >
-                {subjects.map((subject) => (
+                {/* {subjects.map((subject) => (
                   <option key={subject} value={subject}>{subject}</option>
-                ))}
-              </select>
+                ))} */}
+             </input>
               {errors.subject && <p className="text-red-500 text-xs">{errors.subject.message}</p>}
             </div>
 
@@ -203,21 +243,35 @@ const Signup = () => {
               <label htmlFor="state" className="sr-only">
                 State
               </label>
-              <Select
+              <input
                 id="state"
                 name="state"
-                options={states}
-                value={selectedState}
-                onChange={handleStateChange}
-                isSearchable
-                placeholder="Select a State"
-                className={`${errors.state ? 'border-red-500' : ''}`}
+                type='text'
+               {...register('state', { required: 'state is required' })}
+               className={`appearance-none rounded-md relative block w-full px-3 py-2 border mb-4 border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm ${errors.state? 'border-red-500' : ''}`}
+                placeholder="Enter state name"
+                
+              />
+              {errors.state && <p className="text-red-500 text-xs">{errors.state.message}</p>}
+            </div>
+            <div>
+              <label htmlFor="City" className="sr-only">
+                State
+              </label>
+              <input
+                id="City"
+                name="City"
+                type='text'
+               {...register('state', { required: 'city is required' })}
+               className={`appearance-none rounded-md relative block w-full px-3 py-2 border mb-4 border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm ${errors.state? 'border-red-500' : ''}`}
+                placeholder="Enter City name"
+                
               />
               {errors.state && <p className="text-red-500 text-xs">{errors.state.message}</p>}
             </div>
 
             {/* City Dropdown */}
-            <div>
+            {/* <div>
               <label htmlFor="city" className="sr-only">
                 City
               </label>
@@ -234,7 +288,7 @@ const Signup = () => {
                 ))}
               </select>
               {errors.city && <p className="text-red-500 text-xs">{errors.city.message}</p>}
-            </div>
+            </div> */}
 
             {/* Bio */}
             <div>
@@ -253,6 +307,7 @@ const Signup = () => {
             </div>
 
             {/* Fee per Month */}
+            {role =='tutor'?(
             <div>
               <label htmlFor="fee" className="sr-only">
                 Fee per Month
@@ -267,6 +322,7 @@ const Signup = () => {
               />
               {errors.fee && <p className="text-red-500 text-xs">{errors.fee.message}</p>}
             </div>
+            ):null}
 
             {/* Password */}
             <div>
@@ -305,20 +361,7 @@ const Signup = () => {
           </div>
 
           <div className="flex justify-center space-x-4">
-            <button
-              type="button"
-              onClick={() => handleRoleToggle('tutor')}
-              className={`py-2 px-4 border rounded-md ${role === 'tutor' ? 'bg-indigo-600 text-white' : 'bg-gray-200'}`}
-            >
-              Tutor
-            </button>
-            <button
-              type="button"
-              onClick={() => handleRoleToggle('student')}
-              className={`py-2 px-4 border rounded-md ${role === 'student' ? 'bg-indigo-600 text-white' : 'bg-gray-200'}`}
-            >
-              Student
-            </button>
+           
           </div>
 
           <div>

@@ -34,6 +34,7 @@ const SettingsPage = () => {
         console.error("Error updating profile:", error);
       
     }
+    
   };
 
 
