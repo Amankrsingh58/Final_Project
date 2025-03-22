@@ -21,21 +21,21 @@ const Signup = () => {
   const dispatch = useDispatch();
 
   const { register, handleSubmit, formState: { errors }, watch } = useForm();
-  const [signup] = useSignupMutation();
+  const [Signup] = useSignupMutation();
 
  const onSubmit = async (data) => {
     setError(null);
     setIsLoading(true);
 
     try {
-      const result = await signup({
+      const result =  await Signup({
         userName: data.userName,
         email: data.email,
         phoneNo: data.phoneNo,
         experience: data.experience,
         subject: data.subject,
-        state: selectedState?.value,
-        city: selectedCity,
+        state: data.value,
+        city: data.value,
         bio: data.bio,
         fee: data.fee,
         password: data.password,
@@ -114,7 +114,7 @@ const handleInputChange = (e) => {
           </motion.div>
         )}
 
-        <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
+        <form className="mt-8 space-y-6" onSubmit={handleSubmit(onSubmit)}>
           <div className="rounded-md shadow-sm -space-y-px">
           <button
               type="button"
@@ -219,6 +219,24 @@ const handleInputChange = (e) => {
            
 
             {/* Subjects (Multiple selection) */}
+            {role === 'tutor' ? (
+            <div>
+              <label htmlFor="subject" className="sr-only">
+                Subjects
+              </label>
+              <input 
+                id="subject"
+                name="subject"
+                multiple
+                {...register('subject', { required: 'Please select at least one subject' })}
+                className={`appearance-none rounded-md relative block w-full px-3 py-2 border mb-4 border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm ${errors.subject ? 'border-red-500' : ''}`}
+                 placeholder="Enter subjects"
+              >
+           
+             </input>
+              {errors.subject && <p className="text-red-500 text-xs">{errors.subject.message}</p>}
+            </div>
+            ):role ==='student'?(
             <div>
               <label htmlFor="subject" className="sr-only">
                 Subjects
@@ -231,12 +249,11 @@ const handleInputChange = (e) => {
                 className={`appearance-none rounded-md relative block w-full px-3 py-2 border mb-4 border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm ${errors.subject ? 'border-red-500' : ''}`}
                  placeholder="Enter intrested subjects"
               >
-                {/* {subjects.map((subject) => (
-                  <option key={subject} value={subject}>{subject}</option>
-                ))} */}
+           
              </input>
               {errors.subject && <p className="text-red-500 text-xs">{errors.subject.message}</p>}
             </div>
+            ):null}
 
             {/* State Dropdown (Searchable) */}
             <div>
