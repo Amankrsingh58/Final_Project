@@ -3,6 +3,7 @@ import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 import Sidebar from "../components/Dashboard/Slidebar";
 import DashboardHome from "../components/Dashboard/DashboardHome";
 import Notifications from "../components/Dashboard/Notifications";
+import AllBookings from "../components/Dashboard/AllBookings";
 import SettingsPage from "../components/Dashboard/setting";
 import "./DashBoard.css";
 import Tutor from "../components/Dashboard/Tutors";
@@ -42,6 +43,7 @@ const DashBoard = () => {
           <Route path="/" element={<DashboardHome />} />
           <Route path="profile" element={<Profile/>} />
           <Route path="notifications" element={<Notifications />} />
+          <Route path="bookings" element={<AllBookings />} />
           <Route path="tutors" element={<Tutor />} />
           <Route path="students" element={<Student />} />
           <Route path="adminsetting" element={<SettingsPage/>} />

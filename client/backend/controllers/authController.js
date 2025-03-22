@@ -12,11 +12,14 @@ const bcrypt = require("bcrypt")
 //register business logic
 const registerUser = async (req, res) => {
     try {
-        const { userName, email, password, confirmpassword, role, subjects, experience, grade, state, city, subjectInterested } = req.body;
+        const { userName, email, password, confirmPassword, role, subjects, experience, grade, state, city, subjectInterested } = req.body;
         console.log("req ka body =>", req.body);
         //validate user data input
-        if (!userName || !email || !password || password !== confirmpassword) {
-            return res.status(400).json({ message: 'Please enter required details' });
+        if (!userName || !email || !password ||  !confirmPassword) {
+            return res.status(404).json({ message: 'Please enter required details' });
+        }
+        if ( password !== confirmPassword) {
+            return res.status(400).json({ message: 'Confirm password do not match' });
         }
 
         if (role === 'Tutor') {
@@ -71,10 +74,33 @@ const registerUser = async (req, res) => {
         //remove password and refresh token field from response
         //check for user creaion
 
-        return res.status(201).json({ message: 'User registered successfully' });
-    } catch (error) {
+  // Generate access and refresh tokens
+  const accessToken = await user.generateAccessToken();
+  const refreshToken = await user.generateRefreshToken();
+  // console.log("User not found", user);
+  user.refreshToken = refreshToken;
+  await user.save();
+  // console.log(refreshToken);
+
+  user.password = undefined;
+  // Set cookies with the tokens
+  const options = {
+      httpOnly: true,
+      secure: false,
+      sameSite: "Lax",
+      maxAge: 24 * 60 * 60 * 1000,
+  };
+
+  return res.status(200)
+      .cookie("accessToken", accessToken, options)
+      .cookie("refreshToken", refreshToken, options)
+      .json({
+          success: true,
+          user: user,
+          message: 'User Register  successfully',
+      });    } catch (error) {
         console.error("Registration error: ", error);
-        return res.status(500).json({ error: 'Registration failed' });
+        return res.status(500).json({ message: 'Registration failed', error:error.message });
     }
 };
 

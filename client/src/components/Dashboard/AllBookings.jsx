@@ -3,9 +3,9 @@ import { format } from 'date-fns';
 import { Calendar, Clock, CheckCircle, XCircle, AlertCircle, MapPin, BookOpenText, Phone } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { useGetUserBookingQuery } from '../features/auth/bookingApi';
+import { useGetUserBookingQuery } from '../../features/auth/bookingApi';
 
-const Bookings = () => {
+const AllBookings = () => {
   const [bookings, setBookings] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -227,4 +227,4 @@ const Bookings = () => {
   );
 };
 
-export default Bookings;
+export default AllBookings;

@@ -302,19 +302,19 @@ const TutorsList = () => {
                   </div>
                   
                   <div className="mt-4 flex items-center text-sm text-gray-500">
-                    <Clock className="h-4 w-4 mr-1" />
+                    <Clock className="h-4 w-4 mr-1 text-blue-400" />
                     <span>{tutor.experience} years experience</span>
                   </div>
                   
                   {tutor.city && (
                     <div className="mt-1 flex items-center text-sm text-gray-500">
-                      <MapPin className="h-4 w-4 mr-1 text-green-400" />
+                      <MapPin className="h-4 w-4 mr-1 text-blue-400" />
                       <span>Location: {tutor.city}</span>
                     </div>
                   )}
                   
                   <div className="mt-1 flex items-center text-sm text-gray-500">
-                    <Calendar className="h-4 w-4 mr-1 text-green-400" />
+                    <Calendar className="h-4 w-4 mr-1 text-blue-400" />
                     <span>Posted On :{format(new Date(tutor.createdAt), 'MMMM d, yyyy')}</span>
                     </div>
                   

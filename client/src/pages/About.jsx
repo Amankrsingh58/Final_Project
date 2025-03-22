@@ -2,8 +2,13 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { BookOpen, Award, Users, Heart, Target, MessageSquare } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import AmanImg from '../images/Aman4.JPG'
+import AnjaniImg from '../images/Anjani.JPG'
+import { useSelector } from 'react-redux';
 
 const AboutUs = () => {
+
+  const {user, isAuthenticated} = useSelector((state) => state.auth)
   const fadeIn = {
     hidden: { opacity: 0, y: 20 },
     visible: { 
@@ -25,29 +30,17 @@ const AboutUs = () => {
 
   const teamMembers = [
     {
-      name: 'Dr. Emily Chen',
+      name: 'Aman Kumar Singh',
       role: 'Founder & CEO',
-      bio: 'Former professor with a passion for making education accessible to all. Emily founded TutorMatch after seeing the need for personalized learning experiences.',
-      image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'
+      bio: 'Aman is passionate about creating solutions that bridge educational gaps. He and his co-founder noticed how difficult it was for people to find quality tutors and wanted to make the process easier for everyone.',
+      image: AmanImg
     },
     {
-      name: 'Michael Rodriguez',
-      role: 'Chief Technology Officer',
-      bio: 'With over 15 years in EdTech, Michael leads our technology initiatives to create seamless learning experiences for students and tutors alike.',
-      image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'
+      name: 'Anjani Kumar',
+      role: 'Co-Founder & CMO',
+      bio: 'Anjani’s leadership skills and commitment to education helped bring the vision of TutorMatch to life. He observed how many students and parents struggled with finding the right tutor and set out to change that.',
+      image: AnjaniImg
     },
-    {
-      name: 'Sarah Johnson',
-      role: 'Head of Tutor Relations',
-      bio: 'Former math tutor with a knack for connecting the right tutors with students. Sarah ensures our platform maintains the highest quality standards.',
-      image: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'
-    },
-    {
-      name: 'David Kim',
-      role: 'Director of Student Success',
-      bio: 'Educational psychologist dedicated to optimizing learning outcomes. David works to ensure every student achieves their academic goals.',
-      image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'
-    }
   ];
 
   return (
@@ -83,13 +76,10 @@ const AboutUs = () => {
               <h2 className="text-3xl font-bold text-gray-900 mb-6">Our Story</h2>
               <div className="space-y-4 text-gray-700">
                 <p>
-                  TutorMatch was founded in 2020 with a simple mission: to make quality education accessible to everyone. What started as a small community of passionate educators has grown into a comprehensive platform connecting thousands of students with expert tutors across dozens of subjects.
+                  TutorMatch was founded by Aman Kumar Singh and Anjani Kumar, both third-year students at IIMT College of Engineering, Greater Noida. The idea for this project came from noticing the struggles faced by friends, family, and other people who found it difficult to find home tutors. Parents were struggling to find the best tutors for their children, and students often faced challenges in finding quality tutoring services. 
                 </p>
                 <p>
-                  Our founder, Dr. Emily Chen, recognized a fundamental problem in education—many students struggle not because they lack ability, but because they haven't found the right teaching approach that works for them. TutorMatch was born from the belief that personalized, one-on-one instruction can transform a student's educational journey.
-                </p>
-                <p>
-                  Today, we're proud to have facilitated over 50,000 successful tutoring sessions, helping students of all ages achieve their academic goals and discover the joy of learning.
+                  Our goal was simple: to create a platform where students and parents can easily find qualified tutors that match their educational needs. With a shared vision and a passion for education, we worked to bring TutorMatch to life, offering personalized tutoring solutions for all.
                 </p>
               </div>
             </motion.div>
@@ -282,8 +272,8 @@ const AboutUs = () => {
 
       {/* Stats */}
       <section className="py-16">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
+        <div className="max-w-7xl mx-auto px-6 overflow-x-hidden">
+          <div className="grid grid-cols-2 lg:grid-cols-2 md:grid-cols-2 gap-8 text-center ml-auto  overflow-x-hidden">
             {[
               { number: "5,000+", label: "Qualified Tutors" },
               { number: "50,000+", label: "Tutoring Sessions" },
@@ -321,13 +311,13 @@ const AboutUs = () => {
             </p>
             <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
               <Link 
-                to="/tutors" 
+                to={isAuthenticated ? "/tutor" : "/login"} 
                 className="bg-white text-indigo-600 px-6 py-3 rounded-md font-medium hover:bg-gray-100 transition-colors"
               >
                 Find a Tutor
               </Link>
               <Link 
-                to="/become-tutor" 
+                to={isAuthenticated ? "/my-bookings" : "/signup"} 
                 className="bg-transparent border-2 border-white text-white px-6 py-3 rounded-md font-medium hover:bg-white hover:text-indigo-600 transition-colors"
               >
                 Become a Tutor
