@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { format } from 'date-fns';
 import { useGetStudentByIdQuery } from '../features/auth/studentApi';
-import { Clock, DollarSign, Star, MapPin, Check, X, Calendar } from 'lucide-react';
+import { Clock, DollarSign, Star, MapPin, Check, X, Calendar, Phone, PhoneCall } from 'lucide-react';
 import { motion } from 'framer-motion';  // For motion effects
 import toast from 'react-hot-toast';
 import { useCreateBokingMutation } from '../features/auth/bookingApi';
+import { FaWhatsapp } from "react-icons/fa";
 import { useSelector } from 'react-redux';
 
 const StudentDetail = () => {
@@ -68,6 +69,13 @@ const StudentDetail = () => {
     );
   }
 
+  const message = 'Hello! I would like to contact you.';
+
+  const handleClick = () => {
+    const url = `https://wa.me/${student.data.phoneNo}?text=${encodeURIComponent(message)}`;
+    window.open(url, '_blank');
+  };
+
   return (
     <div className="pt-16 min-h-screen bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -104,7 +112,16 @@ const StudentDetail = () => {
                
                 </div>
                 
-                <div className="mt-6 flex flex-wrap gap-4"> 
+                <div className="mt-6 flex flex-wrap flex-col gap-4"> 
+                <div className="flex items-center text-gray-700">
+                    <Phone className="h-5 w-5 mr-2 text-indigo-600" />
+                    <span>(+91) {student.data.phoneNo}</span>
+                  </div>
+
+                <div className="flex items-center text-gray-700">
+                    <div className="h-5 w-5 mr-2 text-indigo-600" />
+                    <span>Grade: {student.data.grade}</span>
+                  </div>
                   
                   <div className="flex items-center text-gray-700">
                     <MapPin className="h-5 w-5 mr-2 text-indigo-600" />
@@ -112,13 +129,13 @@ const StudentDetail = () => {
                   </div>
                 </div>
                 
-                <div className="mt-6">
+                {student.data.bio && <div className="mt-6">
                   <h2 className="text-xl font-semibold mb-2">About Me</h2>
                   <p className="text-gray-700">{student.data.bio || "No bio provided yet"}</p>
-                </div>
+                </div>}
                 
                 <div className="mt-6">
-                  <h2 className="text-xl font-semibold mb-2">SubjectInterested</h2>
+                  <h2 className="text-xl font-semibold mb-2">Subjects</h2>
                   <div className="flex flex-wrap gap-2">
                     {student.data.subjectInterested.map((subject, index) => (
                       <span key={index} className="bg-gray-100 text-gray-800 px-3 py-1 rounded-full text-sm">
@@ -139,7 +156,7 @@ const StudentDetail = () => {
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.3, duration: 0.5 }}
               >
-                <h2 className="text-2xl font-bold mb-6">Reach Out to Student</h2>
+                {/* <h2 className="text-2xl font-bold mb-6">Reach Out to Student</h2> */}
 
                 {/* Error Handling */}
                 {error && (
@@ -189,10 +206,19 @@ const StudentDetail = () => {
                   >
                     Offer Tuition
                   </button>
+
+                  <button
+                    onClick={handleClick}
+                    className={`w-full gap-2 items-center bg-[#25d366] text-white px-6 py-3 mt-2 cursor-pointer rounded-md flex justify-center hover:bg-green-700 transition-colors ${
+                      selectedDate ? 'opacity-50 cursor-not-allowed' : ''
+                    }`}
+                  ><span>Chat On</span> 
+                    <FaWhatsapp className='font-lg w-8  h-6 text-center'/>
+                  </button>
                 </div>
 
                 <p className="text-sm text-gray-500 mt-4 text-center">
-                  You won't be charged until after the session
+                  Have A Good Chat...!
                 </p>
               </motion.div>
             </div>

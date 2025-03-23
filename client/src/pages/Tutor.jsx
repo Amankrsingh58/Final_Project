@@ -11,7 +11,7 @@ const TutorsList = () => {
 
   const [bookingData, setBookingData] = useState({
     tutorId:"",
-    studentId:user._id,
+    studentId:user?._id,
     booker:'Student'
   });
   
@@ -323,10 +323,10 @@ const TutorsList = () => {
                   )}
                   
                   <div className="mt-6 flex justify-between items-center">
-                    <Link to={`/tutor/${tutor._id}`} className="text-indigo-600 hover:text-indigo-800 font-medium text-sm">
+                    <Link to={isAuthenticated ? `/tutor/${tutor._id}` : "/signup"} className="text-indigo-600 hover:text-indigo-800 font-medium text-sm">
                       View Profile
                     </Link>
-                    <Link to={`/tutor/${tutor._id}`} className="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition-colors text-sm font-medium">
+                    <Link to={isAuthenticated ?`/tutor/${tutor._id}` : "/signup"} className="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition-colors text-sm font-medium">
                     Request Tuition
                     </Link>
                   </div>

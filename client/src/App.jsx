@@ -49,10 +49,11 @@ function App() {
           <Route path="/dashboard/*" element={<Dashboard />} />
         </Route>        
 
-        <Route element={<ProtectedRoute allowedRoles={["Student","Tutor","Admin"]} />}>
         <Route path="/tutor" element={<Tutor />} />
-        <Route path="/tutor/:id" element={<TutorDetail />} />
         <Route path="/student" element={<Student />} />
+        
+        <Route element={<ProtectedRoute allowedRoles={["Student","Tutor","Admin"]} />}>
+        <Route path="/tutor/:id" element={<TutorDetail />} />
         <Route path="/student/:id" element={<StudentDetail />} />
         <Route path="/tutordetail" element={<TutorDetail />} />
         <Route path="/my-bookings" element={<Bookings />} />

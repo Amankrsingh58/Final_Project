@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useGetUserBookingQuery, useUpdateBookingStateMutation } from '../features/auth/bookingApi';
 import toast from 'react-hot-toast';
+import { FaWhatsapp } from "react-icons/fa";
+
 
 const Bookings = () => {
   const [bookings, setBookings] = useState([]);
@@ -91,7 +93,7 @@ const Bookings = () => {
 
   return (
     <div className="pt-16 min-h-screen bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-0 lg:px-8 py-8">
         <h1 className="text-3xl font-bold text-gray-900 mb-6">My Bookings</h1>
 
         <div className="bg-white rounded-lg shadow-md overflow-hidden">
@@ -100,8 +102,8 @@ const Bookings = () => {
               <button
                 onClick={() => setActiveTab('current')}
                 className={`py-4 px-6 text-center border-b-2 font-medium text-sm ${activeTab === 'current'
-                    ? 'border-indigo-500 text-indigo-600'
-                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                  ? 'border-indigo-500 text-indigo-600'
+                  : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
                   }`}
               >
                 Current ({upcomingBookings.length})
@@ -109,8 +111,8 @@ const Bookings = () => {
               <button
                 onClick={() => setActiveTab('history')}
                 className={`py-4 px-6 text-center border-b-2 font-medium text-sm ${activeTab === 'history'
-                    ? 'border-indigo-500 text-indigo-600'
-                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                  ? 'border-indigo-500 text-indigo-600'
+                  : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
                   }`}
               >
                 History ({pastBookings.length})
@@ -118,7 +120,7 @@ const Bookings = () => {
             </nav>
           </div>
 
-          <div className="p-6">
+          <div className="p-1">
             {error && (
               <div className="bg-red-50 border-l-4 border-red-400 p-4 text-red-700 mb-6">
                 {error}
@@ -136,7 +138,7 @@ const Bookings = () => {
                   to={user.role === 'Tutor' ? "/student" : "/tutor"}
                   className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                 >
-                 {user.role === 'Tutor' ? "Find Students" : "Find a Tutor"} 
+                  {user.role === 'Tutor' ? "Find Students" : "Find a Tutor"}
                 </Link>
               </div>
             ) : activeTab === 'history' && pastBookings.length === 0 ? (
@@ -150,7 +152,7 @@ const Bookings = () => {
             ) : user.role === "Student" ? (
               <div className="space-y-6">
                 {(activeTab === 'current' ? upcomingBookings : pastBookings).map((booking) => (
-                  <div key={booking._id} className="bg-gray-50 rounded-lg p-6">
+                  <div key={booking._id} className="bg-gray-50 rounded-lg p-2">
 
                     <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
 
@@ -166,7 +168,7 @@ const Bookings = () => {
                           <h3 className="text-lg font-semibold">{booking.tutorId.userName}</h3>
                           <div className="flex items-center text-gray-600 text-sm font-semibold">
                             <Phone className="h-4 w-4 mr-1 text-sm font-semibold" />
-                            <span>  {8287393644}</span>
+                            <span>(+91) {booking.tutorId.tutorId.phonrNo}</span>
                           </div>
                         </div>
                       </div>
@@ -224,9 +226,9 @@ const Bookings = () => {
                 ))}
               </div>
 
-            ) : (<div className="space-y-6">
+            ) : (<div className="space-y-3">
               {(activeTab === 'current' ? upcomingBookings : pastBookings).map((booking) => (
-                <div key={booking._id} className="bg-gray-50 rounded-lg p-6">
+                <div key={booking._id} className="bg-gray-50 rounded-lg p-2">
 
                   <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
 
@@ -242,7 +244,7 @@ const Bookings = () => {
                         <h3 className="text-lg font-semibold">{booking.studentId.userName}</h3>
                         <div className="flex items-center text-gray-600 text-sm font-semibold">
                           <Phone className="h-4 w-4 mr-1 text-sm font-semibold" />
-                          <span>  {8287393644}</span>
+                          <span>  {booking.studentId.studentId.phoneNo}</span>
                         </div>
                       </div>
                     </div>
@@ -270,12 +272,12 @@ const Bookings = () => {
                     <div className="flex flex-col items-start md:items-end">
                       <div className="mb-2">{getStatusBadge(booking.bookingStatus)}</div>
                       <div className="flex items-center text-gray-600 text-sm">
-                      <span>
-                            {(booking.BookingStatus === 'cancelled' || booking.BookingStatus === 'accepted')
-                              ? `On ${format(new Date(booking.createdAt), 'MMMM d, yyyy')}`
-                              : `Posted On : ${format(new Date(booking.createdAt), 'MMMM d, yyyy')}`}
-                          </span> 
-                        </div>
+                        <span>
+                          {(booking.BookingStatus === 'cancelled' || booking.BookingStatus === 'accepted')
+                            ? `On ${format(new Date(booking.createdAt), 'MMMM d, yyyy')}`
+                            : `Posted On : ${format(new Date(booking.createdAt), 'MMMM d, yyyy')}`}
+                        </span>
+                      </div>
                     </div>
                   </div>
 
@@ -293,6 +295,15 @@ const Bookings = () => {
                           className="text-white cursor-pointer text-sm font-medium px-4 py-2 rounded-md duration-300 hover:scale-95 transition-all bg-green-600"
                         >
                           Accept
+                        </button>
+                      )}
+                      {user.role === booking.bookerRole && (
+                        <button
+                          // onClick={handleClick}
+                          className={` gap-1 items-center bg-[#25d366] text-white px-4 py-3 cursor-pointer rounded-md flex justify-center hover:bg-green-700 transition-colors`}
+                        >
+                          <span>Chat On</span>
+                          <FaWhatsapp className='font-lg w-8  h-6 text-center' />
                         </button>
                       )}
                     </div>

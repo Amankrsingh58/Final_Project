@@ -20,6 +20,17 @@ export const store = configureStore({
     auth: authReducer,  
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(authApi.middleware).concat(helpFormApi.middleware).concat(profileApi.middleware)
-    .concat(tutorApi.middleware).concat(studentApi.middleware).concat(noticeApi.middleware).concat(bookingApi.middleware),
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: ['some/actionType'], 
+        ignoredPaths: ['some/statePath'],  
+      }
+    })
+    .concat(authApi.middleware)
+    .concat(helpFormApi.middleware)
+    .concat(profileApi.middleware)
+    .concat(tutorApi.middleware)
+    .concat(studentApi.middleware)
+    .concat(noticeApi.middleware)
+    .concat(bookingApi.middleware),
 });

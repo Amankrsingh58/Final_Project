@@ -3,7 +3,7 @@ const { getAllStudent, getStudentById } = require('../controllers/studentControl
 const { auth } = require('../middlewares/authMiddleware');
 const router = express.Router();
 
-router.get("/allstudents", auth, getAllStudent);
-router.get("/student/:id", getStudentById);
+router.get("/allstudents", getAllStudent);
+router.get("/student/:id",auth, getStudentById);
 
 module.exports = router;

@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { format } from 'date-fns';
 import { useGetTutorByIdQuery } from '../features/auth/tutorApi';
-import { Clock, DollarSign, Star, MapPin, Check, X, Calendar } from 'lucide-react';
+import { Clock, DollarSign, Star, MapPin, Check, X, Calendar, Phone } from 'lucide-react';
 import { motion } from 'framer-motion';  
 import toast from 'react-hot-toast';
 import { useSelector } from 'react-redux';
 import { useCreateBokingMutation } from '../features/auth/bookingApi';
+import { FaWhatsapp } from "react-icons/fa";
 
 const TutorDetail = () => {
   const { id } = useParams();
@@ -68,6 +69,13 @@ const TutorDetail = () => {
     );
   }
 
+  const message = 'Hello! I would like to contact you.';
+
+  const handleClick = () => {
+    const url = `https://wa.me/${tutor.data.phoneNo}?text=${encodeURIComponent(message)}`;
+    window.open(url, '_blank');
+  };
+
   return (
     <div className="pt-16 min-h-screen bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -102,20 +110,25 @@ const TutorDetail = () => {
                     <p className="text-indigo-600 font-medium text-lg">{tutor.data.subjects.join(', ')}</p>
                   </div>
                   <div className="bg-indigo-100 text-indigo-800 px-4 py-2 rounded-full text-lg font-bold">
-                  ₹{tutor.data.hourly_rate}/hr
+                  ₹{tutor.data.fee}/hr
                   </div>
                 </div>
                 
-                <div className="mt-6 flex flex-wrap gap-4">
+                <div className="mt-6 flex flex-wrap flex-col gap-4">
+                  <div className="flex items-center text-gray-700">
+                    <Phone className="h-5 w-5 mr-2 text-indigo-600" />
+                    <span>(+91) {tutor.data.phoneNo}</span>
+                  </div>
+
                   <div className="flex items-center text-gray-700">
                     <Clock className="h-5 w-5 mr-2 text-indigo-600" />
                     <span>{tutor.data.experience} years experience</span>
                   </div>
                   
-                  <div className="flex items-center text-gray-700">
+                  {/* <div className="flex items-center text-gray-700">
                     <Star className="h-5 w-5 mr-2 text-yellow-400" />
                     <span>4.9 (120 reviews)</span>
-                  </div>
+                  </div> */}
                   
                   <div className="flex items-center text-gray-700">
                     <MapPin className="h-5 w-5 mr-2 text-indigo-600" />
@@ -123,10 +136,10 @@ const TutorDetail = () => {
                   </div>
                 </div>
                 
-                <div className="mt-6">
+               {tutor.bio && <div className="mt-6">
                   <h2 className="text-xl font-semibold mb-2">About Me</h2>
                   <p className="text-gray-700">{tutor.data.bio || "No bio provided yet"}</p>
-                </div>
+                </div>}
                 
                 <div className="mt-6">
                   <h2 className="text-xl font-semibold mb-2">Expertise</h2>
@@ -150,7 +163,7 @@ const TutorDetail = () => {
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.3, duration: 0.5 }}
               >
-                <h2 className="text-2xl font-bold mb-6">Request a Session</h2>
+                {/* <h2 className="text-2xl font-bold mb-6">Request a Session</h2> */}
 
                 {/* Error Handling */}
                 {error && (
@@ -193,16 +206,26 @@ const TutorDetail = () => {
                 <div className="mt-6">
                   <button
                     onClick={() => handleBookSession(tutor.data._id)}
-                    className={`w-full bg-indigo-600 text-white px-6 py-3 rounded-md font-medium hover:bg-indigo-700 transition-colors ${
+                    className={`w-full bg-indigo-600 text-white px-6 py-3 cursor-pointer rounded-md font-medium hover:bg-indigo-700 transition-colors ${
                       selectedDate ? 'opacity-50 cursor-not-allowed' : ''
                     }`}
                   >
                     Request Tuition
                   </button>
+
+                  <button
+                    onClick={handleClick}
+                    className={`w-full gap-2 items-center bg-[#25d366] text-white px-6 py-3 mt-2 cursor-pointer rounded-md flex justify-center hover:bg-green-700 transition-colors ${
+                      selectedDate ? 'opacity-50 cursor-not-allowed' : ''
+                    }`}
+                  ><span>Chat On</span> 
+                    <FaWhatsapp className='font-lg w-8  h-6 text-center'/>
+                  </button>
+                 
                 </div>
 
                 <p className="text-sm text-gray-500 mt-4 text-center">
-                  You won't be charged until after the session
+                 Have A Good Talk...!
                 </p>
               </motion.div>
             </div>

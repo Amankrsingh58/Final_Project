@@ -1,7 +1,7 @@
 import { useLogoutMutation } from '../features/auth/userApi';
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Menu, X, BookOpen, User, LogOut } from 'lucide-react';
+import { Menu, X, BookOpen, User, LogOut, SquarePen } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useDispatch, useSelector } from 'react-redux';
 import { setLogout } from '../features/auth/authSlice';
@@ -55,6 +55,11 @@ const Navbar = () => {
          {token &&  <Link to={user.role === "Tutor" ? "/student" : "/tutor"} className="text-gray-700 hover:text-indigo-600 transition-colors">
            {user.role ==="Tutor" ? "Find Students" : 'Find Tutor' }
           </Link>}
+
+          {!isAuthenticated && <Link to= "/tutor" className="text-gray-700 hover:text-indigo-600 transition-colors py-2" onClick={toggleMenu}>
+             Find Tutor
+              </Link>}
+              
           <Link to="/about" className="text-gray-700 hover:text-indigo-600 transition-colors">
             About Us
           </Link>
@@ -104,7 +109,8 @@ const Navbar = () => {
               )}
             </div>
           ):(
-            <Link to="/signup" className="text-gray-700 hover:text-indigo-600 transition-colors">
+            <Link to="/signup" className="text-gray-700 flex  hover:text-indigo-600 transition-colors">
+               <SquarePen />
               SignUp
             </Link>
           )}
@@ -129,6 +135,14 @@ const Navbar = () => {
             <div className="flex flex-col space-y-4 px-4 py-2">
              {token && <Link to={user.role === "Tutor" ? "/student" : "/tutor"} className="text-gray-700 hover:text-indigo-600 transition-colors py-2" onClick={toggleMenu}>
              {user.role ==="Tutor" ? "Find Students" : 'Find Tutor' }
+              </Link>}
+
+             {!isAuthenticated && <Link to= "/tutor" className="text-gray-700 hover:text-indigo-600 transition-colors py-2" onClick={toggleMenu}>
+             Find Tutor
+              </Link>}
+
+             {!isAuthenticated && <Link to="/tutor" className="text-gray-700 hover:text-indigo-600 transition-colors py-2" onClick={toggleMenu}>
+             Find Tutor
               </Link>}
               <Link to="/about" className="text-gray-700 hover:text-indigo-600 transition-colors py-2" onClick={toggleMenu}>
                 About Us

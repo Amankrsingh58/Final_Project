@@ -26,6 +26,12 @@ const tutorSchema = new mongoose.Schema({
     type: String,
     default:"Not Provided yet"
   },
+  fee:{
+    type: Number,
+  },
+  phoneNo	:{
+    type: String,
+  },
 
   review: [{
     type: mongoose.Schema.Types.ObjectId,

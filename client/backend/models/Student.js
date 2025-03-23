@@ -23,6 +23,9 @@ const studentSchema = new mongoose.Schema({
     },
     state:{
         type:String
+    },
+    phoneNo:{
+        type: String,
     }
     
 },{timestamps:true});

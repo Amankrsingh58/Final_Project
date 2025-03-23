@@ -62,15 +62,15 @@ function Header(){
           <p className="text-xl mb-8">Connect with expert tutors for personalized learning experiences that help you achieve your academic goals.</p>
           <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
             <Link 
-              to={user && user.role === 'Tutor' ? "/student" : "/tutor"}
+              to={isAuthenticated ? (user.role === 'Tutor' ? "/student" : "/tutor") :"/tutor"}
               className="bg-white text-indigo-600 px-6 py-3 rounded-md font-medium hover:bg-gray-100 transition-colors text-center"
             >{user && user.role === 'Tutor' ? "Look For Students" : "Find a Tutor"}
               
             </Link>
             <Link 
-              to={isAuthenticated ? "/my-bookings" : "/signup"} 
+              to={isAuthenticated ? "/my-bookings" : "/student"} 
               className="bg-transparent border-2 border-white text-white px-6 py-3 rounded-md font-medium hover:bg-white hover:text-indigo-600 transition-colors text-center"
-            >{isAuthenticated ? "My Bookings" : "Become a Tutor"}
+            >{isAuthenticated ? "My Bookings" : "Look for Students"}
             </Link>
           </div>
         </motion.div>

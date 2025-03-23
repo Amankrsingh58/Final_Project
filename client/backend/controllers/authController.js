@@ -12,7 +12,7 @@ const bcrypt = require("bcrypt")
 //register business logic
 const registerUser = async (req, res) => {
     try {
-        const { userName, email, password, confirmPassword, role, subjects, experience, grade, state, city, subjectInterested } = req.body;
+        const { userName, email, password, confirmPassword,fee,phoneNo, role, subjects, experience, grade, state, city, subjectInterested } = req.body;
         console.log("req ka body =>", req.body);
         //validate user data input
         if (!userName || !email || !password ||  !confirmPassword) {
@@ -53,6 +53,8 @@ const registerUser = async (req, res) => {
                 bio: req.body.bio,
                 state,
                 city,
+                fee,
+                phoneNo,
             });
             await tutor.save();
             user.tutorId = tutor._id;
@@ -65,6 +67,7 @@ const registerUser = async (req, res) => {
                 subjectInterested,
                 state,
                 city,
+                phoneNo,
             });
             await student.save();
             user.studentId = student._id;

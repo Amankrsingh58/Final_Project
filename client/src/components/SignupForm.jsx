@@ -317,6 +317,12 @@ const Signup = () => {
                   )}
                 </button>
               </div>
+              <p className="text-center text-sm text-gray-600">
+                Already have an account?{' '}
+                <Link to="/login" className="font-medium text-indigo-600 hover:text-indigo-500 transition-colors">
+                  Sign in instead
+                </Link>
+              </p>
             </form>
           </div>
         </motion.div>

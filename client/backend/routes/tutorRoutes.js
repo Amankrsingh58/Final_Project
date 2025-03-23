@@ -3,7 +3,7 @@ const { getAllTutor, getTutorById } = require('../controllers/tutorController');
 const { auth } = require('../middlewares/authMiddleware');
 const router = express.Router();
 
-router.get("/alltutors", auth, getAllTutor);
-router.get("/tutor/:id", getTutorById);
+router.get("/alltutors", getAllTutor);
+router.get("/tutor/:id",auth, getTutorById);
 
 module.exports = router;
