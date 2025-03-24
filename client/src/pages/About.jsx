@@ -2,8 +2,8 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { BookOpen, Award, Users, Heart, Target, MessageSquare } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import AmanImg from '../images/Aman4.jpg'
-import AnjaniImg from '../images/Anjani.jpg'
+// import AmanImg from '../images/Aman4.jpg'
+// import AnjaniImg from '../images/Anjani.jpg'
 import { useSelector } from 'react-redux';
 
 const AboutUs = () => {
@@ -33,13 +33,13 @@ const AboutUs = () => {
       name: 'Aman Kumar Singh',
       role: 'Founder & CEO',
       bio: 'Aman is passionate about creating solutions that bridge educational gaps. He and his co-founder noticed how difficult it was for people to find quality tutors and wanted to make the process easier for everyone.',
-      image: AmanImg
+      // image: AmanImg
     },
     {
       name: 'Anjani Kumar',
       role: 'Co-Founder & CMO',
       bio: 'Anjani’s leadership skills and commitment to education helped bring the vision of MyTutorMatch to life. He observed how many students and parents struggled with finding the right tutor and set out to change that.',
-      image: AnjaniImg
+      // image: AnjaniImg
 
     },
   ];
