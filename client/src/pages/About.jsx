@@ -2,8 +2,8 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { BookOpen, Award, Users, Heart, Target, MessageSquare } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import AmanImg from '../images/Aman4.JPG'
-import AnjaniImg from '../images/Anjani.JPG'
+import AmanImg from '../images/Aman4.jpg'
+import AnjaniImg from '../images/Anjani.jpg'
 import { useSelector } from 'react-redux';
 
 const AboutUs = () => {
@@ -40,7 +40,7 @@ const AboutUs = () => {
       role: 'Co-Founder & CMO',
       bio: 'Anjani’s leadership skills and commitment to education helped bring the vision of MyTutorMatch to life. He observed how many students and parents struggled with finding the right tutor and set out to change that.',
       image: AnjaniImg
-      
+
     },
   ];
 
