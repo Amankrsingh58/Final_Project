@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { format } from 'date-fns';
 import { useGetTutorByIdQuery } from '../features/auth/tutorApi';
-import { Clock, DollarSign, Star, MapPin, Check, X, Calendar, Phone } from 'lucide-react';
+import { Clock, DollarSign, Star, MapPin, Check, X, Calendar, Phone, Notebook, Book, BookOpen } from 'lucide-react';
 import { motion } from 'framer-motion';  
 import toast from 'react-hot-toast';
 import { useSelector } from 'react-redux';
@@ -106,22 +106,21 @@ const TutorDetail = () => {
               >
                 <div className="flex justify-between items-start">
                   <div>
-                    <h1 className="text-3xl font-bold text-gray-900">{tutor.data.userId.userName}</h1>
-                    <p className="text-indigo-600 font-medium text-lg">{tutor.data.subjects.join(', ')}</p>
+                    <h1 className="text-3xl font-bold text-gray-700">{tutor.data.userId.userName}</h1>
                   </div>
-                  <div className="bg-indigo-100 text-indigo-800 px-4 py-2 rounded-full text-lg font-bold">
-                  ₹{tutor.data.fee}/hr
+                  <div className="bg-indigo-100 text-indigo-700 px-4 py-2 rounded-full text-lg font-bold">
+                  ₹{tutor.data.fee}/month
                   </div>
                 </div>
                 
                 <div className="mt-6 flex flex-wrap flex-col gap-4">
                   <div className="flex items-center text-gray-700">
-                    <Phone className="h-5 w-5 mr-2 text-indigo-600" />
+                    <Phone className="h-5 w-5 mr-2 text-indigo-500" />
                     <span>(+91) {tutor.data.phoneNo}</span>
                   </div>
 
                   <div className="flex items-center text-gray-700">
-                    <Clock className="h-5 w-5 mr-2 text-indigo-600" />
+                    <Clock className="h-5 w-5 mr-2 text-indigo-500" />
                     <span>{tutor.data.experience} years experience</span>
                   </div>
                   
@@ -131,9 +130,19 @@ const TutorDetail = () => {
                   </div> */}
                   
                   <div className="flex items-center text-gray-700">
-                    <MapPin className="h-5 w-5 mr-2 text-indigo-600" />
+                    <MapPin className="h-5 w-5 mr-2 text-indigo-500" />
                     <span>{tutor.data.city}, {tutor.data.state}</span>
                   </div>
+
+                  <div className="flex items-center text-gray-700">
+                    <BookOpen className="h-5 w-5 mr-2 text-indigo-500" />
+                    {tutor.data.subjects.map((subject, index) => (
+                      <span key={index} className="bg-gray-100 text-gray-800 px-3 py-1 rounded-full text-sm">
+                        {subject}
+                      </span>
+                    ))}
+                  </div>
+
                 </div>
                 
                {tutor.bio && <div className="mt-6">
@@ -141,23 +150,14 @@ const TutorDetail = () => {
                   <p className="text-gray-700">{tutor.data.bio || "No bio provided yet"}</p>
                 </div>}
                 
-                <div className="mt-6">
-                  <h2 className="text-xl font-semibold mb-2">Expertise</h2>
-                  <div className="flex flex-wrap gap-2">
-                    {tutor.data.subjects.map((subject, index) => (
-                      <span key={index} className="bg-gray-100 text-gray-800 px-3 py-1 rounded-full text-sm">
-                        {subject}
-                      </span>
-                    ))}
-                  </div>
-                </div>
+                
               </motion.div>
             </div>
           </div>
 
           {/* Booking Section */}
           <div className="border-t border-gray-200">
-            <div className="p-6 md:p-8">
+            <div className="pl-6 pr-6 pb-6 md:p-8">
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}

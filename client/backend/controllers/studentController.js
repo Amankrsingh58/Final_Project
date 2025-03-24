@@ -1,5 +1,7 @@
 const Student = require("../models/Student")
 const mongoose = require("mongoose")
+const User = require("../models/User")
+
 
 exports.getAllStudent = async(req,res) => {
     try {
@@ -53,3 +55,29 @@ exports.getStudentById = async (req,res) => {
         })
     }
 };
+
+exports.deleteStudent = async (req,res) => {    
+    try{
+        const studentId = req.body;
+
+        const student = await Student.findById(studentId);
+        if (!student) {
+            return res.status(404).send('Tutor not found');
+          }
+
+        const userId = student.userId;
+
+        await Student.findByIdAndDelete(studentId);
+        const deletedUser = await User.findByIdAndDelete(userId);
+
+
+        if (!deletedUser) {
+            return res.status(404).send('User not found');
+          }
+      
+          res.status(200).send('User deleted successfully');
+        } catch (error) {
+          res.status(500).send('Error deleting user: ' + error.message);
+        
+    }
+}

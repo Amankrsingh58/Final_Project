@@ -37,6 +37,19 @@ const StudentsList = () => {
     setSuccess(null);
   };
 
+  const handleDelete = async(id) => {
+    const toastId = toast.loading('Deleting User...');
+    try{
+        await deleteStudent({id}).unwrap();
+        toast.success('User Deleted', { id: toastId });
+    } catch(error){
+      toast.error("Cannot delete user try again",{id:toastId});
+    }
+    finally {
+      setTimeout( () => toast.dismiss(toastId), 2000);
+    }
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -339,6 +352,9 @@ const StudentsList = () => {
                     </Link>
                     <button onClick={() =>{setSelectedStudentId(student._id), setShowModal(true)} } className="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition-colors text-sm font-medium">
                       Send Notice
+                    </button>
+                    <button onClick={() => handleDelete(student._id)} className="bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-700 transition-colors text-sm font-medium">
+                      Delete
                     </button>
                   </div>
                 </div>

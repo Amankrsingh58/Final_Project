@@ -63,7 +63,7 @@ const WorkFlowCard = () => {
   };
   return (
     <div className="bg-gray-200 py-10 px-6">
-        <h1 className="w-full pb-8 font-bold text-[2rem] font-robotoSlab text-center">Welcome To Sunny Tution Finder !</h1>
+        <h1 className="w-full pb-8 font-bold text-[2rem] font-robotoSlab text-center">Welcome To My Tutor Match !</h1>
       <div className="max-w-7xl mx-auto grid gap-6 lg:grid-cols-3 sm:grid-cols-1 md:grid-cols-3">
         {data.map((item, index) => (
           <div

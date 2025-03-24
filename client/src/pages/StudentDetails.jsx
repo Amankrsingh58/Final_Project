@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { format } from 'date-fns';
 import { useGetStudentByIdQuery } from '../features/auth/studentApi';
-import { Clock, DollarSign, Star, MapPin, Check, X, Calendar, Phone, PhoneCall } from 'lucide-react';
+import { Clock, DollarSign, Star, MapPin, Check, X, Calendar, Phone, PhoneCall, GraduationCapIcon, BookOpen } from 'lucide-react';
 import { motion } from 'framer-motion';  // For motion effects
 import toast from 'react-hot-toast';
 import { useCreateBokingMutation } from '../features/auth/bookingApi';
@@ -106,25 +106,34 @@ const StudentDetail = () => {
               >
                 <div className="flex justify-between items-start">
                   <div>
-                    <h1 className="text-3xl font-bold text-gray-900">{student.data.userId.userName}</h1>
-                    <p className="text-indigo-600 font-medium text-lg">{student.data.subjectInterested.join(', ')}</p>
+                    <h1 className="text-3xl font-bold text-gray-700">{student.data.userId.userName}</h1>
                   </div>
                
                 </div>
                 
                 <div className="mt-6 flex flex-wrap flex-col gap-4"> 
                 <div className="flex items-center text-gray-700">
-                    <Phone className="h-5 w-5 mr-2 text-indigo-600" />
+                    <Phone className="h-5 w-5 mr-2 text-indigo-500" />
                     <span>(+91) {student.data.phoneNo}</span>
                   </div>
 
                 <div className="flex items-center text-gray-700">
-                    <div className="h-5 w-5 mr-2 text-indigo-600" />
-                    <span>Grade: {student.data.grade}</span>
+                    <GraduationCapIcon className="h-5 w-5 mr-2 text-indigo-500" />
+                    <span>Class : {student.data.grade}</span>
+                  </div>
+
+                  
+                  <div className="flex items-center text-gray-700">
+                    <BookOpen className="h-5 w-5 mr-2 text-indigo-500" />
+                    {student.data.subjectInterested.map((subject, index) => (
+                      <span key={index} className="bg-gray-100 text-gray-800 px-3 py-1 rounded-full text-sm">
+                        {subject}
+                      </span>
+                    ))}
                   </div>
                   
                   <div className="flex items-center text-gray-700">
-                    <MapPin className="h-5 w-5 mr-2 text-indigo-600" />
+                    <MapPin className="h-5 w-5 mr-2 text-indigo-500" />
                     <span>{student.data.city}, {student.data.state}</span>
                   </div>
                 </div>
@@ -134,23 +143,14 @@ const StudentDetail = () => {
                   <p className="text-gray-700">{student.data.bio || "No bio provided yet"}</p>
                 </div>}
                 
-                <div className="mt-6">
-                  <h2 className="text-xl font-semibold mb-2">Subjects</h2>
-                  <div className="flex flex-wrap gap-2">
-                    {student.data.subjectInterested.map((subject, index) => (
-                      <span key={index} className="bg-gray-100 text-gray-800 px-3 py-1 rounded-full text-sm">
-                        {subject}
-                      </span>
-                    ))}
-                  </div>
-                </div>
+                
               </motion.div>
             </div>
           </div>
 
           {/* Booking Section */}
           <div className="border-t border-gray-200">
-            <div className="p-6 md:p-8">
+            <div className="pr-6 pl-6 pb-6 md:p-8">
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}

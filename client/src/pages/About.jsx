@@ -38,7 +38,7 @@ const AboutUs = () => {
     {
       name: 'Anjani Kumar',
       role: 'Co-Founder & CMO',
-      bio: 'Anjani’s leadership skills and commitment to education helped bring the vision of TutorMatch to life. He observed how many students and parents struggled with finding the right tutor and set out to change that.',
+      bio: 'Anjani’s leadership skills and commitment to education helped bring the vision of MyTutorMatch to life. He observed how many students and parents struggled with finding the right tutor and set out to change that.',
       image: AnjaniImg
     },
   ];
@@ -54,7 +54,7 @@ const AboutUs = () => {
             animate="visible"
             variants={fadeIn}
           >
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">About TutorMatch</h1>
+            <h1 className="text-4xl md:text-5xl font-bold mb-4">About MyTutorMatch</h1>
             <p className="text-xl max-w-3xl mx-auto">
               Connecting passionate educators with eager learners to create meaningful educational experiences.
             </p>
@@ -76,10 +76,10 @@ const AboutUs = () => {
               <h2 className="text-3xl font-bold text-gray-900 mb-6">Our Story</h2>
               <div className="space-y-4 text-gray-700">
                 <p>
-                  TutorMatch was founded by Aman Kumar Singh and Anjani Kumar, both third-year students at IIMT College of Engineering, Greater Noida. The idea for this project came from noticing the struggles faced by friends, family, and other people who found it difficult to find home tutors. Parents were struggling to find the best tutors for their children, and students often faced challenges in finding quality tutoring services. 
+                MyTutorMatch was founded by Aman Kumar Singh and Anjani Kumar, both third-year students at IIMT College of Engineering, Greater Noida. The idea for this project came from noticing the struggles faced by friends, family, and other people who found it difficult to find home tutors. Parents were struggling to find the best tutors for their children, and students often faced challenges in finding quality tutoring services. 
                 </p>
                 <p>
-                  Our goal was simple: to create a platform where students and parents can easily find qualified tutors that match their educational needs. With a shared vision and a passion for education, we worked to bring TutorMatch to life, offering personalized tutoring solutions for all.
+                  Our goal was simple: to create a platform where students and parents can easily find qualified tutors that match their educational needs. With a shared vision and a passion for education, we worked to bring MyTutorMatch to life, offering personalized tutoring solutions for all.
                 </p>
               </div>
             </motion.div>
@@ -235,7 +235,7 @@ const AboutUs = () => {
           >
             <h2 className="text-3xl font-bold text-gray-900 mb-4">Meet Our Team</h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              The passionate individuals behind TutorMatch
+              The passionate individuals behind MyTutorMatch
             </p>
           </motion.div>
 
@@ -305,7 +305,7 @@ const AboutUs = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="text-3xl font-bold mb-4">Join the TutorMatch Community</h2>
+            <h2 className="text-3xl font-bold mb-4">Join the MyTutorMatch Community</h2>
             <p className="text-xl mb-8 max-w-3xl mx-auto">
               Whether you're looking to learn or to share your knowledge, we'd love to have you as part of our growing community.
             </p>

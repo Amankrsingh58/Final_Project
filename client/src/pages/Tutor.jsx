@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation,Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Search,Calendar, Filter,CheckCircle, Star, Clock, DollarSign, BookOpen, MapPin } from 'lucide-react';
+import { Search,Calendar, Filter,CheckCircle, Star, Clock, DollarSign, BookOpen, MapPin, Pen } from 'lucide-react';
 import { useGetAllTutorQuery } from '../features/auth/tutorApi';
 import { useSelector } from 'react-redux';
 import { format } from 'date-fns';
@@ -69,10 +69,10 @@ const TutorsList = () => {
       const [min, max] = priceRange.split('-').map(Number);
       if (max) {
         filtered = filtered.filter(tutor =>
-          tutor.hourly_rate >= min && tutor.hourly_rate <= max
+          tutor.fee >= min && tutor.fee <= max
         );
       } else {
-        filtered = filtered.filter(tutor => tutor.hourly_rate >= min);
+        filtered = filtered.filter(tutor => tutor.fee >= min);
       }
     }
   
@@ -270,7 +270,7 @@ const TutorsList = () => {
             {filteredTutors.map((tutor) => (
               <motion.div
                 key={tutor._id}
-                className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
+                className="bg-white rounded-lg shadow-lg  border-gray-500 overflow-hidden hover:shadow-lg transition-shadow"
                 variants={itemVariants}
               >
                   <div className="h-48 overflow-hidden">
@@ -284,24 +284,22 @@ const TutorsList = () => {
                 <div className="p-6">
                   <div className="flex justify-between items-start">
                     <div>
-                      <h3 className="text-lg font-semibold text-gray-900">{tutor.userId.userName}</h3>
-                      <div className="flex flex-wrap gap-1 mt-1">
-                        {tutor.subjects.map((subject, index) => (
-                          <span 
-                            key={index}
-                            className="inline-block bg-indigo-100 text-indigo-800 text-xs px-3 py-1 rounded-full"
-                          >
-                            {subject}
-                          </span>
-                        ))}
-                      </div>
+                      <h3 className="text-lg font-bold text-gray-700">{tutor.userId.userName}</h3>
+                     
                     </div>
                     <div className="bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-sm font-medium">
-                    ₹{tutor.hourly_rate}/month
+                    ₹{tutor.fee}/month
                     </div>
                   </div>
                   
                   <div className="mt-4 flex items-center text-sm text-gray-500">
+                    <BookOpen className="h-4 w-4 mr-1 text-blue-400" />
+                    Subjects : {tutor.subjects.map((subject, index) => (
+                      <span key={index} >
+                        {subject}
+                      </span>
+                    ))}                  </div>
+                  <div className="mt-1 flex items-center text-sm text-gray-500">
                     <Clock className="h-4 w-4 mr-1 text-blue-400" />
                     <span>{tutor.experience} years experience</span>
                   </div>
@@ -318,9 +316,7 @@ const TutorsList = () => {
                     <span>Posted On :{format(new Date(tutor.createdAt), 'MMMM d, yyyy')}</span>
                     </div>
                   
-                  {tutor.bio && (
-                    <p className="mt-4 text-gray-600 line-clamp-3">{tutor.bio}</p>
-                  )}
+                 
                   
                   <div className="mt-6 flex justify-between items-center">
                     <Link to={isAuthenticated ? `/tutor/${tutor._id}` : "/signup"} className="text-indigo-600 hover:text-indigo-800 font-medium text-sm">

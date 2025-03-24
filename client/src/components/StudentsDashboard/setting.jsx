@@ -92,7 +92,7 @@ const SettingsPage = () => {
         )}
       </div>
 
-      <div className="border rounded-lg p-4 bg-gray-800 shadow-md">
+      {/* <div className="border rounded-lg p-4 bg-gray-800 shadow-md">
         <button
           onClick={() => toggleExpand("delete")}
           className="w-full text-left font-medium"
@@ -109,7 +109,7 @@ const SettingsPage = () => {
             </button>
           </div>
         )}
-      </div>
+      </div> */}
 
       {/* Confirmation Modal */}
       {showDeleteModal && (

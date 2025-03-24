@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 export const helpFormApi = createApi({
     reducerPath: "helpFormApi",
     baseQuery: fetchBaseQuery({
-        baseUrl: "http://localhost:8000/api/helprequests",
+        baseUrl: "https://tutorbackend-i63e.onrender.com/api/helprequests",
         credentials: 'include',
     }),
     tagTypes: ['HelpForm'],

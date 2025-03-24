@@ -9,8 +9,8 @@ dotenv.config();
 // Database connection
 const connectDB = async () => {
   try {
-    const conn = await mongoose.connect("mongodb://localhost:27017/finalProject", {
-       useNewUrlParser: true, useUnifiedTopology: true 
+    const conn = await mongoose.connect("mongodb+srv://mytutormatch:783447@tutormatch.hrzdv.mongodb.net/?retryWrites=true&w=majority&appName=tutormatch", {
+       useNewUrlParser: true, 
     });
     console.log(`MongoDB Connected: ${conn.connection.host}`);
   } catch (err) {

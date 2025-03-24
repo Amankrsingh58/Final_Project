@@ -91,6 +91,13 @@ const Bookings = () => {
     );
   }
 
+  const message = 'Hello! I would like to contact you.';
+
+  const handleClick = (data) => {
+    const url = `https://wa.me/${data}?text=${encodeURIComponent(message)}`;
+    window.open(url, '_blank');
+  };
+
   return (
     <div className="pt-16 min-h-screen bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-0 lg:px-8 py-8">
@@ -168,7 +175,7 @@ const Bookings = () => {
                           <h3 className="text-lg font-semibold">{booking.tutorId.userName}</h3>
                           <div className="flex items-center text-gray-600 text-sm font-semibold">
                             <Phone className="h-4 w-4 mr-1 text-sm font-semibold" />
-                            <span>(+91) {booking.tutorId.tutorId.phonrNo}</span>
+                            <span>(+91) {booking.tutorId.tutorId.phoneNo}</span>
                           </div>
                         </div>
                       </div>
@@ -199,7 +206,7 @@ const Bookings = () => {
                           <span>
                             {(booking.BookingStatus === 'cancelled' || booking.BookingStatus === 'accepted')
                               ? `On ${format(new Date(booking.createdAt), 'MMMM d, yyyy')}`
-                              : `Posted On : ${format(new Date(booking.createdAt), 'MMMM d, yyyy')}`}
+                              : `Saved On : ${format(new Date(booking.createdAt), 'MMMM d, yyyy')}`}
                           </span>                        </div>
                       </div>
                     </div>
@@ -220,6 +227,16 @@ const Bookings = () => {
                             Accept
                           </button>
                         )}
+
+                      {user.role === booking.bookerRole	 && (
+                        <button
+                          onClick={() => handleClick(booking.tutorId.tutorId.phoneNo)}
+                          className={` gap-1 items-center bg-[#25d366] text-white px-4 py-3 cursor-pointer rounded-md flex justify-center hover:bg-green-700 transition-colors`}
+                        >
+                          <span>Chat On</span>
+                          <FaWhatsapp className='font-lg w-8  h-6 text-center' />
+                        </button>
+                      )}
                       </div>
                     )}
                   </div>
@@ -275,7 +292,7 @@ const Bookings = () => {
                         <span>
                           {(booking.BookingStatus === 'cancelled' || booking.BookingStatus === 'accepted')
                             ? `On ${format(new Date(booking.createdAt), 'MMMM d, yyyy')}`
-                            : `Posted On : ${format(new Date(booking.createdAt), 'MMMM d, yyyy')}`}
+                            : `Saved On : ${format(new Date(booking.createdAt), 'MMMM d, yyyy')}`}
                         </span>
                       </div>
                     </div>
@@ -289,7 +306,7 @@ const Bookings = () => {
                       >
                         Cancel
                       </button>
-                      {user.role !== booking.bookerRole && (
+                      {user.role !== booking.bookerRole	 && (
                         <button
                           onClick={() => statusHandler(booking._id, "accepted")}
                           className="text-white cursor-pointer text-sm font-medium px-4 py-2 rounded-md duration-300 hover:scale-95 transition-all bg-green-600"
@@ -297,9 +314,9 @@ const Bookings = () => {
                           Accept
                         </button>
                       )}
-                      {user.role === booking.bookerRole && (
+                      {user.role === booking.bookerRole	 && (
                         <button
-                          // onClick={handleClick}
+                          onClick={() => handleClick(booking.studentId.studentId.phoneNo)}
                           className={` gap-1 items-center bg-[#25d366] text-white px-4 py-3 cursor-pointer rounded-md flex justify-center hover:bg-green-700 transition-colors`}
                         >
                           <span>Chat On</span>

@@ -10,10 +10,10 @@ const DeveloperFooter = () => {
           Connect With Us
         </p>
         <div className="social-links">
-          <a href="#facebook" target="_blank" rel="noopener noreferrer">
+        <a href="https://www.linkedin.com/in/anjani-kumar-683ba725a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" rel="noopener noreferrer">
             <img
-              src="https://img.icons8.com/ios-filled/30/ffffff/facebook.png"
-              alt="Facebook"
+             src="https://img.icons8.com/ios-filled/30/ffffff/linkedin.png"
+                 alt="LinkedIn"
             />
           </a>
           <a href="#twitter" target="_blank" rel="noopener noreferrer">
@@ -34,7 +34,7 @@ const DeveloperFooter = () => {
               alt="YouTube"
             />
           </a>
-          <a href="#linkedin" target="_blank" rel="noopener noreferrer">
+          <a href="https://www.linkedin.com/in/aman-kumar-singh-030083243?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" rel="noopener noreferrer">
             <img
               src="https://img.icons8.com/ios-filled/30/ffffff/linkedin.png"
               alt="LinkedIn"

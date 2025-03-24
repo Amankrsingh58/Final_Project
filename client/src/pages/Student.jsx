@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Search, Filter, Star, Clock, DollarSign, BookOpen } from 'lucide-react';
+import { Search, Filter, Star, Clock, DollarSign, BookOpen, MapPin, GraduationCap, Calendar } from 'lucide-react';
 import { useGetAllStudentQuery } from '../features/auth/studentApi';
+import { format } from 'date-fns';
+
 
 const StudentsList = () => {
   const [filteredStudents, setFilteredStudents] = useState([]);
@@ -255,17 +257,8 @@ const StudentsList = () => {
                 <div className="p-6">
                   <div className="flex justify-between items-start">
                     <div>
-                      <h3 className="text-lg font-semibold text-gray-900">{student.userId.userName}</h3>
-                      <div className="flex flex-wrap gap-1 mt-1">
-                        {student.subjectInterested.map((subject, index) => (
-                          <span
-                            key={index}
-                            className="inline-block bg-indigo-100 text-indigo-800 text-xs px-3 py-1 rounded-full"
-                          >
-                            {subject}
-                          </span>
-                        ))}
-                      </div>
+                      <h3 className="text-lg font-bold mb-2 text-gray-700">{student.userId.userName}</h3>
+                      
                     </div>
 
                   </div>
@@ -275,15 +268,27 @@ const StudentsList = () => {
                     <span>{student.experience} years experience</span>
                   </div> */}
 
+
+                  <div className="mt-1 flex items-center text-sm text-gray-500">
+                  <BookOpen className="h-4 w-4 mr-1 text-blue-400" />
+                    <span>Subjects : {student.subjectInterested}</span>
+                  </div>
+                  <div className="mt-1 flex items-center text-sm text-gray-500">
+                  <GraduationCap className="h-4 w-4 mr-1 text-blue-400" />
+                    <span>Class : {student.grade}</span>
+                  </div>
+
                   {student.city && (
                     <div className="mt-1 flex items-center text-sm text-gray-500">
-                      <span>Location: {student.city}, {student.state}</span>
+                       <MapPin className="h-4 w-4 mr-1 text-blue-400" />
+                      <span>Location : {student.city}, {student.state}</span>
                     </div>
                   )}
 
-                  <div className="mt-1 flex items-center text-sm text-gray-500">
-                    <span>Grade : {student.grade}</span>
-                  </div>
+                    <div className="mt-1 flex items-center text-sm text-gray-500">
+                    <Calendar className="h-4 w-4 mr-1 text-blue-400" />
+                    <span>Posted On : {format(new Date(student.createdAt), 'MMMM d, yyyy')}</span>
+                    </div>
 
                   {/* {student.bio && (
                     <p className="mt-4 text-gray-600 line-clamp-3">{student.bio}</p>

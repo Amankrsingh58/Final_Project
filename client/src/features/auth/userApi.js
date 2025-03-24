@@ -5,7 +5,7 @@ import { setLoading } from './authSlice';
 export const authApi = createApi({
   reducerPath: 'authApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'http://localhost:8000/api/users',
+    baseUrl: 'https://tutorbackend-i63e.onrender.com/api/users',
     credentials: 'include',
     // Custom fetch base query to check for token expiry and handle it
     prepareHeaders: (headers, { getState }) => {

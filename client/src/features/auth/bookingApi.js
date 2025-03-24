@@ -3,7 +3,7 @@ import {createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 export const bookingApi = createApi({
     reducerPath: "bookingApi",
     baseQuery: fetchBaseQuery({
-        baseUrl: "http://localhost:8000/api/users",
+        baseUrl: "https://tutorbackend-i63e.onrender.com/api/users",
         credentials: 'include',
     }),
 

@@ -47,7 +47,7 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto flex justify-between items-center">
         <Link to="/" className="flex items-center space-x-2">
           <BookOpen className="h-8 w-8 text-indigo-600" />
-          <span className="text-xl font-bold text-gray-800">TutorMatch</span>
+          <span className="text-xl font-bold text-gray-800">MyTutorMatch</span>
         </Link>
 
         {/* Desktop Navigation */}
@@ -58,6 +58,9 @@ const Navbar = () => {
 
           {!isAuthenticated && <Link to= "/tutor" className="text-gray-700 hover:text-indigo-600 transition-colors py-2" onClick={toggleMenu}>
              Find Tutor
+              </Link>}
+          {!isAuthenticated && <Link to= "/student" className="text-gray-700 hover:text-indigo-600 transition-colors py-2" onClick={toggleMenu}>
+             Find Student
               </Link>}
               
           <Link to="/about" className="text-gray-700 hover:text-indigo-600 transition-colors">
@@ -109,8 +112,8 @@ const Navbar = () => {
               )}
             </div>
           ):(
-            <Link to="/signup" className="text-gray-700 flex  hover:text-indigo-600 transition-colors">
-               <SquarePen />
+            <Link to="/signup" className="text-white rounded-full flex items-center gap-2 bg-blue-500 px-3 py-1.5  transition-colors">
+               <SquarePen  className='h-5 w-4'/>
               SignUp
             </Link>
           )}
@@ -141,8 +144,8 @@ const Navbar = () => {
              Find Tutor
               </Link>}
 
-             {!isAuthenticated && <Link to="/tutor" className="text-gray-700 hover:text-indigo-600 transition-colors py-2" onClick={toggleMenu}>
-             Find Tutor
+             {!isAuthenticated && <Link to="/student" className="text-gray-700 hover:text-indigo-600 transition-colors py-2" onClick={toggleMenu}>
+             Find Student
               </Link>}
               <Link to="/about" className="text-gray-700 hover:text-indigo-600 transition-colors py-2" onClick={toggleMenu}>
                 About Us

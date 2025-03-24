@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useLocation,Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Search, Filter, Star, Clock, DollarSign, BookOpen } from 'lucide-react';
-import { useGetAllTutorQuery } from '../../features/auth/tutorApi';
+import { useDeleteTutorMutation, useGetAllTutorQuery } from '../../features/auth/tutorApi';
 import { useSendNoticeMutation } from '../../features/auth/noticeApi';
 import toast from 'react-hot-toast';
 
@@ -40,6 +40,21 @@ const TutorsList = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
     setSuccess(null);
   };
+
+  const [deleteTutor] = useDeleteTutorMutation();
+
+  const handleDelete = async(id) => {
+    const toastId = toast.loading('Deleting User...');
+    try{
+        await deleteTutor(id).unwrap();
+        toast.success('User Deleted', { id: toastId });
+    } catch(error){
+      toast.error("Cannot delete user try again",{id:toastId});
+    }
+    finally {
+      setTimeout( () => toast.dismiss(toastId), 2000);
+    }
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -364,6 +379,9 @@ const TutorsList = () => {
                     </Link>
                     <button onClick={() =>{setSelectedStudentId(tutor._id), setShowModal(true)} } className="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition-colors text-sm font-medium">
                       Send Notice
+                    </button>
+                    <button onClick={() =>handleDelete(tutor._id) } className="bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-700 transition-colors text-sm font-medium">
+                      Delete
                     </button>
                   </div>
                 </div>
