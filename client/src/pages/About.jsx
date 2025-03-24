@@ -40,6 +40,7 @@ const AboutUs = () => {
       role: 'Co-Founder & CMO',
       bio: 'Anjani’s leadership skills and commitment to education helped bring the vision of MyTutorMatch to life. He observed how many students and parents struggled with finding the right tutor and set out to change that.',
       image: AnjaniImg
+      
     },
   ];
 
