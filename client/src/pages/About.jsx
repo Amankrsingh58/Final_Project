@@ -2,8 +2,6 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { BookOpen, Award, Users, Heart, Target, MessageSquare } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import AmanImg from '../images/Aman4.jpg'
-import AnjaniImg from '../images/Anjani.jpg'
 import { useSelector } from 'react-redux';
 
 const AboutUs = () => {
