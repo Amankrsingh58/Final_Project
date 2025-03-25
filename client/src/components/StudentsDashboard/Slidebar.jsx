@@ -45,8 +45,8 @@ useEffect(() => {
   };
 
   return (
-    <div className={isExpand ? "stsidebar border-r-2 border-[#BEBEBE] overflow-x-hidden transition-all duration-150" : "stsidebar stnotExpand overflow-x-hidden"}>
-      <div className="logo">
+<div className={isExpand ? "stsidebar stExpand" : "stsidebar stnotExpand"}>
+<div className="logo">
         {isExpand && <h2 className=" font-bold">{user.role}</h2>}
         <GiHamburgerMenu className="stmenu-toggle" onClick={toggleSidebar} />
       </div>

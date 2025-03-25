@@ -1,22 +1,28 @@
+
 .stsidebar {
-    min-width: 250px;
-    color: #515151;
-    height: 100vh;
-    padding: 1rem;
-    transition: width 0.3s ease, padding 0.3s ease;
-    /* overflow: hidden; */
-  }
- 
-  .stnotExpand {
-    width: 50px;
-    min-width: 50px;
-    padding: 0.5rem;
-    transition: width 0.3s ease, padding 0.3s ease;
-  } 
- 
+  width: 250px; 
+  color: #515151;
+  height: 100vh;
+  padding: 1rem;
+  transition: all 0.3s ease-in-out;
+  overflow: hidden;
+}
+
+.stnotExpand {
+  width: 50px;
+  padding: 0.5rem;
+  transition: all 0.3s ease-in-out;
+}
+
+.stExpand .logo{
+  margin-top: 1.1rem;
+}
+  
+  
   .stnotExpand .logo{
     justify-content: center;
     margin-left: 28px;
+    margin-top: 3.1rem;
   }
   .logo {
     display: flex;

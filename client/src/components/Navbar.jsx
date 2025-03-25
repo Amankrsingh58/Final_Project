@@ -63,10 +63,10 @@ const Navbar = () => {
              Find Student
               </Link>}
               
-          <Link to="/about" className="text-gray-700 hover:text-indigo-600 transition-colors">
+          <Link to="/about" className="text-gray-700 hover:text-indigo-600 transition-colors" onClick={toggleMenu}>
             About Us
           </Link>
-         {token && <Link to="/my-bookings" className="text-gray-700 hover:text-indigo-600 transition-colors">
+         {token && <Link to="/my-bookings" className="text-gray-700 hover:text-indigo-600 transition-colors" onClick={toggleMenu}>
             My Bookings
           </Link>}
           
@@ -74,7 +74,7 @@ const Navbar = () => {
           {token ? (
             <Link to={
               user.role === "Tutor" || user.role === "Student"
-              ? "/userdashboard"
+              ? "/userdashboard/profile"
               : user.role === "Admin"
               ? "/dashboard"
               : "/unauthorised"
