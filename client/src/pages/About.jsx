@@ -33,13 +33,13 @@ const AboutUs = () => {
       name: 'Aman Kumar Singh',
       role: 'Founder & CEO',
       bio: 'Aman is passionate about creating solutions that bridge educational gaps. He and his co-founder noticed how difficult it was for people to find quality tutors and wanted to make the process easier for everyone.',
-      image: AmanImg
+      image: 'https://res.cloudinary.com/dx4q9falx/image/upload/v1742912175/user_images/ehh1yu8ztzd5afrszgqo.jpg'
     },
     {
       name: 'Anjani Kumar',
       role: 'Co-Founder & CMO',
       bio: 'Anjani’s leadership skills and commitment to education helped bring the vision of MyTutorMatch to life. He observed how many students and parents struggled with finding the right tutor and set out to change that.',
-      image: AnjaniImg
+      image: 'https://res.cloudinary.com/dx4q9falx/image/upload/v1742912309/user_images/hf3ytvwd42mslvhscayr.jpg'
 
     },
   ];
