@@ -6,6 +6,8 @@ import { FaUser, FaBell, FaCog, FaChalkboardTeacher, FaUserGraduate, FaSignOutAl
 import { SiHomeassistantcommunitystore } from "react-icons/si";
 import "./Slidebar.css";
 import { useSelector } from "react-redux";
+import { IoClose } from "react-icons/io5";
+
 
 const Sidebar = () => {
   const [isExpand, setIsExpand] = useState(true);
@@ -48,7 +50,8 @@ useEffect(() => {
 <div className={isExpand ? "stsidebar stExpand" : "stsidebar stnotExpand"}>
 <div className="logo">
         {isExpand && <h2 className=" font-bold">{user.role}</h2>}
-        <GiHamburgerMenu className="stmenu-toggle" onClick={toggleSidebar} />
+        {isExpand &&<GiHamburgerMenu className="stmenu-toggle" onClick={toggleSidebar} />}
+        {!isExpand && <IoClose className="stmenu-toggle" onClick={toggleSidebar} />}
       </div>
 
       <ul className="stmenu">
