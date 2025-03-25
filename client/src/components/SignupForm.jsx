@@ -191,7 +191,7 @@ const Signup = () => {
                   </FormField>
                 )}
 
-                <div className="md:col-span-2">
+                {/* <div className="md:col-span-2">
                   <FormField error={errors.bio?.message}>
                     <div className="relative">
                       <FileText className="absolute left-3 top-3 text-gray-400 h-5 w-5" />
@@ -203,7 +203,7 @@ const Signup = () => {
                       />
                     </div>
                   </FormField>
-                </div>
+                </div> */}
 
                 {role === 'Tutor' && (
                   <FormField error={errors.fee?.message}>

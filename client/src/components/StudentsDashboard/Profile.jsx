@@ -99,7 +99,7 @@ const Profile = () => {
   }
 
   return (
-    <div className="h-auto max-w-4xl mx-auto px-4 py-8">
+    <div className="h-auto max-w-4xl mx-auto px-2 py-8">
       {error && <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">{error}</div>}
       <h2 className="text-2xl font-bold mb-6 text-gray-800 text-center sm:text-left">My Profile</h2>
       <div className="bg-white p-6 rounded-lg shadow-md border border-gray-200 flex flex-col sm:flex-row items-center sm:items-start">
@@ -116,7 +116,7 @@ const Profile = () => {
           </button>
         </div>
       </div>
-      <div className="mt-8 bg-white p-6 rounded-lg shadow-md">
+      <div className="mt-8 bg-white p-2 rounded-lg shadow-md">
         <h3 className="text-xl font-semibold mb-6 text-gray-800 text-center sm:text-left">Personal Information</h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
           {userData && Object.entries(userData).map(([key, value]) => {
@@ -125,7 +125,7 @@ const Profile = () => {
               <div key={key} className="w-full bg-gray-100 flex gap-2 items-center p-2 rounded-md">
                 <label className="block text-gray-800 font-medium capitalize w-1/3">{key.replace(/([A-Z])/g, " $1").trim()}</label>
                 {isEditing ? (
-                  <input type="text" name={key} defaultValue={value} onChange={handleChange} className="w-2/3 p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
+                  <input type="text" name={key} defaultValue={value} onChange={handleChange} className="w-2/3 p-2 border text-gray-800 border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
                 ) : (
                   <p className="text-gray-800 py-2 w-2/3">{Array.isArray(value) ? value.join(", ") : value}</p>
                 )}
