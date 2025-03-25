@@ -50,8 +50,8 @@ useEffect(() => {
 <div className={isExpand ? "stsidebar stExpand" : "stsidebar stnotExpand"}>
 <div className="logo">
         {isExpand && <h2 className=" font-bold">{user.role}</h2>}
-        {isExpand &&<GiHamburgerMenu className="stmenu-toggle" onClick={toggleSidebar} />}
-        {!isExpand && <IoClose className="stmenu-toggle" onClick={toggleSidebar} />}
+        {!isExpand &&<GiHamburgerMenu className="stmenu-toggle" onClick={toggleSidebar} />}
+        {isExpand && <IoClose className="stmenu-toggle" onClick={toggleSidebar} />}
       </div>
 
       <ul className="stmenu">
