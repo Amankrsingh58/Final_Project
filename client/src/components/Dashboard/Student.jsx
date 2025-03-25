@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Search, Filter, Star, Clock, DollarSign, BookOpen } from 'lucide-react';
-import { useGetAllStudentQuery } from '../../features/auth/studentApi';
+import { useDeleteStudentMutation, useGetAllStudentQuery } from '../../features/auth/studentApi';
 import toast from 'react-hot-toast';
 import { useSendNoticeMutation } from '../../features/auth/noticeApi';
 
@@ -37,6 +37,7 @@ const StudentsList = () => {
     setSuccess(null);
   };
 
+  const [deleteStudent] = useDeleteStudentMutation();
   const handleDelete = async(id) => {
     const toastId = toast.loading('Deleting User...');
     try{
