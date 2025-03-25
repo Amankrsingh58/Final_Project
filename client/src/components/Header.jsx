@@ -49,7 +49,7 @@ function Header(){
     };
   
   return(
-    <section className="xs:mt-2 bg-gradient-to-r from-blue-600 to-blue-600 text-white py-20 md:py-32">
+    <section className="xs:mt-2 bg-gradient-to-r from-blue-600 to-blue-600 text-white py-24 md:py-32">
     <div className="max-w-7xl mx-auto px-6">
       <div className="flex flex-col md:flex-row items-center">
         <motion.div 
