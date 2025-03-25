@@ -319,7 +319,7 @@ const TutorsList = () => {
             initial="hidden"
             animate="visible"
           >
-            {filteredTutors.map((tutor) => (
+            {filteredTutors?.map((tutor) => (
               <motion.div
                 key={tutor._id}
                 className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
@@ -327,8 +327,7 @@ const TutorsList = () => {
               >
                   <div className="h-48 overflow-hidden">
                   <img 
-                    src={tutor.userId.image || "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"} 
-                    alt={tutor.name} 
+                    src={tutor?.userId?.image || "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"} 
                     className="w-full h-full object-cover"
                   />
                 </div>
@@ -336,7 +335,7 @@ const TutorsList = () => {
                 <div className="p-6">
                   <div className="flex justify-between items-start">
                     <div>
-                      <h3 className="text-lg font-semibold text-gray-900">{tutor.userId.userName}</h3>
+                      <h3 className="text-lg font-semibold text-gray-900">{tutor?.userId?.userName}</h3>
                       <div className="flex flex-wrap gap-1 mt-1">
                         {tutor.subjects.map((subject, index) => (
                           <span 
@@ -349,7 +348,7 @@ const TutorsList = () => {
                       </div>
                     </div>
                     <div className="bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-sm font-medium">
-                    ₹{tutor.hourly_rate}/month
+                    ₹{tutor.fee}/month
                     </div>
                   </div>
                   
