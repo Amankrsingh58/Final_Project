@@ -40,7 +40,7 @@ const StudentsList = () => {
   const handleDelete = async(id) => {
     const toastId = toast.loading('Deleting User...');
     try{
-        await deleteStudent({id}).unwrap();
+        await deleteStudent(id).unwrap();
         toast.success('User Deleted', { id: toastId });
     } catch(error){
       toast.error("Cannot delete user try again",{id:toastId});
