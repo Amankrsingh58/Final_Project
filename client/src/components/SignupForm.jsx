@@ -182,7 +182,7 @@ const Signup = () => {
                     <div className="relative">
                       <BookOpen className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
                       <input
-                        type="number"
+                        type="text"
                         {...register('grade', { required: 'Grade is required' })}
                         className="pl-10 w-full h-10 rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
                         placeholder="Grade"
