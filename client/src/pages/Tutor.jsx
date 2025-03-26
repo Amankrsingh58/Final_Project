@@ -273,13 +273,13 @@ const TutorsList = () => {
                 className="bg-white rounded-lg shadow-lg  border-gray-500 overflow-hidden hover:shadow-lg transition-shadow"
                 variants={itemVariants}
               >
-                  <div className="h-48 overflow-hidden">
+                  {/* <div className="h-48 overflow-hidden">
                   <img 
                     src={tutor.userId.image || "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"} 
                     alt={tutor.name} 
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-fit"
                   />
-                </div>
+                </div> */}
 
                 <div className="p-6">
                   <div className="flex justify-between items-start">
