@@ -10,6 +10,7 @@
 
 .stnotExpand {
   width: 50px;
+  min-width: 50px;
   padding: 0.5rem;
   transition: all 0.3s ease-in-out;
 }
@@ -17,11 +18,11 @@
 .stExpand .logo{
   margin-top: 1.1rem;
 }
-/* .stExpand{
-  min-width: 250px;
+.stExpand{
+  min-width: 200px;
   transition: all 0.3s ease-in-out;
 
-} */
+}
   
   .stnotExpand .logo{
     justify-content: center;

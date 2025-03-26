@@ -55,15 +55,15 @@ useEffect(() => {
       </div>
 
       <ul className="stmenu">
-        <li>
+        {/* <li>
           <NavLink
             to="/userdashboard"
-            className={({ isActive }) => (isActive ? " bg-[#d8d9e5b3]" : "")}
+            className={({ isActive }) => (isActive ? "" : "")}
           >  
             <RiHomeFill className="icon" />
             {isExpand && <span>Dashboard</span>}
           </NavLink>
-        </li>
+        </li> */}
         <li>
           <NavLink
             to="/userdashboard/profile"

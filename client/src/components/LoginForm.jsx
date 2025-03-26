@@ -4,10 +4,12 @@ import { useForm } from 'react-hook-form';
 import { motion } from 'framer-motion';
 import { LogIn, AlertCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { useLoginMutation } from '../features/auth/userApi';  
+import { useLoginMutation, useLogoutMutation } from '../features/auth/userApi';  
 import { useDispatch } from 'react-redux';
 import { setUser, setError } from '../features/auth/authSlice';
 import { toast } from 'react-hot-toast';
+import { setLogout } from '../features/auth/authSlice';
+
 
 const Login = () => {
   const [error, setError] = useState(null);
@@ -17,8 +19,28 @@ const Login = () => {
 
   const { register, handleSubmit, formState: { errors } } = useForm();
   const [login] = useLoginMutation(); 
+  const [logout] = useLogoutMutation();
 
+  const handleLogout = async () => {
+    const toastId = toast.loading("Logging out...");
 
+    try {
+      dispatch(setLogout()); 
+      localStorage.removeItem('authToken'); 
+      localStorage.removeItem('user');
+      await logout().unwrap(); 
+      toast.success('Logout Sucessful!',{id:toastId})
+      navigate('/login'); 
+    } catch (err) {
+      toast.error(err.message || 'Error occured', {id:toastId})
+      console.error('Logout failed:', err.message);
+    }
+    finally{
+      setTimeout(() => toast.dismiss(toastId), 2000)
+
+    }
+   
+  };
 
   const onSubmit = async (data) => {
     setError(null);
@@ -43,7 +65,9 @@ const Login = () => {
       localStorage.setItem('user', JSON.stringify(result.user));
 
       dispatch(setUser({ user, token }));
-
+      setTimeout(() => {
+        handleLogout();
+      }, 86400000);
       navigate('/');
     } catch (err) {
       toast.error(err.message || "An unexpected error occurred.", { id: toastId });

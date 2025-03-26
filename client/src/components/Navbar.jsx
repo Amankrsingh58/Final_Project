@@ -155,7 +155,7 @@ const Navbar = () => {
               </Link>}
               {token && (
                 <Link  to ={ user.role === "Tutor" || user.role === "Student"
-                ? "/userdashboard"
+                ? "/userdashboard/profile"
                 : user.role === "Admin"
                 ? "/dashboard"
                 : "/unauthorised"} className="text-gray-700 hover:text-indigo-600 transition-colors py-2" onClick={toggleMenu}>

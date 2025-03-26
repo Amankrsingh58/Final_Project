@@ -246,13 +246,13 @@ const StudentsList = () => {
                 className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
                 variants={itemVariants}
               >
-                <div className="h-48 overflow-hidden">
+                {/* <div className="h-48 overflow-hidden">
                   <img
                     src={student.userId.image || "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"}
                     alt={student.name}
                     className="w-full h-full object-cover"
                   />
-                </div>
+                </div> */}
 
                 <div className="p-6">
                   <div className="flex justify-between items-start">
