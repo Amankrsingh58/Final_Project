@@ -6,6 +6,19 @@ import { useGetAllTutorQuery } from '../features/auth/tutorApi';
 import { useSelector } from 'react-redux';
 import { format } from 'date-fns';
 
+const SkeletonCard = () => (
+  <div className="bg-white rounded-lg shadow-md overflow-hidden animate-pulse">
+    <div className="h-48 bg-gray-300 rounded-t-lg"></div>
+    <div className="p-6">
+      <div className="h-4 bg-gray-300 rounded mb-2"></div>
+      <div className="h-4 bg-gray-300 rounded mb-4"></div>
+      <div className="h-4 bg-gray-300 rounded mb-2"></div>
+      <div className="h-4 bg-gray-300 rounded mb-2"></div>
+      <div className="h-4 bg-gray-300 rounded mb-2"></div>
+    </div>
+  </div>
+);
+
 const TutorsList = () => {
   const {user, isAuthenticated} = useSelector( (state) => state.auth);
 
@@ -138,13 +151,13 @@ const TutorsList = () => {
     }
   };
 
-  if (isLoading) {
-    return (
-      <div className="flex justify-center items-center h-64">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-indigo-500"></div>
-      </div>
-    );
-  }
+  // if (isLoading) {
+  //   return (
+  //     <div className="flex justify-center items-center h-64">
+  //       <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-indigo-500"></div>
+  //     </div>
+  //   );
+  // }
 
   if (isError) {
     return (
@@ -246,7 +259,13 @@ const TutorsList = () => {
           </div>
         </motion.div>
 
-        {filteredTutors.length === 0 ? (
+        {isLoading ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {Array.from({ length: 6 }).map((_, index) => (
+              <SkeletonCard key={index} />
+            ))}
+          </div>
+        ) :filteredTutors.length === 0 ? (
           <div className="bg-white rounded-lg shadow-md p-8 text-center">
             <BookOpen className="h-12 w-12 text-gray-400 mx-auto mb-4" />
             <h3 className="text-lg font-medium text-gray-900 mb-2">No tutors found</h3>

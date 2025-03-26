@@ -1,28 +1,36 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Search, Filter, Star, Clock, DollarSign, BookOpen, MapPin, GraduationCap, Calendar } from 'lucide-react';
+import { Search, Filter, BookOpen, GraduationCap, MapPin, Calendar } from 'lucide-react';
 import { useGetAllStudentQuery } from '../features/auth/studentApi';
 import { format } from 'date-fns';
 
+const SkeletonCard = () => (
+  <div className="bg-white rounded-lg shadow-md overflow-hidden animate-pulse">
+    <div className="h-48 bg-gray-300 rounded-t-lg"></div>
+    <div className="p-6">
+      <div className="h-4 bg-gray-300 rounded mb-2"></div>
+      <div className="h-4 bg-gray-300 rounded mb-4"></div>
+      <div className="h-4 bg-gray-300 rounded mb-2"></div>
+      <div className="h-4 bg-gray-300 rounded mb-2"></div>
+      <div className="h-4 bg-gray-300 rounded mb-2"></div>
+    </div>
+  </div>
+);
 
 const StudentsList = () => {
   const [filteredStudents, setFilteredStudents] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [showFilters, setShowFilters] = useState(false);
-
   const [subjectFilter, setSubjectFilter] = useState('');
   const [gradeFilter, setGradeFilter] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
 
   const location = useLocation();
-
   const { data: allStudent, isLoading, isError } = useGetAllStudentQuery();
 
   useEffect(() => {
     if (allStudent) {
       setFilteredStudents(allStudent.allStudent || []);
-      setLoading(false);
     }
   }, [allStudent]);
 
@@ -38,7 +46,7 @@ const StudentsList = () => {
     if (allStudent?.allStudent) {
       applyFilters();
     }
-  }, [subjectFilter,gradeFilter, searchQuery, allStudent]);
+  }, [subjectFilter, gradeFilter, searchQuery, allStudent]);
 
   const applyFilters = () => {
     if (!allStudent?.allStudent) return;
@@ -53,11 +61,10 @@ const StudentsList = () => {
       );
     }
 
-    // Apply grade range filter
     if (gradeFilter) {
       filtered = filtered.filter(student => {
         if (typeof student.grade === 'number') {
-          return student.grade === parseInt(gradeFilter, 10); 
+          return student.grade === parseInt(gradeFilter, 10);
         } else if (Array.isArray(student.grade)) {
           return student.grade.includes(gradeFilter);
         } else {
@@ -66,25 +73,21 @@ const StudentsList = () => {
       });
     }
 
-    // Apply search query
     if (searchQuery) {
       const query = searchQuery.toLowerCase();
-    
       filtered = filtered.filter(student => {
         const userNameMatch = student.userId?.userName?.toLowerCase().includes(query);
         const cityMatch = student.city?.toLowerCase().includes(query);
-        const subjectMatch = student.subjectInterested?.some(subject => 
+        const subjectMatch = student.subjectInterested?.some(subject =>
           subject.toLowerCase().includes(query)
         );
-        const gradeMatch = typeof student.grade === 'string' 
-          ? student.grade.toLowerCase().includes(query) 
-          : student.grade.toString().includes(query); 
+        const gradeMatch = typeof student.grade === 'string'
+          ? student.grade.toLowerCase().includes(query)
+          : student.grade.toString().includes(query);
         const bioMatch = student.bio?.toLowerCase().includes(query);
-    
         return userNameMatch || cityMatch || subjectMatch || gradeMatch || bioMatch;
       });
     }
-    
 
     setFilteredStudents(filtered);
   };
@@ -94,33 +97,6 @@ const StudentsList = () => {
     setGradeFilter('');
     setSearchQuery('');
   };
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1
-      }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.4 }
-    }
-  };
-
-  if (isLoading) {
-    return (
-      <div className="flex justify-center items-center h-64">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-indigo-500"></div>
-      </div>
-    );
-  }
 
   if (isError) {
     return (
@@ -147,6 +123,7 @@ const StudentsList = () => {
           </button>
         </div>
 
+        {/* Filters Section */}
         <motion.div
           className={`bg-white rounded-lg shadow-md p-6 mb-8 ${showFilters ? 'block' : 'hidden'}`}
           initial={{ height: 0, opacity: 0 }}
@@ -158,7 +135,7 @@ const StudentsList = () => {
             <div className="relative text-gray-700">
               <input
                 type="text"
-                placeholder="Search subject,city, name..."
+                placeholder="Search subject, city, name..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="w-full px-4 py-2 border text-gray-700 border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500"
@@ -173,7 +150,7 @@ const StudentsList = () => {
               className="w-full px-4 py-2 border text-gray-700 border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500"
             >
               <option value="">All Subjects</option>
-              <option value="mathematics">Mathematics</option>
+              <option value="mathematics">Math</option>
               <option value="physics">Physics</option>
               <option value="chemistry">Chemistry</option>
               <option value="biology">Biology</option>
@@ -200,7 +177,6 @@ const StudentsList = () => {
               <option value="11">11th Grade</option>
               <option value="12">12th Grade</option>
             </select>
-
           </div>
 
           <div className="mt-4 flex justify-end">
@@ -219,7 +195,13 @@ const StudentsList = () => {
           </div>
         </motion.div>
 
-        {filteredStudents.length === 0 ? (
+        {isLoading ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {Array.from({ length: 6 }).map((_, index) => (
+              <SkeletonCard key={index} />
+            ))}
+          </div>
+        ) : filteredStudents.length === 0 ? (
           <div className="bg-white rounded-lg shadow-md p-8 text-center">
             <BookOpen className="h-12 w-12 text-gray-400 mx-auto mb-4" />
             <h3 className="text-lg font-medium text-gray-900 mb-2">No students found</h3>
@@ -234,71 +216,48 @@ const StudentsList = () => {
             </button>
           </div>
         ) : (
-          <motion.div
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
-          >
+          <motion.div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredStudents.map((student) => (
               <motion.div
                 key={student._id}
                 className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
-                variants={itemVariants}
               >
-                {/* <div className="h-48 overflow-hidden">
-                  <img
-                    src={student.userId.image || "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"}
-                    alt={student.name}
-                    className="w-full h-full object-cover"
-                  />
-                </div> */}
-
                 <div className="p-6">
                   <div className="flex justify-between items-start">
                     <div>
                       <h3 className="text-lg font-bold mb-2 text-gray-700">{student.userId.userName}</h3>
-                      
                     </div>
-
                   </div>
 
-                  {/* <div className="mt-4 flex items-center text-sm text-gray-500">
-                    <Clock className="h-4 w-4 mr-1" />
-                    <span>{student.experience} years experience</span>
-                  </div> */}
-
-
                   <div className="mt-1 flex items-center text-sm text-gray-500">
-                  <BookOpen className="h-4 w-4 mr-1 text-blue-400" />
-                    <span>Subjects : {student.subjectInterested}</span>
+                    <BookOpen className="h-4 w-4 mr-1 text-blue-400" />
+                    <span>Subjects: {student.subjectInterested.join(', ')}</span>
                   </div>
                   <div className="mt-1 flex items-center text-sm text-gray-500">
-                  <GraduationCap className="h-4 w-4 mr-1 text-blue-400" />
-                    <span>Class : {student.grade}</span>
+                    <GraduationCap className="h-4 w-4 mr-1 text-blue-400" />
+                    <span>Class: {student.grade}</span>
                   </div>
 
                   {student.city && (
                     <div className="mt-1 flex items-center text-sm text-gray-500">
-                       <MapPin className="h-4 w-4 mr-1 text-blue-400" />
-                      <span>Location : {student.city}, {student.state}</span>
+                      <MapPin className="h-4 w-4 mr-1 text-blue-400" />
+                      <span>Location: {student.city}, {student.state}</span>
                     </div>
                   )}
 
-                    <div className="mt-1 flex items-center text-sm text-gray-500">
+                  <div className="mt-1 flex items-center text-sm text-gray-500">
                     <Calendar className="h-4 w-4 mr-1 text-blue-400" />
-                    <span>Posted On : {format(new Date(student.createdAt), 'MMMM d, yyyy')}</span>
-                    </div>
-
-                  {/* {student.bio && (
-                    <p className="mt-4 text-gray-600 line-clamp-3">{student.bio}</p>
-                  )} */}
+                    <span>Posted On: {format(new Date(student.createdAt), 'MMMM d, yyyy')}</span>
+                  </div>
 
                   <div className="mt-6 flex justify-between items-center">
                     <Link to={`/student/${student._id}`} className="text-indigo-600 hover:text-indigo-800 font-medium text-sm">
                       View Profile
                     </Link>
-                    <Link to={`/student/${student._id}`} className="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition-colors text-sm font-medium">
+                    <Link
+                      to={`/student/${student._id}`}
+                      className="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition-colors text-sm font-medium"
+                    >
                       Offer Tuition
                     </Link>
                   </div>
