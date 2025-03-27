@@ -4,6 +4,7 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { RiHomeFill } from "react-icons/ri";
 import { FaUser, FaBell, FaCog, FaChalkboardTeacher, FaUserGraduate, FaSignOutAlt } from "react-icons/fa";
 import "./Slidebar.css";
+import { FaBlog } from "react-icons/fa";
 
 const Sidebar = () => {
   const [isExpand, setIsExpand] = useState(true);
@@ -93,11 +94,11 @@ useEffect(() => {
         </li>
         <li>
           <NavLink
-            to="/logout"
+            to="/blogmanage"
             className={({ isActive }) => (isActive ? "active-link" : "")}
           >
-            <FaSignOutAlt className="icon" />
-            {isExpand && <span>Signout</span>}
+            <FaBlog className="icon" />
+            {isExpand && <span>Blogs</span>}
           </NavLink>
         </li>
       </ul>

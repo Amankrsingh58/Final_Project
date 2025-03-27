@@ -19,6 +19,9 @@ import { useEffect } from "react";
 import StudentDetail from "./pages/StudentDetails";
 import { Toaster } from "react-hot-toast";
 import Bookings from "./pages/Bookings";
+import BlogList from "./pages/BlogList";
+import BlogDetails from "./pages/BlogDetails";
+import AdminBlogPanel from "./components/Dashboard/AdminBlogPanel";
 
 
 
@@ -39,6 +42,10 @@ function App() {
 
       <Navbar />
       <Routes>
+
+      <Route path="/blogs" element={<BlogList />} />
+      <Route path="/blog/:id" element={<BlogDetails />} />
+
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/login" element={<Login />} />
@@ -47,6 +54,7 @@ function App() {
 
         <Route element={<ProtectedRoute allowedRoles={"Admin"} />}>
           <Route path="/dashboard/*" element={<Dashboard />} />
+      <Route path="/blogmanage" element={<AdminBlogPanel />} />
         </Route>        
 
         <Route path="/tutor" element={<Tutor />} />
