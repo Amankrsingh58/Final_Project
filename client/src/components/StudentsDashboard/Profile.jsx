@@ -99,7 +99,7 @@ const Profile = () => {
   }
 
   return (
-    <div className="h-auto min-h-screen max-w-4xl mx-auto px-2 pb-5">
+    <div className="h-auto min-h-screen max-w-4xl mx-auto px-2 pb-5 mb-2">
       {error && <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">{error}</div>}
       <h2 className="text-2xl font-bold mb-6 text-gray-800 text-center sm:text-left">My Profile</h2>
       <div className="bg-white p-6 rounded-lg shadow-md border border-gray-200 flex flex-col sm:flex-row items-center sm:items-start">
