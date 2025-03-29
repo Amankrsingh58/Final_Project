@@ -22,8 +22,8 @@ const DashBoard = () => {
 // },[]);
 
   return (
-    <div className="flex sm:pb-10 lg-pb-0 mt-[64px] fixed w-screen" style={{ height: 'calc(100vh - 64px)' }}>
-      <Sidebar />
+<div className="flex xs:pb-10 lg:pb-0 mt-[64px] relative w-full" style={{ height: 'calc(100vh - 64px)' }}>
+<Sidebar />
       <div className="dashboard-content bg-[#2C2D33]">
 
         {/* <div
