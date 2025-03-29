@@ -2,7 +2,7 @@
 .stsidebar {
   width: 250px; 
   color: #515151;
-  height: 100vh;
+  height: auto;
   padding: 1rem;
   transition: all 0.3s ease-in-out;
   overflow: hidden;
