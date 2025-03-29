@@ -333,7 +333,7 @@ const TutorsList = () => {
                 </div>
 
                 <div className="p-6">
-                  <div className="flex justify-between items-start">
+                  <div className="flex justify-between items-start flex-wrap gap-1">
                     <div>
                       <h3 className="text-lg font-semibold text-gray-900">{tutor?.userId?.userName}</h3>
                       <h3 className="text-md font-semibold text-gray-700">{tutor?.userId?.email}</h3>
@@ -373,7 +373,7 @@ const TutorsList = () => {
                     <p className="mt-4 text-gray-600 line-clamp-3">{tutor.bio}</p>
                   )}
                   
-                  <div className="mt-6 flex justify-between items-center">
+                  <div className="mt-6 flex justify-between md:gap-0 sm:flex-col flex-wrap md:flex-row sm:gap-[1rem] sm:items-baseline md:items-center">
                     <Link to={`/tutor/${tutor._id}`} className="text-indigo-600 hover:text-indigo-800 font-medium text-sm">
                       View Profile
                     </Link>
