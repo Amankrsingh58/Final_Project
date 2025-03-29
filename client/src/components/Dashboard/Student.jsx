@@ -187,7 +187,7 @@ const StudentsList = () => {
   }
 
   return (
-    <div className=" min-h-screen bg-gray-50">
+    <div className="pb-2 min-h-screen bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
           <div>
@@ -348,7 +348,7 @@ const StudentsList = () => {
                     <p className="mt-4 text-gray-600 line-clamp-3">{student.bio}</p>
                   )} */}
 
-                  <div className="mt-6 flex justify-between items-center">
+                  <div className="mt-6 flex justify-between md:gap-1 sm:flex-col flex-wrap md:flex-row sm:gap-[1rem] sm:items-baseline md:items-center">
                     <Link to={`/student/${student._id}`} className="text-indigo-600 hover:text-indigo-800 font-medium text-sm">
                       View Profile
                     </Link>
