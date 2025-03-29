@@ -1,108 +1,158 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
+import { X, ChevronRight, Users, BookOpen, Briefcase } from "lucide-react";
 
 const WorkFlowCard = () => {
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
   const [displayedData, setDisplayedData] = useState([]);
-  const {token} = useSelector((state) => state.auth)
+  const { token } = useSelector((state) => state.auth);
 
   const data = [
     {
-      title: "Parents",
+      title: "For Parents",
       description:
-        "Give us your learning needs and our team will quickly find the well-qualified and experienced tutor who makes learning a fun-filled process.",
-      buttonText: "POST YOUR REQUIREMENT",
-      image: "https://apnahometuition.com/images/course_2.jpg",
+        "Find qualified and experienced tutors who make learning engaging and effective for your child. Our matching process ensures the perfect fit for your specific needs.",
+      buttonText: "Post Requirement",
+      image: "https://img.freepik.com/free-photo/father-painting-with-daughter-fathers-day_23-2147805505.jpg?t=st=1743233239~exp=1743236839~hmac=75e5bf04aade45f36fbeb1a3a517b0716938fc261774cd6060db6fd2a4b74198&w=1380",
+      icon: <Users className="w-6 h-6" />,
+      color: "from-blue-500 to-blue-600",
     },
     {
-      title: "Tutors",
+      title: "For Tutors",
       description:
-        "Register as Tutor & Showcase your talent and expertise to Students & Earn extra money. If you have the passion to teach & learn.",
-      buttonText: "SUBMIT YOUR PROFILE",
-      image: "https://apnahometuition.com/images/course_1.jpg",
+        "Join our community of educators, showcase your expertise, and connect with students who need your skills. Create your professional profile and start teaching today.",
+      buttonText: "Join as Tutor",
+      image: "https://img.freepik.com/free-photo/father-daughter-spending-quality-time-indoors_23-2148510988.jpg?t=st=1743233752~exp=1743237352~hmac=15358dde8d0783c0ee3670fc767d694d3a29adc0ab1ee143b56bfcfe6cc1ea8e&w=1380",
+      icon: <BookOpen className="w-6 h-6" />,
+      color: "from-blue-500 to-blue-600",
     },
-    {
-      title: "Current Vacancies",
-      description:
-        "We provide exciting Home Tuition Jobs in Academics for KG-12th & Co-Curricular Tuition also, tons of opportunities waiting for you.",
-      buttonText: "APPLY FOR VACANCIES",
-      image: "https://plus.unsplash.com/premium_photo-1661344287754-5b54e8feb18b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    },
+  
   ];
 
-  // Function to adjust the length of the data array based on screen width
   const adjustArrayLength = () => {
     const screenWidth = window.innerWidth;
-
-    if (screenWidth > 810) {
-      setDisplayedData(data.slice(0, 3)); // Show 3 items on larger screens
-    } else {
-      setDisplayedData(data.slice(0, 2)); // Show 2 items on smaller screens
-    }
+    setDisplayedData(screenWidth > 810 ? data : data.slice(0, 2));
   };
 
-  // Use effect hook to handle resizing
   useEffect(() => {
-    adjustArrayLength(); // Adjust on initial load
-    window.addEventListener('resize', adjustArrayLength); // Listen for window resize
-
-    // Clean up event listener
-    return () => {
-      window.removeEventListener('resize', adjustArrayLength);
-    };
+    adjustArrayLength();
+    window.addEventListener('resize', adjustArrayLength);
+    return () => window.removeEventListener('resize', adjustArrayLength);
   }, []);
 
   const handleClick = () => {
     if (token) {
-      setShowModal(true); // Show modal if user is logged in
+      setShowModal(true);
     } else {
-      navigate("/signup"); // Navigate to signup if not logged in
+      navigate("/signup");
     }
   };
-  return (
-    <div className="bg-gray-200 py-10 px-6">
-        <h1 className="w-full pb-8 font-bold text-[2rem] font-robotoSlab text-center">Welcome To My Tutor Match !</h1>
-      <div className="max-w-7xl mx-auto grid gap-6 lg:grid-cols-3 sm:grid-cols-1 md:grid-cols-3">
-        {data.map((item, index) => (
-          <div
-            key={index}
-            className="bg-white shadow-md rounded-lg overflow-hidden hover:shadow-lg transition duration-300"
-          >
-            <img
-              src={item.image}
-              alt={item.title}
-              className="w-full h-48 object-cover"
-            />
-            <div className="p-6">
-              <h2 className="text-xl font-semibold text-gray-800 mb-2">
-                {item.title}
-              </h2>
-              <p className="text-gray-600 mb-4">{item.description}</p>
-              <button onClick={handleClick} className="bg-blue-600 text-white font-semibold font-Roboto text-[14px] py-2 px-4 rounded hover:bg-blue-700 transition">
-                {item.buttonText}
-              </button>
-            </div>
-          </div>
-        ))}
-      </div>
-         {/* Modal for already posted users */}
-         {showModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-          <div className="bg-gray-800 p-5 rounded-lg shadow-lg w-[90%] max-w-md text-center">
-            <h2 className="text-2xl font-bold text-white">Alert</h2>
-            <p className="mt-3 text-white">You have already posted!</p>
 
-            <button
-              onClick={() => setShowModal(false)}
-              className="mt-4 bg-gray-600 hover:bg-gray-700 text-white py-2 px-5 rounded-lg"
+  return (
+    <div className="bg-gradient-to-b from-gray-50 to-white py-16 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-12"
+        >
+          <h1 className="text-4xl font-bold text-gray-900 mb-4">
+            Welcome to MyTutorMatch
+          </h1>
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            Connecting passionate educators with eager learners for personalized learning experiences
+          </p>
+        </motion.div>
+
+        <div className="grid gap-8 lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1">
+          {data.map((item, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.2 }}
+              className="group relative bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300"
             >
-              Close
-            </button>
-          </div>
+              <div className="relative h-48 overflow-hidden">
+                <div className="absolute inset-0 bg-black/20 z-10" />
+                <img
+                  src={item.image}
+                  alt={item.title}
+                  className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-300"
+                />
+                <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm rounded-full p-2 z-20">
+                  <div className="text-gray-800">
+                    {item.icon}
+                  </div>
+                </div>
+              </div>
+
+              <div className="p-6">
+                <h2 className="text-2xl font-semibold text-gray-900 mb-3">
+                  {item.title}
+                </h2>
+                <p className="text-gray-600 mb-6 line-clamp-3">
+                  {item.description}
+                </p>
+                <button
+                  onClick={handleClick}
+                  className={`w-full inline-flex items-center justify-center px-6 py-3 rounded-lg bg-gradient-to-r ${item.color} text-white font-semibold hover:opacity-90 transition-opacity group`}
+                >
+                  {item.buttonText}
+                  <ChevronRight className="w-5 h-5 ml-2 transform group-hover:translate-x-1 transition-transform" />
+                </button>
+              </div>
+            </motion.div>
+          ))}
         </div>
-      )}
+
+        <AnimatePresence>
+          {showModal && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 z-50"
+            >
+              <motion.div
+                initial={{ scale: 0.95, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.95, opacity: 0 }}
+                className="bg-white rounded-xl shadow-xl w-full max-w-md overflow-hidden"
+              >
+                <div className="flex items-center justify-between p-6 border-b">
+                  <h3 className="text-xl font-semibold text-gray-900">
+                    Already Posted
+                  </h3>
+                  <button
+                    onClick={() => setShowModal(false)}
+                    className="text-gray-400 hover:text-gray-500 transition-colors"
+                  >
+                    <X className="w-6 h-6" />
+                  </button>
+                </div>
+                <div className="p-6">
+                  <p className="text-gray-600 mb-6">
+                    You have already submitted a post. You can view and manage your existing posts in your dashboard.
+                  </p>
+                  <div className="flex justify-end">
+                    <button
+                      onClick={() => setShowModal(false)}
+                      className="px-6 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors"
+                    >
+                      Close
+                    </button>
+                  </div>
+                </div>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
     </div>
   );
 };
