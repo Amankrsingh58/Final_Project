@@ -120,7 +120,7 @@ const Profile = () => {
         <h3 className="text-xl font-semibold mb-6 text-gray-800 text-center sm:text-left">Personal Information</h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
           {userData && Object.entries(userData).map(([key, value]) => {
-            if (["refreshToken", "__v", "_id", "createdAt", "updatedAt", "review", "userId"].includes(key)) return null;
+            if (["refreshToken", "__v", "_id","pasword", "createdAt", "updatedAt", "review", "userId"].includes(key)) return null;
             return (
               <div key={key} className="w-full bg-gray-100 flex gap-2 items-center p-2 rounded-md">
                 <label className="block text-gray-800 font-medium capitalize w-1/3">{key.replace(/([A-Z])/g, " $1").trim()}</label>

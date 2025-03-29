@@ -22,7 +22,7 @@ const DashBoard = () => {
 // },[]);
 
   return (
-    <div className="flex pb-10 mt-[64px]  w-screen" style={{ height: 'calc(100vh - 64px)' }}>
+    <div className="flex pb-10 mt-[64px] fixed w-screen" style={{ height: 'calc(100vh - 64px)' }}>
       <Sidebar />
       <div className="dashboard-content bg-[#2C2D33]">
 
