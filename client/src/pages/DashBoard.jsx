@@ -22,7 +22,7 @@ const DashBoard = () => {
 // },[]);
 
   return (
-    <div className="flex h-screen mt-[10vh]">
+    <div className="flex h-screen mt-[64vh]">
       <Sidebar />
       <div className="dashboard-content bg-[#2C2D33]">
 

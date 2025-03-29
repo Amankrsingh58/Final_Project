@@ -21,7 +21,7 @@ const Navigate = useNavigate();
 // },[]);
 
   return (
-    <div className="flex h-screen mt-[10vh] overflow-x-hidden">
+    <div className="flex h-screen mt-[64vh] overflow-x-hidden">
       <Sidebar />
       <div className="bg-gray-100 dashboard-content overflow-x-hidden overflow-y-scroll">
 

@@ -336,6 +336,7 @@ const TutorsList = () => {
                   <div className="flex justify-between items-start">
                     <div>
                       <h3 className="text-lg font-semibold text-gray-900">{tutor?.userId?.userName}</h3>
+                      <h3 className="text-md font-semibold text-gray-700">{tutor?.userId?.email}</h3>
                       <div className="flex flex-wrap gap-1 mt-1">
                         {tutor.subjects.map((subject, index) => (
                           <span 
@@ -379,7 +380,7 @@ const TutorsList = () => {
                     <button onClick={() =>{setSelectedStudentId(tutor._id), setShowModal(true)} } className="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition-colors text-sm font-medium">
                       Send Notice
                     </button>
-                    <button onClick={() =>handleDelete(tutor._id) } className="bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-700 transition-colors text-sm font-medium">
+                    <button onClick={() =>handleDelete(tutor._id) } className="bg-red-600 mr-1 text-white px-4 py-2 rounded-md hover:bg-red-700 transition-colors text-sm font-medium">
                       Delete
                     </button>
                   </div>

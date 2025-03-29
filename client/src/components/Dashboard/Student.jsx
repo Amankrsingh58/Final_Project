@@ -314,6 +314,7 @@ const StudentsList = () => {
                   <div className="flex justify-between items-start">
                     <div>
                       <h3 className="text-lg font-semibold text-gray-900">{student.userId.userName}</h3>
+                      <h3 className="text-md font-semibold text-gray-700">{student.userId.email}</h3>
                       <div className="flex flex-wrap gap-1 mt-1">
                         {student.subjectInterested.map((subject, index) => (
                           <span
@@ -389,7 +390,7 @@ const StudentsList = () => {
           required
         />
 
-        <div className="flex justify-between mt-4">
+        <div className="flex mr-1 justify-between mt-4">
           <button
             type="button"
             onClick={() => setShowModal(false)}
