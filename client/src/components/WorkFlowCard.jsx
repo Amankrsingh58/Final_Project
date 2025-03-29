@@ -68,14 +68,14 @@ const WorkFlowCard = () => {
           </p>
         </motion.div>
 
-        <div className="grid gap-8 lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1">
+        <div className="sm:grid sm:gap-8 lg:flex lg:mx-auto lg:w-[80%] lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1">
           {data.map((item, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.2 }}
-              className="group relative bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300"
+              className="group relative  bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300"
             >
               <div className="relative h-48 overflow-hidden">
                 <div className="absolute inset-0 bg-black/20 z-10" />
