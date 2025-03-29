@@ -23,7 +23,7 @@ const Navigate = useNavigate();
   return (
     <div className="flex  mt-[64px] fixed w-screen" style={{ height: 'calc(100vh - 64px)' }}>
       <Sidebar />
-      <div className="bg-gray-100 dashboard-content overflow-x-auto">
+      <div className="bg-gray-100 dashboard-content flex-grow w-full overflow-x-hidden">
 
           <Routes>
           <Route path="/" element={<StudentsDashboardHome />} />

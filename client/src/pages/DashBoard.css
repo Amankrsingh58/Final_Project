@@ -7,10 +7,10 @@
   .dashboard-content {
     color: white;
     flex-grow: 1;
-    min-width: 0;  /* ✅ Prevents content from overflowing */
-    height: 100vh; /* ✅ Ensures full height */
+    min-width: 0; 
+    height: 100vh;
     overflow-y: auto;
-    overflow-x: hidden; /* ✅ Prevents unwanted horizontal scrolling */
-    padding-bottom: 20px
+    overflow-x: hidden;
+    padding-bottom: 20px; 
   }
   
