@@ -1,13 +1,13 @@
 .dashboard {
     display: flex;
     height: 100vh;
-    margin-top: 10vh;
+    /* margin-top: 10vh; */
   }
   
   .dashboard-content {
     color: white;
     flex-grow: 1;
-    padding: 2rem;
+    /* padding: 2rem; */
     /* background-color: #ecf0f1; */
     overflow-y: auto;
   }

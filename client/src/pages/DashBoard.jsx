@@ -26,7 +26,7 @@ const DashBoard = () => {
       <Sidebar />
       <div className="dashboard-content bg-[#2C2D33]">
 
-        <div
+        {/* <div
         className="flex items-center p-[0.5rem] lg:w-[60%] sm:w-[100%] md:w-[60%] bg-[#21222D] rounded-md border-none"
         >
           <CiSearch />
@@ -36,7 +36,7 @@ const DashBoard = () => {
         placeholder="Search here.."
         />
 
-        </div>
+        </div> */}
         
 
             <Routes>

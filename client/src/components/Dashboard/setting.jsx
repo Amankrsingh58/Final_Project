@@ -43,7 +43,7 @@ const SettingsPage = () => {
   };
 
   return (
-    <div className="max-w-xl mx-auto p-6">
+    <div className="max-w-xl mx-auto ">
       <h2 className="text-2xl font-semibold mb-4">Settings</h2>
 
       <div className="border rounded-lg p-4 mb-4  bg-gray-800 shadow-md">
