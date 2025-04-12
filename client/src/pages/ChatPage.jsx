@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import io from 'socket.io-client';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
+import { format } from 'date-fns';
 
 const socket = io('https://tutorbackend-i63e.onrender.com'); 
 
@@ -52,14 +53,24 @@ const ChatPage = () => {
       </div>
       <div className="flex-1 overflow-y-auto p-4 space-y-2">
         {messages.map((msg, i) => (
-          <div
-            key={i}
-            className={`p-2 rounded max-w-xs ${
-              msg.senderId === user._id ? 'bg-blue-200 self-end ml-auto' : 'bg-gray-200 self-start'
-            }`}
-          >
-            {msg.text}
-          </div>
+        <div
+        key={i}
+        className={`p-2 rounded max-w-xs ${
+          msg.senderId === user._id
+            ? 'bg-blue-200 self-end ml-auto'
+            : 'bg-gray-200 self-start'
+        }`}
+      >
+
+        <div>
+        {msg.text}
+
+        </div>
+        <span className="block text-xs text-gray-600 mt-1">
+          {format(new Date(msg.timestamp), 'MMMM d, yyyy, hh:mm')}
+        </span>
+      </div>
+      
         ))}
       </div>
       <form onSubmit={sendMessage} className="p-4 bg-white flex gap-2 shadow">
