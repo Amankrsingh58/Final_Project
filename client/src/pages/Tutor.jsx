@@ -116,7 +116,8 @@ const TutorsList = () => {
         tutor.userId.userName.toLowerCase().includes(query) ||
         tutor.city.toLowerCase().includes(query) ||
         tutor.subjects.some(subject => subject.toLowerCase().includes(query)) ||
-        (tutor.bio && tutor.bio.toLowerCase().includes(query))
+        (tutor.bio && tutor.bio.toLowerCase().includes(query)) ||
+        (tutor.experience && tutor.experience==query)
       );
     }
   

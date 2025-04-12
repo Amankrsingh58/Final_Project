@@ -1,5 +1,6 @@
 import { Routes, Route, useNavigate } from "react-router-dom";
 import Home from "./pages/Home";
+import ChatPage from './pages/ChatPage';
 import About from "./pages/About";
 import Login from "./pages/Login";
 import StudentsDashboard from "./pages/StudentsDashboard";
@@ -30,11 +31,11 @@ function App() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { token,isLoading, isAuthenticated } = useSelector((state) => state.auth);
+  const { token, isLoading, isAuthenticated } = useSelector((state) => state.auth);
 
 
 
-  
+
 
   return (
     <div className="App">
@@ -43,8 +44,8 @@ function App() {
       <Navbar />
       <Routes>
 
-      <Route path="/blogs" element={<BlogList />} />
-      <Route path="/blog/:id" element={<BlogDetails />} />
+        <Route path="/blogs" element={<BlogList />} />
+        <Route path="/blog/:id" element={<BlogDetails />} />
 
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
@@ -54,23 +55,26 @@ function App() {
 
         <Route element={<ProtectedRoute allowedRoles={"Admin"} />}>
           <Route path="/dashboard/*" element={<Dashboard />} />
-      <Route path="/blogmanage" element={<AdminBlogPanel />} />
-        </Route>        
+          <Route path="/blogmanage" element={<AdminBlogPanel />} />
+        </Route>
 
         <Route path="/tutor" element={<Tutor />} />
         <Route path="/student" element={<Student />} />
-        
-        <Route element={<ProtectedRoute allowedRoles={["Student","Tutor","Admin"]} />}>
-        <Route path="/tutor/:id" element={<TutorDetail />} />
-        <Route path="/student/:id" element={<StudentDetail />} />
-        <Route path="/tutordetail" element={<TutorDetail />} />
-        <Route path="/my-bookings" element={<Bookings />} />
 
-        <Route element={<ProtectedRoute allowedRoles={["Student","Tutor"]} />}>
-        <Route path="/userdashboard/*" element={<StudentsDashboard/>} />
+        <Route element={<ProtectedRoute allowedRoles={["Student", "Tutor", "Admin"]} />}>
+          <Route path="/tutor/:id" element={<TutorDetail />} />
+          <Route path="/student/:id" element={<StudentDetail />} />
+
+          <Route path="/chat/:userId" element={<ChatPage />} />
+
+          <Route path="/tutordetail" element={<TutorDetail />} />
+          <Route path="/my-bookings" element={<Bookings />} />
+
+          <Route element={<ProtectedRoute allowedRoles={["Student", "Tutor"]} />}>
+            <Route path="/userdashboard/*" element={<StudentsDashboard />} />
+          </Route>
+
         </Route>
-
-        </Route> 
         <Route path="*" element={<Notfound />} />
       </Routes>
     </div>

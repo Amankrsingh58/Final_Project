@@ -17,7 +17,7 @@ const StudentDetail = () => {
   const [bookingSuccess, setBookingSuccess] = useState(false);
   const [error, setError] = useState(null);
 
-  const {user,isAuthenticated} = useSelector( (state) => state.auth);
+  const { user, isAuthenticated } = useSelector((state) => state.auth);
 
   const { data: student, isLoading, isError } = useGetStudentByIdQuery(id);
 
@@ -33,17 +33,17 @@ const StudentDetail = () => {
         return;
       }
 
-      result =  await createBooking({tutorId:user._id, studentId:id, bookerRole:user.role}).unwrap();
+      result = await createBooking({ tutorId: user._id, studentId: id, bookerRole: user.role }).unwrap();
 
-        toast.success("Student Booked Successful!", {id:toastId})
+      toast.success("Student Booked Successful!", { id: toastId })
 
       setError(null);
-      
+
     } catch (err) {
-      toast.error(err?.message || "Failed to book. Please try again later.", {id:toastId})
+      toast.error(err?.message || "Failed to book. Please try again later.", { id: toastId })
       console.error('Error booking session:', err);
     }
-    finally{
+    finally {
       setTimeout(() => {
         toast.dismiss(toastId)
       }, 2000);
@@ -83,15 +83,15 @@ const StudentDetail = () => {
           <div className="md:flex">
             {/* Student Image Section */}
             <div className="md:w-1/3">
-              <motion.div 
+              <motion.div
                 className="h-64 md:h-full"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.5 }}
               >
-                <img 
-                  src={student.data.userId.image || "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"} 
-                  alt={student.data.userId.userName} 
+                <img
+                  src={student.data.userId.image || "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"}
+                  alt={student.data.userId.userName}
                   className="w-full h-full object-cover"
                 />
               </motion.div>
@@ -108,21 +108,21 @@ const StudentDetail = () => {
                   <div>
                     <h1 className="text-3xl font-bold text-gray-700">{student.data.userId.userName}</h1>
                   </div>
-               
+
                 </div>
-                
-                <div className="mt-6 flex flex-wrap flex-col gap-4"> 
-                <div className="flex items-center text-gray-700">
+
+                <div className="mt-6 flex flex-wrap flex-col gap-4">
+                  <div className="flex items-center text-gray-700">
                     <Phone className="h-5 w-5 mr-2 text-indigo-500" />
                     <span>(+91) {student.data.phoneNo}</span>
                   </div>
 
-                <div className="flex items-center text-gray-700">
+                  <div className="flex items-center text-gray-700">
                     <GraduationCapIcon className="h-5 w-5 mr-2 text-indigo-500" />
                     <span>Class : {student.data.grade}</span>
                   </div>
 
-                  
+
                   <div className="flex items-center text-gray-700">
                     <BookOpen className="h-5 w-5 mr-2 text-indigo-500" />
                     {student.data.subjectInterested.map((subject, index) => (
@@ -131,19 +131,19 @@ const StudentDetail = () => {
                       </span>
                     ))}
                   </div>
-                  
+
                   <div className="flex items-center text-gray-700">
                     <MapPin className="h-5 w-5 mr-2 text-indigo-500" />
                     <span>{student.data.city}, {student.data.state}</span>
                   </div>
                 </div>
-                
+
                 {student.data.bio && <div className="mt-6">
                   <h2 className="text-xl font-semibold mb-2">About Me</h2>
                   <p className="text-gray-700">{student.data.bio || "No bio provided yet"}</p>
                 </div>}
-                
-                
+
+
               </motion.div>
             </div>
           </div>
@@ -167,7 +167,7 @@ const StudentDetail = () => {
 
                 {/* Booking Success Message */}
                 {bookingSuccess && (
-                  <motion.div 
+                  <motion.div
                     className="bg-green-50 border-l-4 border-green-400 p-4 text-green-700 mb-6 flex items-center"
                     initial={{ opacity: 0, height: 0 }}
                     animate={{ opacity: 1, height: 'auto' }}
@@ -200,21 +200,27 @@ const StudentDetail = () => {
                   <button
                     onClick={() => handleBookSession(student.data._id)}
                     // disabled={!selectedDate}
-                    className={`w-full bg-indigo-600 text-white px-6 py-3 rounded-md font-medium hover:bg-indigo-700 transition-colors ${
-                      selectedDate ? 'opacity-50 cursor-not-allowed' : ''
-                    }`}
+                    className={`w-full bg-indigo-600 text-white px-6 py-3 rounded-md font-medium hover:bg-indigo-700 transition-colors ${selectedDate ? 'opacity-50 cursor-not-allowed' : ''
+                      }`}
                   >
                     Offer Tuition
                   </button>
 
                   <button
                     onClick={handleClick}
-                    className={`w-full gap-2 items-center bg-[#25d366] text-white px-6 py-3 mt-2 cursor-pointer rounded-md flex justify-center hover:bg-green-700 transition-colors ${
-                      selectedDate ? 'opacity-50 cursor-not-allowed' : ''
-                    }`}
-                  ><span>Chat On</span> 
-                    <FaWhatsapp className='font-lg w-8  h-6 text-center'/>
+                    className={`w-full gap-2 items-center bg-[#25d366] text-white px-6 py-3 mt-2 cursor-pointer rounded-md flex justify-center hover:bg-green-700 transition-colors ${selectedDate ? 'opacity-50 cursor-not-allowed' : ''
+                      }`}
+                  ><span>Chat On</span>
+                    <FaWhatsapp className='font-lg w-8  h-6 text-center' />
                   </button>
+
+                  <button
+                    onClick={() => navigate(`/chat/${student.data.userId._id}`)}
+                    className="w-full gap-2 items-center bg-blue-500 text-white px-6 py-3 mt-2 cursor-pointer rounded-md flex justify-center hover:bg-blue-700 transition-colors"
+                  >
+                    Chat with Student
+                  </button>
+
                 </div>
 
                 <p className="text-sm text-gray-500 mt-4 text-center">
