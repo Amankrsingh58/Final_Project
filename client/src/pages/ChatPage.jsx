@@ -19,7 +19,9 @@ const ChatPage = () => {
     socket.emit('setup', user._id);
   
     // Fetch old messages
-    axios.get(`https://tutorbackend-i63e.onrender.com/api/messages/${userId}`).then((res) => setMessages(res.data));
+    axios.get(`https://tutorbackend-i63e.onrender.com/api/messages/${userId}`, {
+      withCredentials: true,
+    }).then((res) => setMessages(res.data));
   
     // Listen for new incoming messages
     socket.on('receive_message', (msg) => {
