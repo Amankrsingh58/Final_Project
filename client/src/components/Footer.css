@@ -1,0 +1,48 @@
+.footer {
+    background-color: #326cb5;
+    color: white;
+    padding: 40px 20px;
+  }
+  
+  .footer-content {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  
+  .footer-section {
+    flex: 1;
+    min-width: 220px;
+    margin-right: 20px;
+  }
+  
+  .footer-section h4 {
+    margin-bottom: 20px;
+    font-size: 18px;
+    text-align: left;
+    font-weight: bold;
+  }
+  
+  .footer-section ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .footer-section ul li {
+    margin-bottom: 10px;
+  }
+  
+  .footer-section ul li button {
+    background: none;
+    border: none;
+    color: #fff;
+    text-align: left;
+    font-size: 16px;
+    text-align: left;
+    cursor: pointer;
+    transition: color 0.3s, background-color 0.3s;
+    padding: 8px 0;
+    width: 100%;
+  }
+  
+  
