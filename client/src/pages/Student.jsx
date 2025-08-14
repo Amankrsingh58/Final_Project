@@ -149,12 +149,12 @@ const StudentsList = () => {
               onChange={(e) => setSubjectFilter(e.target.value)}
               className="w-full  cursor-pointer px-4 py-2 border text-gray-700 border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500"
             >
-              <option value="">All Subjects</option>
-              <option value="mathematics">Math</option>
-              <option value="physics">Physics</option>
-              <option value="chemistry">Chemistry</option>
-              <option value="biology">Biology</option>
-              <option value="english">English</option>
+              <option className="cursor-pointer" value="">All Subjects</option>
+              <option className="cursor-pointer" value="mathematics">Math</option>
+              <option className="cursor-pointer" value="physics">Physics</option>
+              <option className="cursor-pointer" value="chemistry">Chemistry</option>
+              <option className="cursor-pointer" value="biology">Biology</option>
+              <option className="cursor-pointer" value="english">English</option>
             </select>
 
             {/* Grade Filter */}
@@ -163,19 +163,19 @@ const StudentsList = () => {
               onChange={(e) => setGradeFilter(e.target.value)}
               className="w-full  cursor-pointer px-4 py-2 text-gray-700 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500"
             >
-              <option value="">All Grades</option>
-              <option value="1">1st Grade</option>
-              <option value="2">2nd Grade</option>
-              <option value="3">3rd Grade</option>
-              <option value="4">4th Grade</option>
-              <option value="5">5th Grade</option>
-              <option value="6">6th Grade</option>
-              <option value="7">7th Grade</option>
-              <option value="8">8th Grade</option>
-              <option value="9">9th Grade</option>
-              <option value="10">10th Grade</option>
-              <option value="11">11th Grade</option>
-              <option value="12">12th Grade</option>
+              <option className="cursor-pointer" value="">All Grades</option>
+              <option className="cursor-pointer" value="1">1st Grade</option>
+              <option className="cursor-pointer" value="2">2nd Grade</option>
+              <option className="cursor-pointer" value="3">3rd Grade</option>
+              <option className="cursor-pointer" value="4">4th Grade</option>
+              <option className="cursor-pointer" value="5">5th Grade</option>
+              <option className="cursor-pointer" value="6">6th Grade</option>
+              <option className="cursor-pointer" value="7">7th Grade</option>
+              <option className="cursor-pointer" value="8">8th Grade</option>
+              <option className="cursor-pointer" value="9">9th Grade</option>
+              <option className="cursor-pointer" value="10">10th Grade</option>
+              <option className="cursor-pointer" value="11">11th Grade</option>
+              <option className="cursor-pointer" value="12">12th Grade</option>
             </select>
           </div>
 
