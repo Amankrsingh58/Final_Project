@@ -115,7 +115,7 @@ const Signup = () => {
               <button
                 type="button"
                 onClick={() => setRole('Student')}
-                className={`flex items-center justify-center px-6 py-3 rounded-lg transition-all ${
+                className={`flex items-center cursor-pointer justify-center px-6 py-3 rounded-lg transition-all ${
                   role === 'Student'
                     ? 'bg-indigo-600 text-white shadow-md'
                     : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
