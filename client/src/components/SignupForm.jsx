@@ -103,7 +103,7 @@ const Signup = () => {
               <button
                 type="button"
                 onClick={() => setRole('Tutor')}
-                className={`flex items-center justify-center px-6 py-3 rounded-lg transition-all ${
+                className={`flex cursor-pointer items-center justify-center px-6 py-3 rounded-lg transition-all ${
                   role === 'Tutor'
                     ? 'bg-indigo-600 text-white shadow-md'
                     : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
@@ -300,7 +300,7 @@ const Signup = () => {
                 <button
                   type="submit"
                   disabled={isLoading}
-                  className={`w-full flex justify-center items-center py-3 px-4 border border-transparent rounded-lg text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors ${
+                  className={`w-full flex cursor-pointer justify-center items-center py-3 px-4 border border-transparent rounded-lg text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors ${
                     isLoading ? 'opacity-70 cursor-not-allowed' : ''
                   }`}
                 >
