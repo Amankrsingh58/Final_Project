@@ -141,7 +141,7 @@ function Container() {
             </p>
             <button
               onClick={token ? () => setShowModal(true) : () => navigate("/login")}
-              className="inline-flex items-center px-6 py-3 rounded-full bg-white text-blue-600 font-semibold hover:bg-blue-50 transition-all transform hover:scale-105"
+              className="inline-flex cursor-pointer items-center px-6 py-3 rounded-full bg-white text-blue-600 font-semibold hover:bg-blue-50 transition-all transform hover:scale-105"
             >
               <MessageCircle className="w-5 h-5 mr-2" />
               Get Free Counseling
