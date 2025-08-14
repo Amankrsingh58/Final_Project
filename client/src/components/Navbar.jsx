@@ -91,7 +91,7 @@ const Navbar = () => {
           {(token && user) ? (
             <div className="relative">
               <button
-                className="flex items-center space-x-1 text-gray-700 hover:text-indigo-600 transition-colors"
+                className="flex  cursor-pointer items-center space-x-1 text-gray-700 hover:text-indigo-600 transition-colors"
                 onClick={toggleAccountMenu}
               >
                 <User className="h-5 w-5" />
