@@ -100,7 +100,7 @@ const WorkFlowCard = () => {
                 </p>
                 <button
                   onClick={handleClick}
-                  className={`w-full inline-flex items-center justify-center px-6 py-3 rounded-lg bg-gradient-to-r ${item.color} text-white font-semibold hover:opacity-90 transition-opacity group`}
+                  className={`w-full cursor-pointer inline-flex items-center justify-center px-6 py-3 rounded-lg bg-gradient-to-r ${item.color} text-white font-semibold hover:opacity-90 transition-opacity group`}
                 >
                   {item.buttonText}
                   <ChevronRight className="w-5 h-5 ml-2 transform group-hover:translate-x-1 transition-transform" />
@@ -130,7 +130,7 @@ const WorkFlowCard = () => {
                   </h3>
                   <button
                     onClick={() => setShowModal(false)}
-                    className="text-gray-400 hover:text-gray-500 transition-colors"
+                    className="text-gray-400  cursor-pointer hover:text-gray-500 transition-colors"
                   >
                     <X className="w-6 h-6" />
                   </button>
@@ -142,7 +142,7 @@ const WorkFlowCard = () => {
                   <div className="flex justify-end">
                     <button
                       onClick={() => setShowModal(false)}
-                      className="px-6 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors"
+                      className="px-6  cursor-pointer py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors"
                     >
                       Close
                     </button>
