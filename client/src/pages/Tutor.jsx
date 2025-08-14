@@ -210,12 +210,12 @@ const TutorsList = () => {
               onChange={(e) => setSubjectFilter(e.target.value)}
               className="w-full cursor-pointer px-4 py-2 border text-gray-700 border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500"
             >
-              <option value="">All Subjects</option>
-              <option value="mathematics">Mathematics</option>
-              <option value="physics">Physics</option>
-              <option value="chemistry">Chemistry</option>
-              <option value="biology">Biology</option>
-              <option value="english">English</option>
+              <option className="cursor-pointer" value="">All Subjects</option>
+              <option className="cursor-pointer" value="mathematics">Mathematics</option>
+              <option className="cursor-pointer" value="physics">Physics</option>
+              <option className="cursor-pointer" value="chemistry">Chemistry</option>
+              <option className="cursor-pointer" value="biology">Biology</option>
+              <option className="cursor-pointer" value="english">English</option>
             </select>
 
             {/* Price Range Filter */}
@@ -224,11 +224,11 @@ const TutorsList = () => {
               onChange={(e) => setPriceRange(e.target.value)}
               className="w-full  cursor-pointer px-4 py-2 text-gray-700 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500"
             >
-              <option value="">Any Price</option>
-              <option value="0-25">2000 - 2500/m</option>
-              <option value="25-50">2500 - 3000/m</option>
-              <option value="50-75">3000 - 4000/m</option>
-              <option value="75">5000+ /hr</option>
+              <option className="cursor-pointer" value="">Any Price</option>
+              <option className="cursor-pointer" value="0-25">2000 - 2500/m</option>
+              <option className="cursor-pointer" value="25-50">2500 - 3000/m</option>
+              <option className="cursor-pointer" value="50-75">3000 - 4000/m</option>
+              <option className="cursor-pointer" value="75">5000+ /hr</option>
             </select>
 
             {/* Experience Level Filter */}
@@ -237,10 +237,10 @@ const TutorsList = () => {
               onChange={(e) => setExperienceLevel(e.target.value)}
               className="w-full  cursor-pointer px-4 py-2 border text-gray-700 border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500"
             >
-              <option value="">Any Experience</option>
-              <option value="beginner">Beginner (0-2 years)</option>
-              <option value="intermediate">Intermediate (3-5 years)</option>
-              <option value="expert">Expert (5+ years)</option>
+              <option className="cursor-pointer" value="">Any Experience</option>
+              <option className="cursor-pointer" value="beginner">Beginner (0-2 years)</option>
+              <option className="cursor-pointer" value="intermediate">Intermediate (3-5 years)</option>
+              <option className="cursor-pointer" value="expert">Expert (5+ years)</option>
             </select>
           </div>
           
