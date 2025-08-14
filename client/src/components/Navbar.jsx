@@ -78,11 +78,11 @@ const Navbar = () => {
               : user.role === "Admin"
               ? "/dashboard"
               : "/unauthorised"
-            } className="text-gray-700 hover:text-indigo-600 transition-colors">
+            } className="  cursor-pointer text-gray-700 hover:text-indigo-600 transition-colors">
               Dashboard
             </Link>
           ) : (
-            <Link to="/login" className="text-gray-700 hover:text-indigo-600 transition-colors">
+            <Link to="/login" className=" cursor-pointer text-gray-700 hover:text-indigo-600 transition-colors">
               Login
             </Link>
           )}
@@ -98,7 +98,7 @@ const Navbar = () => {
                 <span>{user.userName}</span>
               </button>
               {isAccountMenuOpen && (
-                <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 transition-all duration-200">
+                <div className="absolute right-0  cursor-pointer mt-2 w-48 bg-white rounded-md shadow-lg py-1 transition-all duration-200">
                   <Link to={user.role === 'Admin' ? "/dashboard/profile":"/userdashboard/profile"} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                     Profile Settings
                   </Link>
