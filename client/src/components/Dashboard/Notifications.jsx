@@ -2,8 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { useGetAllHelpFormsQuery, useMarkMessageAsSolvedMutation } from '../../features/auth/helpFormApi';
 
 const MessageCard = () => {
-  const { data: helpForms, error, isLoading, isError } = useGetAllHelpFormsQuery( undefined,{ pollingInterval:3000,
-                                                                                             refetchOnMountOrArgChange:true,});
+  const { data: helpForms, error, isLoading, isError } = useGetAllHelpFormsQuery( undefined, {
+      pollingInterval: 3000,           // Fetch every 3 seconds
+      refetchOnMountOrArgChange: true, // Always get latest on mount
+      refetchOnFocus: true,            // Optional: refresh on window focus
+      refetchOnReconnect: true,        // Optional: refresh after reconnect
+    });
   const [messages, setMessages] = useState([]);
   const [markMessageAsSolved] = useMarkMessageAsSolvedMutation();
 
