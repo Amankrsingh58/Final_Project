@@ -1,4 +1,5 @@
 import { Routes, Route, useNavigate } from "react-router-dom";
+import { Analytics } from "@vercel/analytics/react";
 import Home from "./pages/Home";
 import ChatPage from './pages/ChatPage';
 import About from "./pages/About";
@@ -77,6 +78,7 @@ function App() {
         </Route>
         <Route path="*" element={<Notfound />} />
       </Routes>
+      <Analytics />
     </div>
   );
 }
