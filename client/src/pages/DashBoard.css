@@ -1,0 +1,13 @@
+.dashboard {
+    display: flex;
+    height: auto
+    /* margin-top: 10vh; */
+  }
+  
+  .dashboard-content {
+    color: white;
+    flex-grow: 1;
+
+    overflow-y: auto;
+  }
+  

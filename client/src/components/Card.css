@@ -1,0 +1,77 @@
+.card{
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0);
+  padding-bottom: 20px;
+}
+  
+  
+    h2{
+      margin: 0;
+      padding: 18px;
+    }
+    .heading{
+      font-size: 20px;
+      font-weight: 600;
+      line-height: 1.1;
+      /* margin-bottom: 38px; */
+      margin-top: 12px;  
+      /* color: #806868; */
+
+      /* font-family: Poppins, sans-serif !important; */
+        }
+  .headingtag{
+    padding-top: 2rem;
+  }
+  
+  .tutor-container {
+    /* padding: 20px; */
+    /* display: flex;
+  
+    justify-content: center; */
+    gap: 40px;
+  }
+  .tutor-card:hover {
+    /* transform: scale(1.1); */
+    z-index: 1; 
+  }
+  
+  .tutor-cards {
+    max-width: 300px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: #fff;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .tutor-image {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+  }
+  
+  .tutor-info {
+    padding: 10px;
+    font-size: 14px;
+  }
+  
+  .tutor-info p {
+    margin: 5px 0;
+  }
+  
+  .contact-btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 0 0 10px 10px;
+  }
+  
+  .contact-btn:hover {
+    background-color: #0056b3;
+  }
+  
